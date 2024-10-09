@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('book_services', function (Blueprint $table) {
+        Schema::create('service_feedback', function (Blueprint $table) {
             $table->id();
+            $table->string('rating')->nullable();
+            $table->string('feedback');
             $table->date('date');
+            
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedBigInteger('veterinarian_id')->nullable();
-            $table->foreign('veterinarian_id')->references('id')->on('users');
+           
             $table->unsignedBigInteger('service_id')->nullable();
             $table->foreign('service_id')->references('id')->on('services');
             $table->timestamps();
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('book_services');
+        Schema::dropIfExists('service_feedback');
     }
 };

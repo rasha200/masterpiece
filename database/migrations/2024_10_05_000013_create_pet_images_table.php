@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('to_adoupts', function (Blueprint $table) {
+        Schema::create('pet_images', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
+            $table->string('image');
+            
             $table->unsignedBigInteger('pet_id')->nullable();
             $table->foreign('pet_id')->references('id')->on('pets');
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('to_adoupts');
+        Schema::dropIfExists('pet_images');
     }
 };

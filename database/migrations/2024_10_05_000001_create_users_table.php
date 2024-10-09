@@ -17,13 +17,9 @@ return new class extends Migration
             $table->string('Lname');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('mobile');
             $table->string('password');
-            $table->string('mobile')->nullable();
-            $table->string('city')->nullable();
-            $table->string('street')->nullable();
-            $table->string('bulding_number')->nullable();
-            $table->unsignedBigInteger('role_id')->nullable();
-            $table->foreign('role_id')->references('id')->on('roles');
+            $table->enum('role', ['user', 'receptionist','veterinarian', 'manager'])->default('user');
             $table->rememberToken();
             $table->timestamps();
         });
