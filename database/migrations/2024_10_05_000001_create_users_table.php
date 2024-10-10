@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('mobile');
             $table->string('password');
             $table->enum('role', ['user', 'receptionist','veterinarian', 'manager'])->default('user');
+            $table->softDeletes(); 
             $table->rememberToken();
             $table->timestamps();
         });

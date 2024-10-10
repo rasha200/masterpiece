@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('date');
 
-            $table->unsignedBigInteger('pet_id')->nullable();
+            $table->unsignedBigInteger('pet_id')->nullable()->unique();
             $table->foreign('pet_id')->references('id')->on('pets');
             
             $table->unsignedBigInteger('user_id')->nullable();

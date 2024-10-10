@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->string('type');
             $table->string('information');
+            $table->boolean('is_adopted')->default(false); 
             $table->timestamps();
         });
     }

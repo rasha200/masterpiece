@@ -23,52 +23,32 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="">
-                <span class="menu-title">Category</span>
+            <a class="nav-link" href="{{route('users.index')}}">
+                <span class="menu-title">Users</span>
                 <i class="mdi mdi-collage menu-icon"></i>
             </a>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="">
-                <span class="menu-title">Guide</span>
-                <i class="mdi mdi-account-star menu-icon"></i>
-            </a>
-        </li>
-        
-        <li class="nav-item">
-            <a class="nav-link" href="">
-                <span class="menu-title">Trips</span>
-                <i class="mdi mdi-airballoon menu-icon"></i>
-            </a>
-        </li>
-       
+
 
         <li class="nav-item">
-            <a class="nav-link" href="">
-                <span class="menu-title">Bookings</span>
-                <i class="mdi mdi-clipboard-check menu-icon"></i>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="">
-                <span class="menu-title">User</span>
+            <a class="nav-link" href="{{route('pets.index')}}">
+                <span class="menu-title">Pets</span>
                 <i class="mdi mdi-account-circle menu-icon"></i>
             </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="">
-                <span class="menu-title">Testimonials</span>
+                <span class="menu-title">Services</span>
                 <i class="mdi mdi-voice menu-icon"></i>
             </a>
         </li>
-     
-    
+
+
         <li class="nav-item">
             <a class="nav-link" href="">
-                <span class="menu-title">Contact us</span>
+                <span class="menu-title">Categories</span>
                 <i class="mdi mdi-comment-processing menu-icon"></i>
             </a>
         </li>

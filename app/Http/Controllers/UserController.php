@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+
 
 class UserController extends Controller
 {
@@ -11,7 +16,20 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        if (Auth::user()->role == 'receptionist') {
+            $users = User::where('role', 'user')->get();
+
+        } elseif (Auth::user()->role == 'veterinarian') {
+            $users = User::whereIn('role', ['user', 'receptionist'])->get();
+
+        } elseif (Auth::user()->role == 'manager') {
+            $users = User::whereIn('role', ['user', 'receptionist', 'veterinarian', 'manager'])->get();
+
+        } else {
+            
+            $users = collect(); 
+        }
+        return view('dashboard.user.index' , ['users'=> $users]);
     }
 
     /**
@@ -19,7 +37,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+       return view ('dashboard.user.create');
     }
 
     /**
@@ -27,7 +45,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $validation = $request->validate([
+            'Fname' => 'required|string|min:3',
+            'Lname' => 'required|string|min:3',
+            'email' => 'required|email',
+            'mobile' => 'required|numeric',
+            'password' => 'required|confirmed',
+            'role' => 'required|string',
+        ]);
+
+        User::create([
+            'Fname'=>$request->input('Fname'),
+            'Lname'=>$request->input('Lname'),
+            'email'=>$request->input('email'),
+            'mobile'=>$request->input('mobile'),
+            'password' => Hash::make($request->input('password')),
+            'role'=>$request->input('role'),
+        ]);
+
+       
+
+        return to_route('users.index')->with('success', 'User created successfully');
     }
 
     /**
@@ -35,7 +74,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+       return view('dashboard.user.show' , ['user'=> $user]);
     }
 
     /**
@@ -43,7 +83,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+      $user = User::findOrFail($id);
+      return view ('dashboard.user.edit' , ['user' => $user]);
     }
 
     /**
@@ -51,7 +92,27 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validation = $request->validate([
+            'Fname' => 'required|string|min:3',
+            'Lname' => 'required|string|min:3',
+            'email' => 'required|email',
+            'mobile' => 'required|numeric',
+            
+            'role' => 'required|string',
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->update([
+            'Fname'=>$request->input('Fname'),
+            'Lname'=>$request->input('Lname'),
+            'email'=>$request->input('email'),
+            'mobile'=>$request->input('mobile'),
+            'password'=>$user->password,
+            'role'=>$request->input('role'),
+        ]);
+
+        return to_route('users.index')->with('success', 'User updated successfully');
     }
 
     /**
@@ -59,6 +120,9 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete(); 
+        
+        return redirect()->route('users.index')->with('success', 'User soft deleted successfully');
     }
 }

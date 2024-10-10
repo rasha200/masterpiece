@@ -12,7 +12,9 @@ class PetController extends Controller
      */
     public function index()
     {
-        //
+        $pets = Pet::all();
+
+        return view('dashboard.pets.index' , ['pets'=> $pets]);
     }
 
     /**
@@ -20,7 +22,7 @@ class PetController extends Controller
      */
     public function create()
     {
-        //
+        return view ('dashboard.pets.create');
     }
 
     /**

@@ -20,7 +20,7 @@
                 <div class="page-header">
                     <h3 class="page-title">
                         <a href="">
-                        <span class="page-title-icon bg-gradient-primary text-white me-2">
+                        <span class="page-title-icon bg-gradient-info text-white me-2">
                             <i class="mdi mdi-home"></i>
                             </a>
                     </h3>
