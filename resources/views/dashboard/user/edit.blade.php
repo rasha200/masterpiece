@@ -39,7 +39,7 @@
 
                       <div class="form-group">
                         <label for="exampleInputName1">Phone number</label>
-                        <input type="text" class="form-control" id="mobile" placeholder="First name" name="mobile" value="{{$user->mobile}}" required>
+                        <input type="text" class="form-control" id="mobile" placeholder="Phone number" name="mobile" value="{{$user->mobile}}" required>
                       </div>
 
                       

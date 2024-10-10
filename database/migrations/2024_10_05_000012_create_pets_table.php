@@ -17,8 +17,8 @@ return new class extends Migration
             $table->integer('age');
             $table->enum('gender', ['male', 'female']);
             $table->string('type');
-            $table->string('information');
-            $table->boolean('is_adopted')->default(false); 
+            $table->string('information'); 
+            $table->enum('is_adopted', ['yes', 'no'])->default('no');
             $table->timestamps();
         });
     }

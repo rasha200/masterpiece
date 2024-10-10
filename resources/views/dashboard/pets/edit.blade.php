@@ -6,7 +6,7 @@
 <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Edit user</h4>
+                    <h4 class="card-title">Edit pet</h4>
 
                     @if ($errors->any())
                 <div class="alert alert-danger">
@@ -16,31 +16,39 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+             @endif
                    
-                    <form class="forms-sample" action="{{ route('users.update',$user->id) }}" method="POST">
+                    <form class="forms-sample" action="{{ route('pets.update',$pet->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                       <div class="form-group">
-                        <label for="exampleInputName1">First Name</label>
-                        <input type="text" class="form-control" id="Fname" placeholder="First name" name="Fname" value="{{$user->Fname}}" required>
-                      </div>
-
-                      <div class="form-group">
-                        <label for="exampleInputName1">Last Name</label>
-                        <input type="text" class="form-control" id="Lname" placeholder="Last name" name="Lname" value="{{$user->Lname}}" required>
+                        <label for="exampleInputName1">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{$user->name}}" required>
                       </div>
 
 
                       <div class="form-group">
-                        <label for="exampleInputEmail3">Email address</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="{{$user->email}}" required>
+                        <label for="exampleInputEmail3">Age</label>
+                        <input type="text" class="form-control" id="age" placeholder="Age" name="age" value="{{$user->age}}" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleSelectGender">Gender</label>
+                        <select class="form-control" id="gender" name="gender" required>
+                          <option value="male"  {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
+                          <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleInputName1">Pet Type</label>
+                        <input type="text" class="form-control" id="type" placeholder="Pet Type" name="type" value="{{$user->type}}" required>
                       </div>
 
 
                       <div class="form-group">
-                        <label for="exampleInputName1">Phone number</label>
-                        <input type="text" class="form-control" id="mobile" placeholder="First name" name="mobile" value="{{$user->mobile}}" required>
+                        <label for="exampleInputName1">Pet Information</label>
+                        <input type="text" class="form-control" id="information" placeholder="Pet Information" name="information" value="{{$user->information}}" required>
                       </div>
 
                       

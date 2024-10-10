@@ -13,6 +13,13 @@
         </a>
         @endif
     </div>
+
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 <div class=" grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
@@ -26,8 +33,7 @@
                           <th>Age</th>
                           <th>Gender</th>
                           <th>Type</th>
-                          <th>Information</th>
-                          <th>Status</th>
+                          <th>Is adote</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -39,7 +45,6 @@
                           <td > {{$pet->age}} </td>
                           <td>{{$pet->gender}}</td>
                           <td>{{$pet->type}}</td>
-                          <td>{{$pet->information}}</td>
                           <td>{{$pet->is_adopted}}</td>
 
 

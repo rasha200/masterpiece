@@ -5,14 +5,14 @@
 <div class="card">
     <div class="card-body">
         
-        <p><strong>First name:</strong> {{ $user->Fname }}</p>
-        <p><strong>Last name:</strong> {{ $user->Lname }}</p>
-        <p><strong>Email:</strong> {{ $user->email }}</p>
-        <p><strong>Phone number:</strong> {{ $user->mobile }}</p>
-        <p><strong>Role:</strong> {{ $user->role }}</p>
-
+        <p><strong>Name:</strong> {{ $pet->name }}</p>
+        <p><strong>Age:</strong> {{ $pet->age }}</p>
+        <p><strong>Gender:</strong> {{ $pet->gender }}</p>
+        <p><strong>Type:</strong> {{ $pet->type }}</p>
+        <p><strong>Information:</strong> {{ $pet->information }}</p> 
+        <p><strong>Is adopted:</strong> {{ $pet->is_adopted }}</p>
     
-        <a href="{{ route('users.index') }}" class="btn btn-gradient-primary me-2">Back to List</a>
+        <a href="{{ route('pets.index') }}" class="btn btn-gradient-primary me-2">Back to List</a>
        
     </div>
 </div>

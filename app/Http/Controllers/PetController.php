@@ -30,7 +30,27 @@ class PetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'name' => 'required|string',
+            'age' => 'required|numeric',
+            'gender' => 'required|string',
+            'type' => 'required|string',
+            'information' => 'required|string',
+            
+        ]);
+
+        Pet::create([
+            'name'=>$request->input('name'),
+            'age'=>$request->input('age'),
+            'gender'=>$request->input('gender'),
+            'type'=>$request->input('type'),
+            'information'=>$request->input('information'),
+            
+        ]);
+
+       
+
+        return to_route('pets.index')->with('success', 'User created successfully');
     }
 
     /**
@@ -38,7 +58,7 @@ class PetController extends Controller
      */
     public function show(Pet $pet)
     {
-        //
+        return view('dashboard.pets.show' , ['pet'=> $pet]);
     }
 
     /**
