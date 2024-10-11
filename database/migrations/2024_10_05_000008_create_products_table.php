@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->float('price');
+            $table->integer('quantity');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->softDeletes();
             $table->timestamps();
 
         });

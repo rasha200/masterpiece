@@ -53,6 +53,13 @@
                 <i class="mdi mdi-comment-processing menu-icon"></i>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('products.index')}}">
+                <span class="menu-title">Products</span>
+                <i class="mdi mdi-comment-processing menu-icon"></i>
+            </a>
+        </li>
         @endif
     </ul>
 </nav>
