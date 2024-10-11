@@ -16,14 +16,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->role == 'receptionist') {
-            $users = User::where('role', 'user')->get();
+        if (Auth::user()->role == 'receptionist' || Auth::user()->role == 'store_manager') {
+            $users = User::where('role', 'user')->get(); 
 
         } elseif (Auth::user()->role == 'veterinarian') {
-            $users = User::whereIn('role', ['user', 'receptionist'])->get();
+            $users = User::whereIn('role', ['user', 'receptionist', 'store_manager'])->get();
 
         } elseif (Auth::user()->role == 'manager') {
-            $users = User::whereIn('role', ['user', 'receptionist', 'veterinarian', 'manager'])->get();
+            $users = User::whereIn('role', ['user', 'receptionist', 'store_manager', 'veterinarian'])->get();
 
         } else {
             

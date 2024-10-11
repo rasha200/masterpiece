@@ -19,7 +19,7 @@ class role
     public function handle(Request $request, Closure $next): Response
     {
        
-        if (Auth::check() && (Auth::user()->role == 'manager' || Auth::user()->role == 'veterinarian' || Auth::user()->role == 'receptionist')) {
+        if (Auth::check() && (Auth::user()->role == 'manager' || Auth::user()->role == 'veterinarian' || Auth::user()->role == 'store_manager'|| Auth::user()->role == 'receptionist' )) {
             return $next($request);
         }else
             abort(401);

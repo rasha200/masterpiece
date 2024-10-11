@@ -55,11 +55,12 @@
                         <label for="exampleSelectGender">Role</label>
                         <select class="form-control" id="role" name="role" required>
 
-                        @if(Auth::user()->role == 'manager' || Auth::user()->role == 'veterinarian' || Auth::user()->role == 'receptionist')
+                        @if(Auth::user()->role == 'manager' || Auth::user()->role == 'veterinarian'|| Auth::user()->role == 'store_manager' || Auth::user()->role == 'receptionist')
                           <option value="user"  {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
                         @endif
 
                         @if(Auth::user()->role == 'manager' || Auth::user()->role == 'veterinarian')
+                        <option value="store_manager" {{ old('role') == 'store_manager' ? 'selected' : '' }}>Store Manager</option>
                           <option value="receptionist" {{ old('role') == 'receptionist' ? 'selected' : '' }}>Receptionist</option>
                         @endif
 

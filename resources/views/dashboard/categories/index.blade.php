@@ -3,15 +3,15 @@
 @section('content')
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="title-1">Servics</h2>
+        <h2 class="title-1">Categories</h2>
 
-        @if(Auth::user()->role == 'manager' || Auth::user()->role == 'veterinarian')
-        <a href="{{ route('services.create') }}">
+        
+        <a href="{{ route('categories.create') }}">
             <button type="button" class="btn-gradient-info">
-                <i class="zmdi zmdi-plus"></i> Add New Service
+                <i class="zmdi zmdi-plus"></i> Add New Category
             </button>
         </a>
-        @endif
+     
     </div>
 
     @if(session('success'))
@@ -30,39 +30,49 @@
                         <tr>
                           <th>Id</th>
                           <th>Name</th>
+                          <th>Image</th>
+                          
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($services as $service)
+                        @foreach($categories as $category)
                         <tr>
-                          <td>{{$service->id}}</td>
-                          <td>{{$service->name}}</td>
+                          <td>{{$category->id}}</td>
+                          <td>{{$category->name}}</td>
+
+                          <td>
+                          @if($category->image)
+                          
+                            <img src="{{ asset('uploads/category/' . $category->image) }}" alt="Category Image" style="width: 50px; border-radius: 50px;"></td>
+                          @else
+                              <span>No Image</span>
+                          @endif
                           <td> 
-                          <a href="{{ route('services.show', $service->id) }}"  title="view">
+
+                            
+                          <a href="{{ route('categories.show', $category->id) }}"  title="view">
                                 <button type="submit" class="btn btn-gradient-success btn-rounded btn-icon">
                                   <i class="fa-solid fa-eye"></i>
                                 </button>
                           </a>
 
 
-                           @if(Auth::user()->role == 'manager' || Auth::user()->role == 'veterinarian')
-                          <a href="{{ route('services.edit', $service->id) }}"  title="Edit">
+                          
+                          <a href="{{ route('categories.edit', $category->id) }}"  title="Edit">
                                 <button type="submit" class="btn btn-gradient-info btn-rounded btn-icon">
                                   <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
                           </a>
-                          @endif
-
-                          @if(Auth::user()->role == 'manager')
-                          <form action="{{ route('services.destroy', $service->id) }}" method="POST" style="display:inline;" title="delete">
+                          
+                          <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;" title="delete">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="confirmDeletion(event, '{{ route('services.destroy', $service->id) }}')">
+                                                <button type="submit" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="confirmDeletion(event, '{{ route('categories.destroy', $category->id) }}')">
                                                   <i class="mdi mdi-delete" ></i>
                                                 </button>
                                             </form>
-                                            @endif
+                                         
                         </td>
                         </tr>
                         @endforeach

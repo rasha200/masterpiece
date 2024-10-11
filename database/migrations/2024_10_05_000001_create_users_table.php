@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('mobile');
             $table->string('password');
-            $table->enum('role', ['user', 'receptionist','veterinarian', 'manager'])->default('user');
+            $table->enum('role', ['user', 'receptionist', 'store_manager','veterinarian', 'manager'])->default('user');
             $table->softDeletes(); 
             $table->rememberToken();
             $table->timestamps();

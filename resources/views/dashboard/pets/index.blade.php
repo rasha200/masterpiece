@@ -5,7 +5,7 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="title-1">Pets</h2>
 
-        @if(Auth::user()->role == 'receptionist' )
+        @if(Auth::user()->role == 'manager' || Auth::user()->role == 'store_manager' )
         <a href="{{ route('pets.create') }}">
             <button type="button" class="btn-gradient-info">
                 <i class="zmdi zmdi-plus"></i> Add New Pet
@@ -59,7 +59,7 @@
                           </a>
 
 
-                           @if(Auth::user()->role == 'receptionist' )
+                           @if(Auth::user()->role == 'manager' || Auth::user()->role == 'store_manager' )
                           <a href="{{ route('pets.edit', $pet->id) }}"  title="Edit">
                                 <button type="submit" class="btn btn-gradient-info btn-rounded btn-icon">
                                   <i class="fa-solid fa-pen-to-square"></i>

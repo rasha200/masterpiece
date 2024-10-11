@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -33,5 +34,7 @@ Route::get('/', function () {
 Route::resource('users', UserController::class)->middleware(['auth' , 'role']);
 Route::resource('pets', PetController::class)->middleware(['auth' , 'role']);
 Route::resource('services', ServiceController::class)->middleware(['auth' , 'role']);
+Route::resource('categories', CategoryController::class)->middleware(['auth' , 'role']);
+
 
 

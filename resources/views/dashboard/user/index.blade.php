@@ -4,11 +4,13 @@
 
 <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="title-1">Users</h2>
+        @if(Auth::user()->role == 'manager' || Auth::user()->role == 'store_manager'|| Auth::user()->role == 'receptionist')
         <a href="{{ route('users.create') }}">
             <button type="button" class="btn-gradient-info">
                 <i class="zmdi zmdi-plus"></i> Add New User
             </button>
         </a>
+        @endif
     </div>
 
     @if(session('success'))
@@ -49,6 +51,9 @@
                           @elseif($user->role == 'veterinarian')
                               <td><label class="badge badge-dark">{{$user->role}}</label></td>
 
+                          @elseif($user->role == 'store_manager' )
+                            <td><label class="badge badge-info">{{$user->role}}</label></td>
+
                           @elseif($user->role == 'receptionist' )
                               <td><label class="badge badge-success">{{$user->role}}</label></td>
 
@@ -63,8 +68,9 @@
                                   <i class="fa-solid fa-eye"></i>
                                 </button>
                           </a>
-                          
-                          <a href="{{ route('users.edit', $user->id) }}"  title="view">
+
+                           @if(Auth::user()->role == 'manager' || Auth::user()->role == 'store_manager'|| Auth::user()->role == 'receptionist')
+                          <a href="{{ route('users.edit', $user->id) }}"  title="Edit">
                                 <button type="submit" class="btn btn-gradient-info btn-rounded btn-icon">
                                   <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
@@ -77,6 +83,7 @@
                                                   <i class="mdi mdi-delete" ></i>
                                                 </button>
                                             </form>
+                        @endif
                         </td>
                         </tr>
                         @endforeach

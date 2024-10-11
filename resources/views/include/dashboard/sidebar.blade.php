@@ -46,13 +46,14 @@
         </li>
 
 
+        @if(Auth::user()->role == 'manager' || Auth::user()->role == 'store_manager')
         <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{route('categories.index')}}">
                 <span class="menu-title">Categories</span>
                 <i class="mdi mdi-comment-processing menu-icon"></i>
             </a>
         </li>
-
+        @endif
     </ul>
 </nav>
 <!-- partial -->

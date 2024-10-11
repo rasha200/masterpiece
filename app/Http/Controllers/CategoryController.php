@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -12,7 +13,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+       
+         $categories = Category::all(); 
+      
+        return view('dashboard.categories.index' , ['categories'=> $categories]);
     }
 
     /**
@@ -20,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view ('dashboard.categories.create');
     }
 
     /**
@@ -28,7 +32,27 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'name' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $filename = null;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $path = public_path('uploads/category/');
+            $file->move($path, $filename);
+        }
+
+        Category::create([
+            'name'=>$request->input('name'),
+            'image'=>$filename,
+        ]);
+
+       
+
+        return to_route('categories.index')->with('success', 'Category created successfully');
     }
 
     /**
@@ -36,7 +60,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return view('dashboard.categories.show' , ['category'=> $category]);
     }
 
     /**
@@ -44,7 +68,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('dashboard.categories.edit' , ['category'=> $category]);
     }
 
     /**
@@ -52,7 +76,27 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $validation = $request->validate([
+            'name' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $filename = null;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $path = public_path('uploads/category/');
+            $file->move($path, $filename);
+        }
+
+        $category->update([
+            'name'=>$request->input('name'),
+            'image'=>$filename,
+        ]);
+
+       
+
+        return to_route('categories.index')->with('success', 'Category updated successfully');
     }
 
     /**
@@ -60,6 +104,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete(); 
+        
+        return to_route('categories.index')->with('success', 'Category deleted successfully');
     }
 }

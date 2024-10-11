@@ -22,7 +22,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'mobile' => $this->faker->phoneNumber(),
             'password' => Hash::make('password'),
-            'role' => $this->faker->randomElement(['user', 'receptionist', 'veterinarian', 'manager']),
+            'role' => $this->faker->randomElement(['user', 'receptionist', 'veterinarian', 'manager', 'store_manager']),
             'remember_token' => Str::random(10),
         ];
     }
