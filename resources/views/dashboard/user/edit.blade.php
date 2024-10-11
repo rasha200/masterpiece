@@ -15,7 +15,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+                 @endif
                    
                     <form class="forms-sample" action="{{ route('users.update',$user->id) }}" method="POST">
                         @csrf

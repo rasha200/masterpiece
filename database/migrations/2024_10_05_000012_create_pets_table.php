@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('information'); 
             $table->enum('is_adopted', ['yes', 'no'])->default('no');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

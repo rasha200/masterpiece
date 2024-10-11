@@ -22,7 +22,7 @@
                         @csrf
                       <div class="form-group">
                         <label for="exampleInputName1">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{ old('name') }}" required>
+                        <input type="text" class="form-control" id="name" placeholder="name" name="name" value="{{ old('name') }}" required>
                       </div>
 
                       <div class="form-group">
@@ -41,13 +41,13 @@
 
                       <div class="form-group">
                         <label for="exampleInputEmail3">Pet Type</label>
-                        <input type="text" class="form-control" id="type" placeholder="Pet Type" name="type" value="{{ old('type') }}" required>
+                        <input type="text" class="form-control" id="type" placeholder="Type" name="type" value="{{ old('type') }}" required>
                       </div>
 
 
                       <div class="form-group">
                         <label for="exampleInputName1">Pet Information</label>
-                        <input type="text" class="form-control" id="information" placeholder="Pet Information" name="information" value="{{ old('information') }}" required>
+                        <input type="text" class="form-control" id="information" placeholder="Information" name="information" value="{{ old('information') }}" required>
                       </div>
 
                       <button type="submit" class="btn btn-gradient-info me-2">Create</button>

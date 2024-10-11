@@ -97,7 +97,6 @@ class UserController extends Controller
             'Lname' => 'required|string|min:3',
             'email' => 'required|email',
             'mobile' => 'required|numeric',
-            
             'role' => 'required|string',
         ]);
 
@@ -123,6 +122,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete(); 
         
-        return redirect()->route('users.index')->with('success', 'User soft deleted successfully');
+        return to_route('users.index')->with('success', 'User deleted successfully');
     }
 }

@@ -42,7 +42,7 @@
                         <tr>
                           <td>{{$pet->id}}</td>
                           <td>{{$pet->name}}</td>
-                          <td>{{$pet->age}} </td>
+                          <td > {{$pet->age}} </td>
                           <td>{{$pet->gender}}</td>
                           <td>{{$pet->type}}</td>
                           <td>{{$pet->is_adopted}}</td>

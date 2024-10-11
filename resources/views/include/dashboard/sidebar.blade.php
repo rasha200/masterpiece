@@ -39,7 +39,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{route('services.index')}}">
                 <span class="menu-title">Services</span>
                 <i class="mdi mdi-voice menu-icon"></i>
             </a>

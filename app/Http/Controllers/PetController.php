@@ -50,7 +50,7 @@ class PetController extends Controller
 
        
 
-        return to_route('pets.index')->with('success', 'User created successfully');
+        return to_route('pets.index')->with('success', 'Pet created successfully');
     }
 
     /**
@@ -66,7 +66,7 @@ class PetController extends Controller
      */
     public function edit(Pet $pet)
     {
-        //
+        return view ('dashboard.pets.edit' , ['pet' => $pet]);
     }
 
     /**
@@ -74,7 +74,27 @@ class PetController extends Controller
      */
     public function update(Request $request, Pet $pet)
     {
-        //
+        $validation = $request->validate([
+            'name' => 'required|string',
+            'age' => 'required|numeric',
+            'gender' => 'required|string',
+            'type' => 'required|string',
+            'information' => 'required|string',
+            
+        ]);
+
+        $pet->update([
+            'name'=>$request->input('name'),
+            'age'=>$request->input('age'),
+            'gender'=>$request->input('gender'),
+            'type'=>$request->input('type'),
+            'information'=>$request->input('information'),
+            
+        ]);
+
+       
+
+        return to_route('pets.index')->with('success', 'Pet updated successfully');
     }
 
     /**
@@ -82,6 +102,8 @@ class PetController extends Controller
      */
     public function destroy(Pet $pet)
     {
-        //
+        $pet->delete(); 
+        
+        return to_route('pets.index')->with('success', 'pet deleted successfully');
     }
 }
