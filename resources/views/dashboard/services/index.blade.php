@@ -3,12 +3,12 @@
 @section('content')
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="title-1">Pets</h2>
+        <h2 class="title-1">Servics</h2>
 
-        @if(Auth::user()->role == 'receptionist' )
-        <a href="{{ route('pets.create') }}">
+        @if(Auth::user()->role == 'receptionist' || Auth::user()->role == 'manager')
+        <a href="{{ route('services.create') }}">
             <button type="button" class="btn-gradient-info">
-                <i class="zmdi zmdi-plus"></i> Add New Pet
+                <i class="zmdi zmdi-plus"></i> Add New Service
             </button>
         </a>
         @endif
@@ -30,46 +30,33 @@
                         <tr>
                           <th>Id</th>
                           <th>Name</th>
-                          <th>Age</th>
-                          <th>Gender</th>
-                          <th>Type</th>
-                          <th>Is adote</th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($pets as $pet)
+                        @foreach($services as $service)
                         <tr>
-                          <td>{{$pet->id}}</td>
-                          <td>{{$pet->name}}</td>
-                          <td > {{$pet->age}} </td>
-                          <td>{{$pet->gender}}</td>
-                          <td>{{$pet->type}}</td>
-                          <td>{{$pet->is_adopted}}</td>
-
-
-                         
+                          <td>{{$service->id}}</td>
+                          <td>{{$service->name}}</td>
                           <td> 
-
-                            
-                          <a href="{{ route('pets.show', $pet->id) }}"  title="view">
+                          <a href="{{ route('services.show', $service->id) }}"  title="view">
                                 <button type="submit" class="btn btn-gradient-success btn-rounded btn-icon">
                                   <i class="fa-solid fa-eye"></i>
                                 </button>
                           </a>
 
 
-                           @if(Auth::user()->role == 'receptionist' )
-                          <a href="{{ route('pets.edit', $pet->id) }}"  title="Edit">
+                           @if(Auth::user()->role == 'receptionist' || Auth::user()->role == 'manager')
+                          <a href="{{ route('services.edit', $service->id) }}"  title="Edit">
                                 <button type="submit" class="btn btn-gradient-info btn-rounded btn-icon">
                                   <i class="fa-solid fa-pen-to-square"></i>
                                 </button>
                           </a>
                           
-                          <form action="{{ route('pets.destroy', $pet->id) }}" method="POST" style="display:inline;" title="delete">
+                          <form action="{{ route('services.destroy', $service->id) }}" method="POST" style="display:inline;" title="delete">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="confirmDeletion(event, '{{ route('pets.destroy', $pet->id) }}')">
+                                                <button type="submit" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="confirmDeletion(event, '{{ route('services.destroy', $service->id) }}')">
                                                   <i class="mdi mdi-delete" ></i>
                                                 </button>
                                             </form>

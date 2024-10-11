@@ -21,7 +21,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view ('dashboard.services.create');
     }
 
     /**
@@ -29,7 +29,19 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+        ]);
+
+        Service::create([
+            'name'=>$request->input('name'),
+            'description'=>$request->input('description'),
+        ]);
+
+       
+
+        return to_route('services.index')->with('success', 'Service created successfully');
     }
 
     /**
@@ -37,7 +49,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        return view('dashboard.services.show' , ['service'=> $service]);
     }
 
     /**
@@ -45,7 +57,7 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        return view ('dashboard.services.edit' , ['service' => $service]);
     }
 
     /**
@@ -53,7 +65,20 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        
+        $validation = $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
+        ]);
+
+        $service->update([
+            'name'=>$request->input('name'),
+            'description'=>$request->input('description'),
+        ]);
+
+       
+
+        return to_route('services.index')->with('success', 'Service updated successfully');
     }
 
     /**
@@ -61,6 +86,8 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-        //
+        $service->delete(); 
+        
+        return to_route('services.index')->with('success', 'Service deleted successfully');
     }
 }
