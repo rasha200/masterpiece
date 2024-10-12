@@ -21,12 +21,12 @@
                         @csrf
                         @method('PUT')
                       <div class="form-group">
-                        <label for="exampleInputName1">First Name</label>
+                        <label for="exampleInputName1">First name</label>
                         <input type="text" class="form-control" id="Fname" placeholder="First name" name="Fname" value="{{$user->Fname}}" required>
                       </div>
 
                       <div class="form-group">
-                        <label for="exampleInputName1">Last Name</label>
+                        <label for="exampleInputName1">Last name</label>
                         <input type="text" class="form-control" id="Lname" placeholder="Last name" name="Lname" value="{{$user->Lname}}" required>
                       </div>
 
@@ -63,8 +63,8 @@
                       </div>
 
                       
-                      <button type="submit" class="btn btn-gradient-info me-2">Edit</button>
-                      <a href="{{route('users.index')}}" class="btn btn-light">Cancel</a>
+                      <button type="submit" class="btn btn-outline-info btn-fw">Edit</button>
+                      <a href="{{route('users.index')}}" class="btn btn-outline-secondary">Cancel</a>
                     </form>
                   </div>
                 </div>

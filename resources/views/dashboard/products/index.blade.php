@@ -7,8 +7,8 @@
 
        
         <a href="{{ route('products.create') }}">
-            <button type="button" class="btn-gradient-info">
-                <i class="zmdi zmdi-plus"></i> Add New Product
+            <button type="button" class="btn btn-outline-info btn-fw">
+                <i class="zmdi zmdi-plus"></i> Add new product
             </button>
         </a>
     
@@ -25,7 +25,7 @@
                   <div class="card-body">
                    
                     </p>
-                    <table class="table table-hover">
+                    <table class="table table-bordered">
                       <thead>
                         <tr>
                           <th>Id</th>
@@ -48,26 +48,26 @@
                           <td> 
 
                             
-                          <a href="{{ route('products.show', $product->id) }}"  title="view">
-                                <button type="submit" class="btn btn-gradient-success btn-rounded btn-icon">
-                                  <i class="fa-solid fa-eye"></i>
-                                </button>
+                          <a href="{{ route('products.show', $product->id) }}"  title="View">
+                          <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
+                            <i class="mdi mdi mdi-eye text-success"></i>
+                          </button>
                           </a>
 
 
                           
                           <a href="{{ route('products.edit', $product->id) }}"  title="Edit">
-                                <button type="submit" class="btn btn-gradient-info btn-rounded btn-icon">
-                                  <i class="fa-solid fa-pen-to-square"></i>
-                                </button>
+                          <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
+                            <i class="mdi mdi mdi-rename-box text-primary"></i>
+                          </button>
                           </a>
                           
-                          <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;" title="delete">
+                          <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;" title="Delete">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="confirmDeletion(event, '{{ route('products.destroy', $product->id) }}')">
-                                                  <i class="mdi mdi-delete" ></i>
-                                                </button>
+                                                <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"  onclick="confirmDeletion(event, '{{ route('products.destroy', $product->id) }}')">
+                            <i class="mdi mdi mdi-delete text-danger"></i>
+                          </button>
                                             </form>
                                            
                         </td>
@@ -84,7 +84,7 @@
     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
     <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
         <p>Are you sure you want to delete this user?</p>
-        <button id="confirmButton" class="btn btn-outline-danger">delete</button>
+        <button id="confirmButton" class="btn btn-outline-danger">Delete</button>
         <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>
     </div>
 </div>

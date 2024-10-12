@@ -20,12 +20,12 @@
                     <form class="forms-sample" action="{{ route('users.store')}}" method="POST">
                         @csrf
                       <div class="form-group">
-                        <label for="exampleInputName1">First Name</label>
+                        <label for="exampleInputName1">First name</label>
                         <input type="text" class="form-control" id="Fname" placeholder="First name" name="Fname" value="{{ old('Fname') }}" required>
                       </div>
 
                       <div class="form-group">
-                        <label for="exampleInputName1">Last Name</label>
+                        <label for="exampleInputName1">Last name</label>
                         <input type="text" class="form-control" id="Lname" placeholder="Last name" name="Lname" value="{{ old('Lname') }}" required>
                       </div>
 
@@ -47,8 +47,8 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="exampleInputPassword4">Confirm Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Password" name="password_confirmation" required>
+                        <label for="exampleInputPassword4">Confirm password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Confirm password" name="password_confirmation" required>
                       </div>
 
                       <div class="form-group">
@@ -71,8 +71,8 @@
                       </div>
 
                       
-                      <button type="submit" class="btn btn-gradient-info me-2">Create</button>
-                      <a href="{{route('users.index')}}" class="btn btn-light">Cancel</a>
+                      <button type="submit" class="btn btn-outline-info btn-fw">Create</button>
+                      <a href="{{route('users.index')}}" class="btn btn-outline-secondary">Cancel</a>
                     </form>
                   </div>
                 </div>

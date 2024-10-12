@@ -35,8 +35,8 @@
                      
 
                       
-                      <button type="submit" class="btn btn-gradient-info me-2">Edit</button>
-                      <a href="{{route('services.index')}}" class="btn btn-light">Cancel</a>
+                      <button type="submit" class="btn btn-outline-info btn-fw">Edit</button>
+                      <a href="{{route('services.index')}}" class="btn btn-outline-secondary">Cancel</a>
                     </form>
                   </div>
                 </div>

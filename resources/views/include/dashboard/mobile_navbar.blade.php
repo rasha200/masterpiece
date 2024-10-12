@@ -1,12 +1,12 @@
 <!-- Navbar -->
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+    <div class="text-left navbar-brand-wrapper d-flex align-items-center">
         <a class="navbar-brand brand-logo" href="">
-            <img src="{{asset('logo.png')}}" alt="logo" style="width: 200px; height:60px"/>
+            <img src="{{asset('masterlogo.png')}}" alt="logo" style="width: 55px; height:35px"/>
         </a>
         <a class="navbar-brand brand-logo-mini" href="index.html">
-            <img src="{{asset('placeholder.png')}}" alt="logo"  width="50"   height="150" />
-        </a>
+        <i class="mdi mdi-paw"></i> 
+</a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-stretch">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -33,7 +33,7 @@
                     <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         <div class="nav-profile-img">
-                            <img src="" alt="image">
+                           
                             <span class="availability-status online"></span>
                         </div>
                         <div class="nav-profile-text">
@@ -56,11 +56,7 @@
                 </li>
            
 
-            <li class="nav-item d-none d-lg-block full-screen-link">
-                <a class="nav-link">
-                    <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
-                </a>
-            </li>
+           
 
             <li class="nav-item dropdown">
 {{--                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"--}}

@@ -27,23 +27,23 @@
                       </div>
 
                       <div class="form-group">
-                    <label for="image">Current Image</label><br>
+                    <label for="image">Current image</label><br>
                     @if($category->image)
-                        <img src="{{ asset('uploads/category/' . $category->image) }}" alt="Category Image" style="width: 100px; border-radius: 50px;">
+                        <img src="{{ asset('uploads/category/' . $category->image) }}" alt="Category image" style="width: 100px; border-radius: 50px;">
                     @else
                         <span>No image available</span>
                     @endif
                 </div>
 
                       <div class="form-group">
-                            <label for="image">Upload New Image</label>
+                            <label for="image">Upload new image</label>
                             <input type="file" name="image" id="image" class="form-control">
                       </div>
 
 
                       
-                      <button type="submit" class="btn btn-gradient-info me-2">Edit</button>
-                      <a href="{{route('categories.index')}}" class="btn btn-light">Cancel</a>
+                      <button type="submit" class="btn btn-outline-info btn-fw">Edit</button>
+                      <a href="{{route('categories.index')}}" class="btn btn-outline-secondary">Cancel</a>
                     </form>
                   </div>
                 </div>

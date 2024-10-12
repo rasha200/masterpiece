@@ -26,13 +26,13 @@
                       </div>
 
                       <div class="form-group">
-                            <label for="image">File Upload</label>
+                            <label for="image">File upload</label>
                             <input type="file" name="image" id="image" class="form-control">
                       </div>
 
                       
-                      <button type="submit" class="btn btn-gradient-info me-2">Create</button>
-                      <a href="{{route('categories.index')}}" class="btn btn-light">Cancel</a>
+                      <button type="submit" class="btn btn-outline-info btn-fw">Create</button>
+                      <a href="{{route('categories.index')}}" class="btn btn-outline-secondary">Cancel</a>
                     </form>
                   </div>
                 </div>

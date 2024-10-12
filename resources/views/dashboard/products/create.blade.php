@@ -52,8 +52,8 @@
 
                       </div>
 
-                      <button type="submit" class="btn btn-gradient-info me-2">Create</button>
-                      <a href="{{route('products.index')}}" class="btn btn-light">Cancel</a>
+                      <button type="submit" class="btn btn-outline-info btn-fw">Create</button>
+                      <a href="{{route('products.index')}}" class="btn btn-outline-secondary">Cancel</a>
                     </form>
                   </div>
                 </div>

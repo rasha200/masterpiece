@@ -41,22 +41,22 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="exampleInputName1">Pet Type</label>
-                        <input type="text" class="form-control" id="type" placeholder="Pet Type" name="type" value="{{$pet->type}}" required>
+                        <label for="exampleInputName1">Pet type</label>
+                        <input type="text" class="form-control" id="type" placeholder="Pet type" name="type" value="{{$pet->type}}" required>
                       </div>
 
 
                       <div class="form-group">
-                        <label for="exampleInputName1">Pet Information</label>
-                        <input type="text" class="form-control" id="information" placeholder="Pet Information" name="information" value="{{$pet->information}}" required>
+                        <label for="exampleInputName1">Pet information</label>
+                        <input type="text" class="form-control" id="information" placeholder="Pet information" name="information" value="{{$pet->information}}" required>
                       </div>
 
                       
       
 
                       
-                      <button type="submit" class="btn btn-gradient-info me-2">Edit</button>
-                      <a href="{{route('pets.index')}}" class="btn btn-light">Cancel</a>
+                      <button type="submit" class="btn btn-outline-info btn-fw">Edit</button>
+                      <a href="{{route('pets.index')}}" class="btn btn-outline-secondary">Cancel</a>
                     </form>
                   </div>
                 </div>
