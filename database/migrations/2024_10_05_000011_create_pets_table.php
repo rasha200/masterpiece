@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->string('type');
             $table->string('information'); 
+            $table->string('image')->nullable();
             $table->enum('is_adopted', ['yes', 'no'])->default('no');
             $table->softDeletes();
             $table->timestamps();

@@ -36,8 +36,16 @@ class PetController extends Controller
             'gender' => 'required|string',
             'type' => 'required|string',
             'information' => 'required|string',
-            
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        $filename = null;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $path = public_path('uploads/pet/');
+            $file->move($path, $filename);
+        }
 
         Pet::create([
             'name'=>$request->input('name'),
@@ -45,7 +53,7 @@ class PetController extends Controller
             'gender'=>$request->input('gender'),
             'type'=>$request->input('type'),
             'information'=>$request->input('information'),
-            
+            'image'=>$filename,
         ]);
 
        
@@ -80,8 +88,16 @@ class PetController extends Controller
             'gender' => 'required|string',
             'type' => 'required|string',
             'information' => 'required|string',
-            
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        $filename = null;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $path = public_path('uploads/pet/');
+            $file->move($path, $filename);
+        }
 
         $pet->update([
             'name'=>$request->input('name'),
@@ -89,7 +105,7 @@ class PetController extends Controller
             'gender'=>$request->input('gender'),
             'type'=>$request->input('type'),
             'information'=>$request->input('information'),
-            
+            'image'=>$filename,
         ]);
 
        

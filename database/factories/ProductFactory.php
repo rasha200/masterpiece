@@ -21,6 +21,7 @@ class ProductFactory extends Factory
         return [
            'name' => $this->faker->word(),
             'description' => $this->faker->sentence(),
+            'image' => 'default.jpg', 
             'price' => $this->faker->randomFloat(2, 1, 1000), 
             'quantity' => $this->faker->numberBetween(1, 100), 
             'category_id' => Category::inRandomOrder()->first()->id ?? null, 

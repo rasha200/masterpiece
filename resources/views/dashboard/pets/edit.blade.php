@@ -18,7 +18,7 @@
                 </div>
              @endif
                    
-                    <form class="forms-sample" action="{{ route('pets.update',$pet->id) }}" method="POST">
+                    <form class="forms-sample" action="{{ route('pets.update',$pet->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                       <div class="form-group">
@@ -52,7 +52,19 @@
                       </div>
 
                       
-      
+                      <div class="form-group">
+                    <label for="image">Current image</label><br>
+                    @if($pet->image)
+                        <img src="{{ asset('uploads/pet/' . $pet->image) }}" alt="pet image" style="width: 100px; border-radius: 50px;">
+                    @else
+                        <span>No image available</span>
+                    @endif
+                </div>
+
+                      <div class="form-group">
+                            <label for="image">Upload new image</label>
+                            <input type="file" name="image" id="image" class="form-control">
+                      </div>
 
                       
                       <button type="submit" class="btn btn-outline-info btn-fw">Edit</button>

@@ -33,6 +33,7 @@
                           <th>Age</th>
                           <th>Gender</th>
                           <th>Type</th>
+                          <th>Image</th>
                           <th>Is adote</th>
                           <th></th>
                         </tr>
@@ -45,6 +46,14 @@
                           <td>{{$pet->age}} </td>
                           <td>{{$pet->gender}}</td>
                           <td>{{$pet->type}}</td>
+                          <td>
+                          @if($pet->image)
+                          
+                            <img src="{{ asset('uploads/pet/' . $pet->image) }}" alt="pet Image" style="width: 50px; border-radius: 50px;"></td>
+                          @else
+                              <span>No Image</span>
+                          @endif
+                          <td> 
                           <td>{{$pet->is_adopted}}</td>
 
 

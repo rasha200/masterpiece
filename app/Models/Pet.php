@@ -18,6 +18,7 @@ class Pet extends Model
         'gender',
         'type',
         'information',
+        'image',
         'is_adopted',
     ];
 }

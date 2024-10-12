@@ -18,7 +18,7 @@
                 </div>
                 @endif
                    
-                    <form class="forms-sample" action="{{ route('pets.store')}}" method="POST">
+                    <form class="forms-sample" action="{{ route('pets.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                       <div class="form-group">
                         <label for="exampleInputName1">Name</label>
@@ -48,6 +48,11 @@
                       <div class="form-group">
                         <label for="exampleInputName1">Pet information</label>
                         <input type="text" class="form-control" id="information" placeholder="Pet information" name="information" value="{{ old('information') }}" required>
+                      </div>
+
+                      <div class="form-group">
+                            <label for="image">File upload</label>
+                            <input type="file" name="image" id="image" class="form-control">
                       </div>
 
                       <button type="submit" class="btn btn-outline-info btn-fw">Create</button>

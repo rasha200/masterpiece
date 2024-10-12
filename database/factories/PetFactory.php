@@ -19,6 +19,7 @@ class PetFactory extends Factory
             'gender' => $this->faker->randomElement(['male', 'female']),
             'type' => $this->faker->randomElement(['dog', 'cat', 'bird', 'rabbit', 'hamster']), 
             'information' => $this->faker->sentence(),
+            'image' => 'default.jpg', 
             'is_adopted' =>'no',
         ];
     }

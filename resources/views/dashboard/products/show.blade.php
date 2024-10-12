@@ -7,6 +7,11 @@
         
         <p><strong>Name:</strong> {{ $product->name }}</p>
         <p><strong>Description:</strong> {{ $product->description }}</p>
+        @if($product->image)
+                <img src="{{ asset('uploads/product/' . $product->image) }}" alt="product Image" style="width:20%; border-radius: 8px; margin-bottom: 15px;">
+            @else
+                <span style="color: #666; font-style: italic;">No image</span>
+            @endif
         <p><strong>Price:</strong> {{ $product->price }}</p>
         <p><strong>Quantity:</strong> {{ $product->quantity }}</p>
         <p><strong>Category name:</strong> {{ $product->category->name }}</p> 

@@ -18,7 +18,7 @@
                 </div>
              @endif
                    
-                    <form class="forms-sample" action="{{ route('products.update',$product->id) }}" method="POST">
+                    <form class="forms-sample" action="{{ route('products.update',$product->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                       <div class="form-group">
@@ -30,6 +30,20 @@
                       <div class="form-group">
                         <label for="exampleInputEmail3">Description</label>
                         <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="{{$product->description}}" required>
+                      </div>
+
+                      <div class="form-group">
+                    <label for="image">Current image</label><br>
+                    @if($product->image)
+                        <img src="{{ asset('uploads/product/' . $product->image) }}" alt="product image" style="width: 100px; border-radius: 50px;">
+                    @else
+                        <span>No image available</span>
+                    @endif
+                </div>
+
+                      <div class="form-group">
+                            <label for="image">Upload new image</label>
+                            <input type="file" name="image" id="image" class="form-control">
                       </div>
 
 
