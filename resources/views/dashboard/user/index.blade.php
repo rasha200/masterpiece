@@ -12,9 +12,15 @@
         </a>
         @endif
     </div>
+    
+    @if(session('delete'))
+    <div class="alert alert-success" style="background-color: #FFFFFF; color: #DC3545; border: 1px solid #DC3545; font-weight: bold; margin-left: 36px; ">
+        {{ session('delete') }}
+    </div>
+@endif
 
     @if(session('success'))
-    <div class="alert alert-success">
+    <div class="alert alert-success" style="background-color: #d4edda; color: #155724; font-weight: bold; margin-left: 36px; ">
         {{ session('success') }}
     </div>
 @endif

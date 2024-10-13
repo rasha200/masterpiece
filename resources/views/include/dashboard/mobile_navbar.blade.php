@@ -2,7 +2,7 @@
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-left navbar-brand-wrapper d-flex align-items-center">
         <a class="navbar-brand brand-logo" href="">
-            <img src="{{asset('masterlogo.png')}}" alt="logo" style="width: 55px; height:35px"/>
+            <img src="{{asset('masterlogo2.png')}}" alt="logo" style="width: 55px; height:35px"/>
         </a>
         <a class="navbar-brand brand-logo-mini" href="index.html">
         <i class="mdi mdi-paw"></i> 

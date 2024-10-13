@@ -18,7 +18,7 @@
                 </div>
                 @endif
                    
-                    <form class="forms-sample" action="{{ route('services.store')}}" method="POST">
+                    <form class="forms-sample" action="{{ route('services.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                       <div class="form-group">
                         <label for="exampleInputName1">Name</label>
@@ -29,6 +29,12 @@
                         <label for="exampleInputName1">Description</label>
                         <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="{{ old('description') }}" required>
                       </div>
+
+                      <div class="form-group">
+                            <label for="image">Choose service images</label>
+                            <input type="file" name="image[]" id="image" class="form-control"multiple/>
+                      </div>
+
 
                      
                       <button type="submit" class="btn btn-outline-info btn-fw">Create</button>

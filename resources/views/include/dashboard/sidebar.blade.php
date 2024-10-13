@@ -25,7 +25,8 @@
         <li class="nav-item">
             <a class="nav-link" href="{{route('users.index')}}">
                 <span class="menu-title">Users</span>
-                <i class="mdi mdi-collage menu-icon"></i>
+                <i class="mdi mdi-account-circle menu-icon"></i>
+               
             </a>
         </li>
 
@@ -34,14 +35,14 @@
         <li class="nav-item">
             <a class="nav-link" href="{{route('pets.index')}}">
                 <span class="menu-title">Pets</span>
-                <i class="mdi mdi-account-circle menu-icon"></i>
+                <i class="mdi mdi mdi-cat menu-icon"></i>
             </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="{{route('services.index')}}">
                 <span class="menu-title">Services</span>
-                <i class="mdi mdi-voice menu-icon"></i>
+                <i class="mdi mdi mdi-pharmacy menu-icon"></i>
             </a>
         </li>
 
@@ -50,17 +51,25 @@
         <li class="nav-item">
             <a class="nav-link" href="{{route('categories.index')}}">
                 <span class="menu-title">Categories</span>
-                <i class="mdi mdi-comment-processing menu-icon"></i>
+                <i class="mdi mdi-collage menu-icon"></i>
             </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="{{route('products.index')}}">
                 <span class="menu-title">Products</span>
-                <i class="mdi mdi-comment-processing menu-icon"></i>
+                <i class="mdi mdi-cart-outline menu-icon"></i>
             </a>
         </li>
         @endif
+
+        <li class="nav-item">
+            <a class="nav-link" href="">
+                <span class="menu-title">Orders</span>
+                <i class="mdi mdi mdi mdi-cart-plus menu-icon"></i>
+            </a>
+        </li>
     </ul>
 </nav>
 <!-- partial -->
+ 

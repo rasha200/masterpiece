@@ -19,7 +19,7 @@ return new class extends Migration
             $table->float('price');
             $table->integer('quantity');
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
 

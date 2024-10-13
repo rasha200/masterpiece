@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
+use App\Models\ServiceImage;
+
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -12,7 +14,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::all();
+        $services = Service::with('service_images')->get(); 
         return view('dashboard.services.index' , ['services'=> $services]);
     }
 
@@ -32,13 +34,33 @@ class ServiceController extends Controller
         $validation = $request->validate([
             'name' => 'required|string',
             'description' => 'required|string',
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        Service::create([
+        $service = Service::create([
             'name'=>$request->input('name'),
             'description'=>$request->input('description'),
         ]);
 
+        $images = [];
+
+        if ($request->hasFile('image')) {
+            foreach($request->file('image') as $file) {
+               
+                $filename = uniqid() . '_' . $file->getClientOriginalExtension();
+                $path = public_path('uploads/service/');
+                $file->move($path, $filename);
+    
+               
+                $images[] = [
+                    'image' => 'uploads/service/' . $filename,
+                    'service_id'=> $service->id, 
+                ];
+            }
+    
+            
+            ServiceImage::insert($images);
+        }
        
 
         return to_route('services.index')->with('success', 'Service created successfully');
@@ -49,7 +71,8 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        return view('dashboard.services.show' , ['service'=> $service]);
+        $serviceImages = $service->service_images; 
+        return view('dashboard.services.show' , ['service'=> $service,'serviceImages'=>$serviceImages]);
     }
 
     /**
@@ -57,7 +80,8 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        return view ('dashboard.services.edit' , ['service' => $service]);
+        $serviceImages = $service->service_images; 
+        return view ('dashboard.services.edit' , ['service' => $service ,'serviceImages'=>$serviceImages]);
     }
 
     /**
@@ -69,12 +93,35 @@ class ServiceController extends Controller
         $validation = $request->validate([
             'name' => 'required|string',
             'description' => 'required|string',
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $service->update([
             'name'=>$request->input('name'),
             'description'=>$request->input('description'),
         ]);
+
+        
+        $images = [];
+
+        if ($request->hasFile('image')) {
+            foreach($request->file('image') as $file) {
+               
+                $filename = uniqid() . '_' . $file->getClientOriginalExtension();
+                $path = public_path('uploads/service/');
+                $file->move($path, $filename);
+    
+               
+                $images[] = [
+                    'image' => 'uploads/service/' . $filename,
+                    'service_id'=> $service->id, 
+                ];
+            }
+    
+            
+            ServiceImage::insert($images);
+        }
+       
 
        
 
@@ -88,6 +135,6 @@ class ServiceController extends Controller
     {
         $service->delete(); 
         
-        return to_route('services.index')->with('success', 'Service deleted successfully');
+        return to_route('services.index')->with('success', 'Service deleted');
     }
 }

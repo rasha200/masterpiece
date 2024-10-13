@@ -60,6 +60,14 @@ class ServiceImageController extends Controller
      */
     public function destroy(ServiceImage $serviceImage)
     {
-        //
+        $serviceId = $serviceImage->service_id; 
+        
+       
+    
+        $serviceImage->delete();
+    
+       
+        return redirect()->route('services.edit', ['service' => $serviceId])
+            ->with('success', 'Service image deleted successfully.');
     }
 }

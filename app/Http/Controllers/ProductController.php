@@ -127,6 +127,6 @@ class ProductController extends Controller
     {
         $product->delete(); 
         
-        return to_route('products.index')->with('success', 'Product deleted successfully');
+        return to_route('products.index')->with('success', 'Product deleted');
     }
 }

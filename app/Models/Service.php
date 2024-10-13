@@ -17,4 +17,9 @@ class Service extends Model
         'description',
         'price',
     ];
+
+    public function service_images()
+{
+    return $this->hasMany(ServiceImage::class);
+}
 }

@@ -14,8 +14,11 @@
         @endif
     </div>
 
+     
+   
+
     @if(session('success'))
-    <div class="alert alert-success">
+    <div class="alert alert-success" style="background-color: #d4edda; color: #155724; font-weight: bold; margin-left: 36px; ">
         {{ session('success') }}
     </div>
 @endif
@@ -30,6 +33,7 @@
                         <tr>
                           <th>Id</th>
                           <th>Name</th>
+                          <th>image</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -38,6 +42,15 @@
                         <tr>
                           <td>{{$service->id}}</td>
                           <td>{{$service->name}}</td>
+                          <td>
+                          @if($service->service_images->isNotEmpty())
+                
+                <img src="{{ asset($service->service_images[0]->image) }}" alt="{{ $service->name }}" style="width: 50px; border-radius: 50px;" />
+            @else
+                <span>No image available</span>
+            @endif
+                            </td>
+
                           <td> 
                           <a href="{{ route('services.show', $service->id) }}"  title="View">
                           <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
@@ -76,7 +89,7 @@
 <div id="confirmationModal"
     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
     <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
-        <p>Are you sure you want to delete this user?</p>
+        <p>Are you sure you want to delete this service?</p>
         <button id="confirmButton" class="btn btn-outline-danger">Delete</button>
         <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>
     </div>

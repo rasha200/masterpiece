@@ -120,6 +120,6 @@ class PetController extends Controller
     {
         $pet->delete(); 
         
-        return to_route('pets.index')->with('success', 'pet deleted successfully');
+        return to_route('pets.index')->with('success', 'pet deleted');
     }
 }

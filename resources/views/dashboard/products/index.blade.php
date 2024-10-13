@@ -14,8 +14,11 @@
     
     </div>
 
+     
+    
+
     @if(session('success'))
-    <div class="alert alert-success">
+    <div class="alert alert-success" style="background-color: #d4edda; color: #155724; font-weight: bold; margin-left: 36px; ">
         {{ session('success') }}
     </div>
 @endif
@@ -49,7 +52,7 @@
                           @else
                               <span>No Image</span>
                           @endif
-                          <td> 
+</td> 
                           <td>{{$product->price}}</td>
                           <td>{{$product->quantity}}</td>
                           <td>{{$product->category->name}}</td>
@@ -92,7 +95,7 @@
 <div id="confirmationModal"
     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
     <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
-        <p>Are you sure you want to delete this user?</p>
+        <p>Are you sure you want to delete this product?</p>
         <button id="confirmButton" class="btn btn-outline-danger">Delete</button>
         <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>
     </div>

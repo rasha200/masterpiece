@@ -31,7 +31,7 @@
                       </div>
 
                       <div class="form-group">
-                            <label for="image">File upload</label>
+                            <label for="image">Choose product image</label>
                             <input type="file" name="image" id="image" class="form-control">
                       </div>
 
