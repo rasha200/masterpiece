@@ -23,22 +23,8 @@
         {{ session('success') }}
     </div>
 @endif
-                   
-                    <form class="forms-sample" action="{{ route('services.update',$service->id) }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                      <div class="form-group">
-                        <label for="exampleInputName1">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{$service->name}}" required>
-                      </div>
 
-
-                      <div class="form-group">
-                        <label for="exampleInputEmail3">Description</label>
-                        <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="{{$service->description}}" required>
-                      </div>
-
-    <div class="form-group">
+<div class="form-group">
     <label>Current Images</label><br>
     <div class="row">
         @foreach ($serviceImages as $serviceImage)
@@ -59,11 +45,26 @@
         @endforeach
     </div>
 </div>
+                   
+                    <form class="forms-sample" action="{{ route('services.update',$service->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
 
-                      <div class="form-group">
+                        <div class="form-group">
                             <label for="image">Choose service images</label>
                             
                             <input type="file" name="image[]" id="image" class="form-control"multiple/>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label for="exampleInputName1">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Name" name="name" value="{{$service->name}}" required>
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="exampleInputEmail3">Description</label>
+                        <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="{{$service->description}}" required>
                       </div>
 
                       

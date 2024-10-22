@@ -89,6 +89,7 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
+       
         
         $validation = $request->validate([
             'name' => 'required|string',

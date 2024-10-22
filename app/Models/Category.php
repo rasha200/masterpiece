@@ -17,8 +17,21 @@ class Category extends Model
         'image',
     ];
 
-    public function products()
-{
+    public function products(){
     return $this->hasMany(Product::class);
-}
+    }
+
+protected static function booted()
+    {
+        static::deleting(function ($category) {
+            // If the category is being soft-deleted, also soft delete related products
+            if ($category->isForceDeleting()) {
+                // Force delete related products
+                $category->products()->forceDelete();
+            } else {
+                // Soft delete related products
+                $category->products()->delete();
+            }
+        });
+    }
 }
