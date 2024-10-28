@@ -61,7 +61,7 @@
                                     </span>
                                 </span>
 
-                                <a href="{{ url('/service_details') }}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+                                <a href="{{ route('service_details') }}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
                                     Continue Reading
 
                                     <i class="fa fa-long-arrow-right m-l-9"></i>

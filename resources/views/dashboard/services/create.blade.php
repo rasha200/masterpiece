@@ -27,7 +27,7 @@
 
                       <div class="form-group">
                         <label for="exampleInputName1">Description</label>
-                        <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="{{ old('description') }}" required>
+                        <textarea class="form-control" id="description" placeholder="Description" name="description" required>{{ old('description') }}</textarea>
                       </div>
 
                       <div class="form-group">

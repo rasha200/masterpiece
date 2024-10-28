@@ -18,11 +18,6 @@ class ServiceController extends Controller
         return view('dashboard.services.index' , ['services'=> $services]);
     }
 
-    public function index_user_side()
-    {
-        $services = Service::with('service_images')->get(); 
-        return view('include.user_side.services' , ['services'=> $services]);
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -40,7 +35,7 @@ class ServiceController extends Controller
         $validation = $request->validate([
             'name' => 'required|string',
             'description' => 'required|string',
-            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
         $service = Service::create([
@@ -80,6 +75,16 @@ class ServiceController extends Controller
         $serviceImages = $service->service_images; 
         return view('dashboard.services.show' , ['service'=> $service,'serviceImages'=>$serviceImages]);
     }
+
+
+
+    public function show_user_side( $id)
+    {
+        $service = Service::findOrFail($id); 
+        $serviceImages = $service->service_images; 
+        return view('service_details' , ['service'=> $service,'serviceImages'=>$serviceImages]);
+    }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -153,7 +153,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .body{
-  background-color: #F1F1F1;
+  background-color: #FFF;
 }
 
 /*//////////////////////////////////////////////////////////////////
@@ -2077,6 +2077,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .block2-pic:hover .block2-btn {
   bottom: 20px;
+  
 }
 
 /*---------------------------------------------*/
@@ -2661,7 +2662,7 @@ input.num-product::-webkit-inner-spin-button {
 ==================================================================*/
 .bg-none {background-color: transparent;}
 .bg0 {
-  background-color: #F1F1F1;
+  background-color: #FFF;
 
 }
 .bg1 {background-color: #14535F;}

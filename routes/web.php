@@ -7,6 +7,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceImageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -40,38 +41,45 @@ Route::delete('/service_images/{service_image}', [ServiceImageController::class,
 
 
 
-Route::get('/', function () {
-    return view('landing_page');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/about_us', function () {
     return view('about_us');
-});
+})->name("about_us");
 
 Route::get('/service', function () {
     return view('services');
-});
+})->name("services");
 
 Route::get('/service_details', function () {
     return view('service_details');
-});
+})->name("service_details");
 
 Route::get('/store', function () {
     return view('store');
-});
+})->name("store");
 
 Route::get('/contact', function () {
     return view('contact');
-});
+})->name("contact");
 
 Route::get('/cart', function () {
     return view('cart');
-});
+})->name("cart");
 
 Route::get('/pet_adoption', function () {
     return view('pet_adoption');
-});
+})->name("pet_adoption");
+
+Route::get('/product_details', function () {
+    return view('product_details');
+})->name("product_details");
 
 
+Route::get('/pet_details', function () {
+    return view('pet_details');
+})->name("pet_details");
 
-Route::get('/services', [ServiceController::class, 'index_user_side']);
+Route::get('/service_details/{id}', [ServiceController::class, 'show_user_side'])->name('service_details');
+
+Route::get('/pet_details/{id}', [PetController::class, 'show_user_side'])->name('pet_details');

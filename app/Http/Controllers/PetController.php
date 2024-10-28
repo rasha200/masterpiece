@@ -69,6 +69,12 @@ class PetController extends Controller
         return view('dashboard.pets.show' , ['pet'=> $pet]);
     }
 
+    public function show_user_side($id)
+    {
+        $pet = Pet::findOrFail($id); 
+        return view('pet_details' , ['pet'=> $pet]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

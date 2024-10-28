@@ -21,7 +21,7 @@
                 
             
         </div>
-        <a href="{{ url('/about_us') }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04"
+        <a href="{{ route('about_us') }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04"
         style="width:30px;">
             About Us
          </a>

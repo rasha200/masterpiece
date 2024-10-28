@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Service;
+use App\Models\ServiceImage;
+use App\Models\Product;
+use App\Models\Pet;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +26,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        
+        $services = Service::all(); 
+        $serviceImages = ServiceImage::all(); 
+        $products = Product::all();
+        $pets = Pet::all();
+
+        return view('landing_page' , ['services'=> $services , 'serviceImages'=> $serviceImages ,'products'=> $products , 'pets'=> $pets]);
     }
 }

@@ -64,28 +64,28 @@
                 <div class="menu-desktop">
                     <ul class="main-menu">
                         <li class="active-menu">
-                            <a href="{{ url('/') }}">Home</a>
+                            <a href="{{ route('home') }}">Home</a>
                         </li>
 
                         <li>
-                            <a href="{{ url('/about_us') }}">About</a>
+                            <a href="{{ route('about_us') }}">About</a>
                         </li>
 
                         <li class="active-menu">
-                            <a href="{{ url('/services') }}">Services</a>
+                            <a href="{{ route('services') }}">Services</a>
                         </li>
 
 
                         <li>
-                            <a href="{{ url('/store') }}">Store</a>
+                            <a href="{{ route('store') }}">Store</a>
                         </li>
 
                         <li>
-                            <a href="{{ url('/pet_adoption') }}">Pet Adoption</a>
+                            <a href="{{ route('pet_adoption') }}">Pet Adoption</a>
                         </li>
 
                         <li>
-                            <a href="{{ url('/contact') }}">Contact</a>
+                            <a href="{{ route('contact') }}">Contact</a>
                         </li>
                     </ul>
                 </div>	
@@ -137,29 +137,29 @@
     <div class="menu-mobile">
         <ul class="main-menu-m">
             <li>
-                <a href="{{ url('/') }}">Home</a>
+                <a href="{{ route('home') }}">Home</a>
             </li>
 
             <li>
-                <a href="{{ url('/about_us') }}">ِAbout</a>
+                <a href="{{ route('about_us') }}">ِAbout</a>
             </li>
 
             <li>
-                <a href="{{ url('/services') }}">Services</a>
+                <a href="{{ route('services') }}">Services</a>
             </li>
 
             <li>
-                <a href="{{ url('/store') }}">Store</a>
+                <a href="{{ route('store') }}">Store</a>
             </li>
 
            
 
             <li>
-                <a href="{{ url('/pet_adoption') }}">Pet Adoption</a>
+                <a href="{{ route('pet_adoption') }}">Pet Adoption</a>
             </li>
 
             <li>
-                <a href="{{ url('/contact') }}">Contact</a>
+                <a href="{{ route('contact') }}">Contact</a>
             </li>
 
         </ul>

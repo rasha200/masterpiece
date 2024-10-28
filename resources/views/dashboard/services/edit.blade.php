@@ -64,7 +64,7 @@
 
                       <div class="form-group">
                         <label for="exampleInputEmail3">Description</label>
-                        <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="{{$service->description}}" required>
+                        <textarea class="form-control" id="description" placeholder="Description" name="description" required>{{ $service->description }}</textarea>
                       </div>
 
                       
