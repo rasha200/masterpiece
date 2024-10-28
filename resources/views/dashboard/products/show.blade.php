@@ -7,8 +7,10 @@
         
         <p><strong>Name:</strong> {{ $product->name }}</p>
         <p><strong>Description:</strong> {{ $product->description }}</p>
+
+        <p><strong>Image:</strong></p>
         @if($product->image)
-                <img src="{{ asset('uploads/product/' . $product->image) }}" alt="product Image" style="width:20%; border-radius: 8px; margin-bottom: 15px;">
+                <img src="{{ asset('uploads/product/' . $product->image) }}" alt="product Image" style="width:20%; margin-bottom: 15px;">
             @else
                 <span style="color: #666; font-style: italic;">No image</span>
             @endif

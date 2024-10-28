@@ -55,7 +55,8 @@
                       <div class="form-group">
                     <label for="image">Current image</label><br>
                     @if($pet->image)
-                        <img src="{{ asset('uploads/pet/' . $pet->image) }}" alt="pet image" style="width: 100px; border-radius: 50px;">
+                        <img src="{{ asset('uploads/pet/' . $pet->image) }}" alt="pet image" style="width: 100px;">
+                        <input type="hidden" name="image"id="image">
                     @else
                         <span>No image available</span>
                     @endif

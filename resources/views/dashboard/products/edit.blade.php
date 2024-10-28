@@ -35,7 +35,7 @@
                       <div class="form-group">
                     <label for="image">Current image</label><br>
                     @if($product->image)
-                        <img src="{{ asset('uploads/product/' . $product->image) }}" alt="product image" style="width: 100px; border-radius: 50px;">
+                        <img src="{{ asset('uploads/product/' . $product->image) }}" alt="product image" style="width: 100px;">
                     @else
                         <span>No image available</span>
                     @endif

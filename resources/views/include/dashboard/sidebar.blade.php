@@ -31,20 +31,13 @@
         </li>
 
 
-
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('pets.index')}}">
-                <span class="menu-title">Pets</span>
-                <i class="mdi mdi mdi-cat menu-icon"></i>
-            </a>
-        </li>
-
         <li class="nav-item">
             <a class="nav-link" href="{{route('services.index')}}">
                 <span class="menu-title">Services</span>
                 <i class="mdi mdi mdi-pharmacy menu-icon"></i>
             </a>
         </li>
+
 
 
         @if(Auth::user()->role == 'manager' || Auth::user()->role == 'store_manager')
@@ -69,6 +62,16 @@
                 <i class="mdi mdi mdi mdi-cart-plus menu-icon"></i>
             </a>
         </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('pets.index')}}">
+                <span class="menu-title">Pets</span>
+                <i class="mdi mdi mdi-cat menu-icon"></i>
+            </a>
+        </li>
+
+
     </ul>
 </nav>
 <!-- partial -->

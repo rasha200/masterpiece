@@ -97,12 +97,14 @@ class ProductController extends Controller
             
         ]);
 
-        $filename = null;
+        
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = public_path('uploads/product/');
             $file->move($path, $filename);
+        } else {
+            $filename = $product->image; 
         }
 
         $product->update([

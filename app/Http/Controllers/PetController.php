@@ -91,13 +91,16 @@ class PetController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $filename = null;
+       
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = public_path('uploads/pet/');
             $file->move($path, $filename);
-        }
+        } 
+        else {
+        $filename = $pet->image; 
+    }
 
         $pet->update([
             'name'=>$request->input('name'),

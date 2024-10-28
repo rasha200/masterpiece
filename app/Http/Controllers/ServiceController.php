@@ -18,6 +18,12 @@ class ServiceController extends Controller
         return view('dashboard.services.index' , ['services'=> $services]);
     }
 
+    public function index_user_side()
+    {
+        $services = Service::with('service_images')->get(); 
+        return view('include.user_side.services' , ['services'=> $services]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

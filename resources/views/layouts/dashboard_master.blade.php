@@ -2,7 +2,7 @@
 @include("include/dashboard/first")
 <!-- first include end -->
 
-<div class="container-scroller">
+
 
 <!-- start mobile navbar -->
 @include("include/dashboard/mobile_navbar")

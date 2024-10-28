@@ -29,7 +29,7 @@
                       <div class="form-group">
                     <label for="image">Current image</label><br>
                     @if($category->image)
-                        <img src="{{ asset('uploads/category/' . $category->image) }}" alt="Category image" style="width: 100px; border-radius: 50px;">
+                        <img src="{{ asset('uploads/category/' . $category->image) }}" alt="Category image" style="width: 100px;">
                     @else
                         <span>No image available</span>
                     @endif

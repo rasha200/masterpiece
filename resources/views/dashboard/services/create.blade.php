@@ -32,7 +32,7 @@
 
                       <div class="form-group">
                             <label for="image">Choose service images</label>
-                            <input type="file" name="image[]" id="image" class="form-control"multiple/>
+                            <input type="file" name="image[]" id="image" class="form-control" multiple/>
                       </div>
 
 
