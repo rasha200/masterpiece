@@ -8,6 +8,9 @@ use App\Http\Controllers\ServiceImageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\ContactController;
+
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -38,26 +41,28 @@ Route::resource('services', ServiceController::class)->middleware(['auth' , 'rol
 Route::resource('categories', CategoryController::class)->middleware(['auth' , 'role']);
 Route::resource('products', ProductController::class)->middleware(['auth' , 'role']);
 Route::delete('/service_images/{service_image}', [ServiceImageController::class, 'destroy'])->name('service_images.destroy')->middleware(['auth' , 'role']);
+Route::resource('/contacts', ContactController::class)->middleware(['auth', 'role']);
 
 
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/home/{id}', [HomeController::class, 'show'])->name('landing_single_product');
 
 Route::get('/about_us', function () {
     return view('about_us');
 })->name("about_us");
 
-Route::get('/service', function () {
-    return view('services');
-})->name("services");
+Route::get('/service',[ServiceController::class, 'index_user_side'])->name("services");
 
 Route::get('/service_details', function () {
     return view('service_details');
 })->name("service_details");
 
-Route::get('/store', function () {
-    return view('store');
-})->name("store");
+Route::get('/store',[StoreController::class, 'index'])->name("store");
+Route::get('/store/{id}',[StoreController::class, 'show'])->name("single_product");
+
+
+
 
 Route::get('/contact', function () {
     return view('contact');
@@ -67,9 +72,7 @@ Route::get('/cart', function () {
     return view('cart');
 })->name("cart");
 
-Route::get('/pet_adoption', function () {
-    return view('pet_adoption');
-})->name("pet_adoption");
+Route::get('/pet_adoption',[PetController::class, 'index_user_side'])->name("pet_adoption");
 
 Route::get('/product_details', function () {
     return view('product_details');
@@ -83,3 +86,5 @@ Route::get('/pet_details', function () {
 Route::get('/service_details/{id}', [ServiceController::class, 'show_user_side'])->name('service_details');
 
 Route::get('/pet_details/{id}', [PetController::class, 'show_user_side'])->name('pet_details');
+
+

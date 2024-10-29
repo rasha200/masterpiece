@@ -18,8 +18,10 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->string('type');
             $table->string('information'); 
+            $table->string('Special needs'); 
+            $table->string('pet_vaccinations_image')->nullable();
             $table->string('image')->nullable();
-            $table->enum('is_adopted', ['yes', 'no'])->default('no');
+            $table->enum('is_adopted', ['Adopted', 'Available'])->default('no');
             $table->softDeletes();
             $table->timestamps();
         });

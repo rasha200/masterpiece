@@ -17,6 +17,12 @@ class PetController extends Controller
         return view('dashboard.pets.index' , ['pets'=> $pets]);
     }
 
+    public function index_user_side()
+    {
+        $pets = Pet::all();
+
+        return view('pet_adoption' , ['pets'=> $pets]);
+    }
     /**
      * Show the form for creating a new resource.
      */

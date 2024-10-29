@@ -23,7 +23,7 @@
                             </span>
 
                             <span class="stext-109 cl3 txt-center">
-                                {{ $service->price }}
+                               $ {{ $service->price }}
                             </span>
                         </div>
                         @endforeach

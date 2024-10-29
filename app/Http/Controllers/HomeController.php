@@ -34,4 +34,11 @@ class HomeController extends Controller
 
         return view('landing_page' , ['services'=> $services , 'serviceImages'=> $serviceImages ,'products'=> $products , 'pets'=> $pets]);
     }
+
+    public function show(string $id)
+    {
+        dd($id);
+        $product = Product::findOrFail($id);
+        return view('landing_page' , ['product'=>$product]);
+    }
 }

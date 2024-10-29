@@ -72,6 +72,14 @@
         </li>
 
 
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('contacts.index')}}">
+                <span class="menu-title">Contacts</span>
+                <i class="mdi mdi mdi-cat menu-icon"></i>
+            </a>
+        </li>
+
+
     </ul>
 </nav>
 <!-- partial -->

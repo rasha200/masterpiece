@@ -10,6 +10,8 @@
 @include("include/user_side/cart")
 {{--include cart end--}}
 
+
+
 @yield("content")
 
 

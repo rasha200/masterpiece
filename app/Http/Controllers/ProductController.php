@@ -18,6 +18,7 @@ class ProductController extends Controller
         return view('dashboard.products.index' , ['products'=> $products]);
     }
 
+   
     /**
      * Show the form for creating a new resource.
      */
