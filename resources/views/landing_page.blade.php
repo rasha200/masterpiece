@@ -6,9 +6,12 @@
 @include("include/user_side/hero")
 {{--include Hero end--}}
 
+
+
 {{--include About start--}}
 @include("include/user_side/about")
 {{--include About end--}}
+
 
 
 {{--Services section start--}}
@@ -25,8 +28,8 @@
             @foreach($services->slice(0, 3) as $service)
             <div class="col-sm-6 col-md-4 p-b-40">
                 <div class="blog-item">
-                    <div class="hov-img0">
-                        <a href="blog-detail.html">
+                    <div class="block2-pic hov-img0">
+                        <a href="{{ route('service_details', $service->id) }}">
                             @if($service->service_images->isNotEmpty())
                             
                             <img src="{{ asset($service->service_images[0]->image) }}" alt="{{$service->name}}" 
@@ -34,6 +37,9 @@
                             @else
                             <span>No image available</span>
             @endif
+                        </a>
+                        <a href="{{ route('service_details', $service->id) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 " >
+                            Book Appointment
                         </a>
                     </div>
 
@@ -46,14 +52,20 @@
                             </a>
                         </h4>
 
+                        <p class="stext-108 cl6">
+                            {{$service->small_description}}
+                        </p>
+
                        
                     </div>
+                    <br>
 
                     <a href="{{ route('service_details', $service->id) }}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
                         Continue Reading
 
                         <i class="fa fa-long-arrow-right m-l-9"></i>
                     </a>
+
                 </div>
             </div>
             @endforeach
@@ -68,6 +80,8 @@
     
 </section>
 {{--Services section end--}}
+
+
 
 
 {{--Products section start--}}
@@ -130,12 +144,9 @@
         </a>
     </div>
 </section>
-
-
-
-
-
 {{--Products section end--}}
+
+
 
 
 {{--Pets section start--}}
@@ -191,6 +202,10 @@
 </section>
 {{--Pets section end--}}
 
+
+
+
+
 {{--include Testimonials start--}}
 <!-- Slider -->
 <section class="section-slide">
@@ -229,6 +244,11 @@
     </div>
 </section>
 {{--include Testimonials end--}}
+
+
+
+
+
 <script>
     // Function to show the modal
     function showModal(modalId) {

@@ -10,7 +10,7 @@
                 <div class="p-r-45 p-r-0-lg">
                     <!--  -->
                     <div class="row">
-                        @foreach ($serviceImages as $serviceImage)
+                        @foreach ($serviceImages->slice(0, 3) as $serviceImage)
                             <div class="col-md-4 mb-3"> 
                                 <img src="{{ asset($serviceImage->image) }}" class="img-fluid rounded" alt="Service Image"
                                      style="height: 200px; object-fit: cover; width: 100%;">

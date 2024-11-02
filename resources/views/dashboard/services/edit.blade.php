@@ -6,7 +6,7 @@
 <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Edit service</h4>
+                    <h4 class="card-title">Edit Service</h4>
 
                     @if ($errors->any())
                 <div class="alert alert-danger">
@@ -63,9 +63,23 @@
 
 
                       <div class="form-group">
+                        <label for="exampleInputName1">Price</label>
+                        <input type="text" class="form-control" id="price" placeholder="Price" name="price" value="{{$service->price}}" required>
+                      </div>
+
+                      
+                      <div class="form-group">
+                        <label for="exampleInputName1">Small Description</label>
+                        <input type="text" class="form-control" id="small_description" placeholder="Small Description" name="small_description" value="{{$service->small_description}}" required>
+                      </div>
+
+
+
+                      <div class="form-group">
                         <label for="exampleInputEmail3">Description</label>
                         <textarea class="form-control" id="description" placeholder="Description" name="description" required>{{ $service->description }}</textarea>
                       </div>
+
 
                       
                       <button type="submit" class="btn btn-outline-info btn-fw">Edit</button>

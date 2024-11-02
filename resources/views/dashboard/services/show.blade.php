@@ -6,7 +6,10 @@
 <div class="card-body" style="border: 1px solid #e7dee9;">
         
         <p><strong>Name:</strong> {{ $service->name }}</p>
+        <p><strong>Price:</strong> ${{ $service->price }}</p>
+        <p><strong>Small Description:</strong> {{ $service->small_description }}</p>
         <p><strong>Description:</strong> {{ $service->description }}</p>
+       
         <div class="form-group">
    
     <p><strong>Service images:</strong></p>

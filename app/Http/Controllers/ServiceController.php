@@ -18,6 +18,8 @@ class ServiceController extends Controller
         return view('dashboard.services.index' , ['services'=> $services]);
     }
 
+    
+
     public function index_user_side()
     {
         $services = Service::with('service_images')->get();
@@ -41,12 +43,16 @@ class ServiceController extends Controller
         $validation = $request->validate([
             'name' => 'required|string',
             'description' => 'required',
-            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'small_description' => 'required|string',
+            'price' => 'nullable',
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP|max:2048',
         ]);
 
         $service = Service::create([
             'name'=>$request->input('name'),
             'description'=>$request->input('description'),
+            'small_description'=>$request->input('small_description'),
+            'price'=>$request->input('price'),
         ]);
 
         $images = [];
@@ -110,13 +116,17 @@ class ServiceController extends Controller
         
         $validation = $request->validate([
             'name' => 'required|string',
-            'description' => 'required|string',
+            'description' => 'required',
+            'small_description' => 'required|string',
+            'price' => 'nullable',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $service->update([
             'name'=>$request->input('name'),
             'description'=>$request->input('description'),
+            'small_description'=>$request->input('small_description'),
+            'price'=>$request->input('price'),
         ]);
 
         

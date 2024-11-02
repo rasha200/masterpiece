@@ -7,7 +7,7 @@
 <!-- page title -->
 <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/hero-16.webp');">
     <h2 class="ltext-105 cl0 txt-center">
-      Our services
+      Our Services
     </h2>
 </section>	
 
@@ -23,7 +23,7 @@
                         <a href="{{ route('service_details', $service->id) }}" class="hov-img0 how-pos5-parent" >
 
                            <div class="row">
-                            @foreach($service->service_images as $image)
+                            @foreach($service->service_images->slice(0, 3) as $image)
                             <div class="col-md-4 mb-3"> 
                                 <img src="{{ asset($image->image) }}" class="img-fluid rounded" alt="Service Image"
                                      style="height: 200px; object-fit: cover; width: 100%;">
@@ -51,8 +51,7 @@
                             </h4>
 
                             <p class="stext-117 cl6">
-                                Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-                              {{-- {{ $service->small_description }}                             --}}
+                              {{ $service->small_description }}                            
                             </p>
 
                             <div class="flex-w flex-sb-m p-t-18">
@@ -78,9 +77,15 @@
                                     <i class="fa fa-long-arrow-right m-l-9"></i>
                                 </a>
                             </div>
-                        </div>
-                    </div>
 
+                            
+                        </div>
+                        
+                    </div>
+                    <a href="{{ route('service_details', $service->id) }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1  trans-04"
+                    style="width:30px;">
+                    Book Appointment
+                     </a>
                 </div>
             </div>
             @endforeach

@@ -8,7 +8,7 @@
         @if(Auth::user()->role == 'manager' || Auth::user()->role == 'veterinarian')
         <a href="{{ route('services.create') }}">
             <button type="button" class="btn btn-outline-info btn-fw">
-                <i class="zmdi zmdi-plus"></i> Add new service
+                <i class="zmdi zmdi-plus"></i> Add New Service
             </button>
         </a>
         @endif

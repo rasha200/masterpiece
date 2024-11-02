@@ -6,7 +6,7 @@
 <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Add new service</h4>
+                    <h4 class="card-title">Add New Service</h4>
 
                     @if ($errors->any())
                 <div class="alert alert-danger">
@@ -26,10 +26,23 @@
                       </div>
 
                       <div class="form-group">
+                        <label for="exampleInputName1">Small Description</label>
+                        <input type="text" class="form-control" id="small_description" placeholder="Small Description" name="small_description" value="{{ old('small_description') }}" required>
+                      </div>
+
+                      <div class="form-group">
                         <label for="exampleInputName1">Description</label>
                         <textarea class="form-control" id="description" placeholder="Description" name="description" required>{{ old('description') }}</textarea>
                       </div>
 
+
+                      <div class="form-group">
+                        <label for="exampleInputName1">Price</label>
+                        <input type="text" class="form-control" id="price" placeholder="Price" name="price" value="{{ old('price') }}" required>
+                      </div>
+
+
+                     
                       <div class="form-group">
                             <label for="image">Choose service images</label>
                             <input type="file" name="image[]" id="image" class="form-control" multiple/>
