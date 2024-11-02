@@ -75,10 +75,18 @@
         <li class="nav-item">
             <a class="nav-link" href="{{route('contacts.index')}}">
                 <span class="menu-title">Contacts</span>
-                <i class="mdi mdi mdi-cat menu-icon"></i>
+                <i class="mdi mdi mdi-phone menu-icon"></i>
             </a>
         </li>
 
+        @if(Auth::user()->role == 'manager' || Auth::user()->role == 'store_manager' || Auth::user()->role == 'receptionist')
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('testimonials.index')}}">
+                <span class="menu-title">Testimonials</span>
+                <i class="mdi mdi mdi-account-multiple menu-icon"></i>
+            </a>
+        </li>
+        @endif
 
     </ul>
 </nav>

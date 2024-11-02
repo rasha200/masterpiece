@@ -12,13 +12,5 @@ class Pet extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = [
-        'name',
-        'age',
-        'gender',
-        'type',
-        'information',
-        'image',
-        'is_adopted',
-    ];
+    protected $guarded  = [];
 }

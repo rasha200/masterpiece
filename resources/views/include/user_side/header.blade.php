@@ -22,12 +22,13 @@
                 </a>
                 @endif
                 @else
-                <a href="" class="flex-c-m trans-04 p-lr-25">
-                    {{ Auth::user()->Fname }}  {{ Auth::user()->Lname }}
-                </a>
                 <a href="#" class="flex-c-m trans-04 p-lr-25">
                     <i class="zmdi zmdi-account"></i>
                  </a>
+                <a href="" class="flex-c-m trans-04 p-lr-25">
+                    {{ Auth::user()->Fname }}  {{ Auth::user()->Lname }}
+                </a>
+               
                  <a href="{{ route('logout') }}" class="flex-c-m trans-04 p-lr-25"
                  onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">

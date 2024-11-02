@@ -12,7 +12,9 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        //
+        $testimonials = Testimonial::all();
+
+        return view('dashboard.testimonials.index' , ['testimonials'=> $testimonials]);
     }
 
     /**
@@ -28,7 +30,26 @@ class TestimonialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+
+        $validation = $request->validate([
+            'message' => 'required|string',
+        ]);
+
+        if (!auth()->check()) {
+            // Store a session variable to remember that the user came from the testimonial form
+            session(['from_testimonial' => true]);
+        
+            // Redirect back with the error message and input data
+            return redirect()->back()->with('error', 'Please log in to submit your feedback.')->withInput();
+        }
+
+        Testimonial::create([
+            'message'=>$request->input('message'),
+            'user_id'=>auth()->id(),
+        ]);
+
+        return redirect()->back()->with('success', 'Thank you for sharing your feedback');
     }
 
     /**
@@ -36,7 +57,7 @@ class TestimonialController extends Controller
      */
     public function show(Testimonial $testimonial)
     {
-        //
+        return view('dashboard.testimonials.show' , ['testimonial'=> $testimonial]);
     }
 
     /**
@@ -60,6 +81,8 @@ class TestimonialController extends Controller
      */
     public function destroy(Testimonial $testimonial)
     {
-        //
+        $testimonial->delete(); 
+        
+        return to_route('testimonials.index')->with('success', 'Service deleted');
     }
 }

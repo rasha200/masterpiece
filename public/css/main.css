@@ -156,6 +156,42 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   background-color: #FFF;
 }
 
+.swal-icon--error {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #f27474;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swal-icon--error__x-mark {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.swal-icon--error__line {
+  position: absolute;
+  height: 5px;
+  width: 40px;
+  background-color: #fff;
+  top: 50%;
+  left: 0;
+  border-radius: 2px;
+}
+
+.swal-icon--error__line--left {
+  transform: rotate(45deg);
+}
+
+.swal-icon--error__line--right {
+  transform: rotate(-45deg);
+}
+
+
 /*//////////////////////////////////////////////////////////////////
 [ BUTTON BACK TO TOP ]*/
 .btn-back-to-top {

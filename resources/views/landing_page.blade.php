@@ -81,183 +81,60 @@
 
         <!-- Tab01 -->
         <div class="tab01">
-           
-
             <!-- Tab panes -->
             <div class="tab-content p-t-50">
-                <!-- - -->
                 <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
-                    <!-- Slide2 -->
                     <div class="wrap-slick2">
                         <div class="slick2">
                             @foreach($products as $product)
-                            <div class="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15" style="height: 418; object-fit: cover; width: 100%;">
-                                <!-- Block2 -->
-
-                               
-                                <div class="block2">
-                                    <div class="block2-pic hov-img0" >
-                                        @if($product->image)
-                                        <img src="{{ asset('uploads/product/' . $product->image) }}" alt="IMG-PRODUCT"
-                                       >
-                                        @else
-                                        <span>No Image</span>
-                                    @endif
-                                    <form action="{{route('landing_single_product', $product->id)}}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                            Quick View
-                                        </button>
-                                    </form>
-                                    </div>
-
-                                    <div class="block2-txt flex-w flex-t p-t-14">
-                                        <div class="block2-txt-child1 flex-col-l ">
-                                            <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                {{$product->name}}
-                                            </a>
-                                            <a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                {{$product->id}}
-                                            </a>
-                                            <span class="stext-105 cl3">
-                                                ${{$product->price}}
-                                            </span>
+                                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
+                                    <!-- Product Block -->
+                                    <div class="block2">
+                                        <div class="block2-pic hov-img0">
+                                            @if($product->image)
+                                                <img src="{{ asset('uploads/product/' . $product->image) }}" alt="IMG-PRODUCT">
+                                            @else
+                                                <span>No Image</span>
+                                            @endif
+                                            <button type="button" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" data-modal="modal-{{ $product->id }}">
+                                                Quick View
+                                            </button>
                                         </div>
-
-                                        
+            
+                                        <div class="block2-txt flex-w flex-t p-t-14">
+                                            <div class="block2-txt-child1 flex-col-l">
+                                                <a href="{{ route('product_details', $product->id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                                    {{ $product->name }}
+                                                </a>
+                                                <span class="stext-105 cl3">
+                                                    ${{ $product->price }}
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                               
-                            </div>
+                                <!-- Modal for Quick View -->
+                                @include('include.modal.product')
+                                <!-- End Modal -->
                             @endforeach  
                         </div>
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
-
-    <div class="flex-c-m flex-w w-full p-t-45">
+    <div class="flex-c-m flex-w w-full p-t-15">
         <a href="{{ route('store') }}" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
             Visit Our Store
         </a>
     </div>
 </section>
 
-<!-- Modal1 -->
-<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
-    <div class="overlay-modal1 js-hide-modal1"></div>
 
-    <div class="container">
-        <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-            <button class="how-pos3 hov3 trans-04 js-hide-modal1">
-                <img src="images/icons/icon-close.png" alt="CLOSE">
-            </button>
 
-            <div class="row">
-                <div class="col-md-6 col-lg-7 p-b-30">
-                    <div class="p-l-25 p-r-30 p-lr-0-lg">
-                        <div class="wrap-slick3 flex-sb flex-w">
-                            <div class="wrap-slick3-dots"></div>
-                            <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
-                            <div class="slick3 gallery-lb">
-                                <div class="item-slick3" data-thumb="{{ asset('uploads/product/' . $product->image) }}">
-                                    <div class="wrap-pic-w pos-relative">
-                                        @if($product->image)
-                                        <img src="{{ asset('uploads/product/' . $product->image) }}" alt="IMG-PRODUCT">
-                                        @else
-                                        <span style="color: #666; font-style: italic;">No image</span>
-                                    @endif
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
 
-                                <div class="item-slick3" data-thumb="{{ asset('uploads/product/' . $product->image) }}">
-                                    <div class="wrap-pic-w pos-relative">
-                                        @if($product->image)
-                                        <img src="{{ asset('uploads/product/' . $product->image) }}" alt="IMG-PRODUCT">
-                                        @else
-                                        <span style="color: #666; font-style: italic;">No image</span>
-                                    @endif
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="item-slick3" data-thumb="{{ asset('uploads/product/' . $product->image) }}">
-                                    <div class="wrap-pic-w pos-relative">
-                                        @if($product->image)
-                                        <img src="{{ asset('uploads/product/' . $product->image) }}" alt="IMG-PRODUCT">
-                                        @else
-                                        <span style="color: #666; font-style: italic;">No image</span>
-                                    @endif
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-6 col-lg-5 p-b-30">
-                    <div class="p-r-50 p-t-5 p-lr-0-lg">
-                        <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                            {{ $product->name }}
-                        </h4>
-
-                        <span class="mtext-106 cl2">
-                            {{ $product->price }}
-                        </span>
-
-                        <p class="stext-102 cl3 p-t-23">
-                            {{ $product->description }}
-                            
-                        </p>
-                            <p class="stext-102 cl3 p-t-23">
-                            {{ $product->id }}
-                            
-                        </p>
-                        
-                        <!--  -->
-                        <div class="p-t-33">
-                            
-                            
-
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-204 flex-w flex-m respon6-next">
-                                    <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-minus"></i>
-                                        </div>
-
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-plus"></i>
-                                        </div>
-                                    </div>
-
-                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                        Add to cart
-                                    </button>
-                                </div>
-                            </div>	
-                        </div>
-
-                        <!--  -->
-                       
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 {{--Products section end--}}
 
 
@@ -305,7 +182,7 @@
         </div>
     </div>
 
-    <div class="flex-c-m flex-w w-full p-t-45">
+    <div class="flex-c-m flex-w w-full p-t-15">
         <a href="{{ route('pet_adoption') }}" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
             Adopt Today
         </a>
@@ -315,7 +192,68 @@
 {{--Pets section end--}}
 
 {{--include Testimonials start--}}
-@include("include/user_side/testimonials")
-{{--include Testimonials end--}}
+<!-- Slider -->
+<section class="section-slide">
+    <div class="wrap-slick1">
+        <div class="slick1">
 
+            @foreach($testimonials as $testimonial)
+            <div class="item-slick1" style="background-image: url(images/hero-17.jpeg);">
+                <div class="container h-full d-flex justify-content-center align-items-center">
+                    <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5 testimonial-content">
+            
+                        <div class="layer-slick1 animated visible-false text-center" data-appear="fadeInUp" data-delay="800">
+                            <h5 class="ltext-201 cl2 p-t-19 p-b-8 respon1">
+                              “{{$testimonial->message}}”
+                            </h5>
+                            <span class="ltext-61 cl2 respon2 text-center p-b-43 testimonial-author">
+                                {{$testimonial->user->Fname}} {{$testimonial->user->Lname}} <br> {{$testimonial->created_at->format('Y-m-d')}}
+                            </span>
+            
+                            <div class="layer-slick1 animated visible-false p-t-59 text-center" data-appear="zoomIn" data-delay="1600">
+                                <a href="{{ route('contact') }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 p-t-12 p-b-15 trans-04" style="width: auto; display: inline-block;">
+                                   Add your feedback
+                                </a>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            @endforeach
+
+        </div>
+    </div>
+</section>
+{{--include Testimonials end--}}
+<script>
+    // Function to show the modal
+    function showModal(modalId) {
+        document.getElementById(modalId).style.display = 'block';
+        document.querySelector('.overlay-modal1').style.display = 'block';
+    }
+
+    // Function to hide the modal
+    function hideModal() {
+        const modals = document.querySelectorAll('.js-modal1');
+        modals.forEach(modal => {
+            modal.style.display = 'none';
+        });
+        document.querySelector('.overlay-modal1').style.display = 'none';
+    }
+
+    // Event listeners for showing and hiding the modal
+    document.querySelectorAll('.js-hide-modal1').forEach(button => {
+        button.addEventListener('click', hideModal);
+    });
+
+    // Example: Show the modal when a specific button is clicked
+    // Replace 'yourButtonId' with the actual button ID
+    document.getElementById('yourButtonId').addEventListener('click', function() {
+        showModal('modal-{{ $product->id }}');
+    });
+</script>
 @endsection

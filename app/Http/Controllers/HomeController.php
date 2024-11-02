@@ -5,6 +5,8 @@ use App\Models\Service;
 use App\Models\ServiceImage;
 use App\Models\Product;
 use App\Models\Pet;
+use App\Models\Testimonial;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,7 +18,8 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // Apply the 'auth' middleware to all methods except 'index' and 'show'
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -31,14 +34,22 @@ class HomeController extends Controller
         $serviceImages = ServiceImage::all(); 
         $products = Product::all();
         $pets = Pet::all();
+        $testimonials = Testimonial::all();
 
-        return view('landing_page' , ['services'=> $services , 'serviceImages'=> $serviceImages ,'products'=> $products , 'pets'=> $pets]);
+
+        return view('landing_page' , [
+            'services'=> $services ,
+            'serviceImages'=> $serviceImages ,
+            'products'=> $products , 
+            'pets'=> $pets,
+            'testimonials'=> $testimonials
+        ]);
     }
 
     public function show(string $id)
     {
         dd($id);
-        $product = Product::findOrFail($id);
+                                                                                                                                        
         return view('landing_page' , ['product'=>$product]);
     }
 }

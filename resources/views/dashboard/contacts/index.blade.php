@@ -24,9 +24,10 @@
                       <thead>
                         <tr>
                           <th>Id</th>
-                          <th>User name</th>
-                          <th>subject</th>
-                          <th>date</th>
+                          <th>User Name</th>
+                          <th>User Email</th>
+                          <th>Subject</th>
+                          <th>Date</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -34,8 +35,8 @@
                         @foreach($contacts as $contact)
                         <tr>
                           <td>{{$contact->id}}</td>
-                          <td>{{$contact->user->Fname}} {{$contact->user->Lname}}</td>
-                        
+                          <td>{{$contact->Fname}} {{$contact->Lname}}</td>
+                          <td>{{$contact->email}}</td>
                           <td>{{$contact->subject}}</td>
                           <td>{{$contact->created_at->format('Y-m-d')}}</td>
 

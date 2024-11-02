@@ -31,15 +31,21 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $validation = $request->validate([
+            'Fname' => 'required|string',
+            'Lname' => 'required|string',
+            'email' => 'required|email',
             'subject' => 'required|string',
             'message' => 'required',
         ]);
 
         Contact::create([
+            'Fname'=>$request->input('Fname'),
+            'Lname'=>$request->input('Lname'),
+            'email'=>$request->input('email'),
             'subject'=>$request->input('subject'),
             'message'=>$request->input('message'),
-            'user_id'=>$request->input('user_id'),
-            'date'=>$request->input('date'),
+          
+            
             
         ]);
         return redirect()->back()->with('success', 'Thanks for contact us');

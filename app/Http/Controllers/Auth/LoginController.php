@@ -29,6 +29,14 @@ class LoginController extends Controller
      */
     protected function redirectTo()
     {
+
+        if (session()->has('from_testimonial')) {
+            // Remove the session variable after use
+            session()->forget('from_testimonial');
+            
+            // Redirect to the contact page
+            return route('contact');
+        }
     
     if (Auth::user()->role == 'receptionist' || Auth::user()->role == 'veterinarian' || Auth::user()->role == 'manager') {
     return '/dashboard';

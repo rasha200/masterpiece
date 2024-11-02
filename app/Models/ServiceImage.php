@@ -8,10 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceImage extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'image',
-        'service_id',
-    ];
+    protected $guarded  = [];
 
     public function service()
 {

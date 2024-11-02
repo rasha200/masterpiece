@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('Special needs'); 
             $table->string('pet_vaccinations_image')->nullable();
             $table->string('image')->nullable();
-            $table->enum('is_adopted', ['Adopted', 'Available'])->default('no');
+            $table->enum('is_adopted', ['Adopted', 'Available'])->default('Available');
             $table->softDeletes();
             $table->timestamps();
         });

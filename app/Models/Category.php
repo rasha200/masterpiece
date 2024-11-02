@@ -12,10 +12,7 @@ class Category extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = [
-        'name',
-        'image',
-    ];
+    protected $guarded  = [];
 
     public function products(){
     return $this->hasMany(Product::class);

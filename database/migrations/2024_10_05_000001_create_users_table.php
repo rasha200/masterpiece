@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('Fname');
             $table->string('Lname');
+            $table->enum('role', ['user', 'receptionist', 'store_manager','veterinarian', 'manager'])->default('user');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('mobile');
             $table->string('password');
-            $table->enum('role', ['user', 'receptionist', 'store_manager','veterinarian', 'manager'])->default('user');
             $table->softDeletes(); 
             $table->rememberToken();
             $table->timestamps();

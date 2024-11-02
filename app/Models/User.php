@@ -21,14 +21,7 @@ class User extends Authenticatable
 
      protected $dates = ['deleted_at'];
      
-    protected $fillable = [
-        'Fname',
-        'Lname',
-        'email',
-        'password',
-        'mobile',
-        'role',
-    ];
+     protected $guarded  = [];
 
     /**
      * The attributes that should be hidden for serialization.

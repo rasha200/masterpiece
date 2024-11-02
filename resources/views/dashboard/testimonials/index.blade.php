@@ -3,19 +3,11 @@
 @section('content')
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-<h2 class="title-1">Pets</h2>
-
-        @if(Auth::user()->role == 'manager' || Auth::user()->role == 'store_manager' )
-        <a href="{{ route('pets.create') }}">
-            <button type="button" class="btn btn-outline-info btn-fw">
-                <i class="zmdi zmdi-plus"></i> Add new pet
-            </button>
-        </a>
-        @endif
+        <h2 class="title-1">Testimonials</h2>
     </div>
 
      
-   
+    
 
     @if(session('success'))
     <div class="alert alert-success" style="background-color: #d4edda; color: #155724; font-weight: bold; margin-left: 36px; ">
@@ -32,60 +24,41 @@
                       <thead>
                         <tr>
                           <th>Id</th>
-                          <th>Name</th>
-                          <th>Age</th>
-                          <th>Gender</th>
-                          <th>Type</th>
-                          <th>Image</th>
-                          <th>Is Adote</th>
+                          <th>User Name</th>
+                          <th>Feedback</th>
+                          <th>Date</th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($pets as $pet)
+                        @foreach($testimonials as $testimonial)
                         <tr>
-                          <td>{{$pet->id}}</td>
-                          <td>{{$pet->name}}</td>
-                          <td>{{$pet->age}} </td>
-                          <td>{{$pet->gender}}</td>
-                          <td>{{$pet->type}}</td>
-                          <td>
-                          @if($pet->image)
-                          
-                            <img src="{{ asset('uploads/pet/' . $pet->image) }}" alt="pet Image" style="width: 50px; border-radius: 50px;"></td>
-                          @else
-                              <span>No Image</span>
-                          @endif
-</td> 
-                          <td>{{$pet->is_adopted}}</td>
+                          <td>{{$testimonial->id}}</td>
+                          <td>{{$testimonial->user->Fname}} {{$testimonial->user->Lname}}</td>
+                        
+                          <td>{{$testimonial->message}}</td>
+                          <td>{{$testimonial->created_at->format('Y-m-d')}}</td>
 
-
-                         
                           <td> 
 
                             
-                          <a href="{{ route('pets.show', $pet->id) }}"  title="View">
+                          <a href="{{ route('testimonials.show', $testimonial->id) }}"  title="View">
                           <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
                             <i class="mdi mdi mdi-eye text-success"></i>
                           </button>
                           </a>
 
 
-                           @if(Auth::user()->role == 'manager' || Auth::user()->role == 'store_manager' )
-                          <a href="{{ route('pets.edit', $pet->id) }}"  title="Edit">
-                          <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
-                            <i class="mdi mdi mdi-rename-box text-primary"></i>
-                          </button>
-                          </a>
-                          
-                          <form action="{{ route('pets.destroy', $pet->id) }}" method="POST" style="display:inline;" title="Delete">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"  onclick="confirmDeletion(event, '{{ route('pets.destroy', $pet->id) }}')">
-                            <i class="mdi mdi mdi-delete text-danger"></i>
-                          </button>
-                                            </form>
-                                            @endif
+                          @if(Auth::user()->role == 'manager')
+                          <form action="{{ route('testimonials.destroy', $testimonial->id) }}" method="POST" style="display:inline;" title="Delete">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"  onclick="confirmDeletion(event, '{{ route('testimonials.destroy', $testimonial->id) }}')">
+        <i class="mdi mdi mdi-delete text-danger"></i>
+      </button>
+                        </form>
+                        @endif
+   
                         </td>
                         </tr>
                         @endforeach
@@ -99,7 +72,7 @@
 <div id="confirmationModal"
     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
     <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
-        <p>Are you sure you want to delete this pet?</p>
+        <p>Are you sure you want to delete this product?</p>
         <button id="confirmButton" class="btn btn-outline-danger">Delete</button>
         <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>
     </div>

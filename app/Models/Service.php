@@ -12,11 +12,7 @@ class Service extends Model
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = [
-        'name',
-        'description',
-        'price',
-    ];
+    protected $guarded  = [];
 
     public function service_images()
 {

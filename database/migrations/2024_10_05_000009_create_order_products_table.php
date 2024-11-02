@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('amount');
             $table->float('total_price');
-            $table->date('date');
+      
             $table->string('city')->nullable();
             $table->string('street')->nullable();
             $table->string('bulding_number')->nullable();

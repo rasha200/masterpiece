@@ -15,13 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('rating')->nullable();
             $table->string('feedback');
-            $table->date('date');
+          
 
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             
             $table->unsignedBigInteger('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
