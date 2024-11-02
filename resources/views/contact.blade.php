@@ -80,30 +80,30 @@
                         Send Us A Message
                     </h4>
                     <div class="bor8 m-b-20 how-pos4-parent">
-                        <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="Fname" placeholder=" First Name" value="{{ old('Fname') }}">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="Fname" placeholder=" First Name" value="{{ old('Fname') }}" required>
                      
                     </div>
 
                     <div class="bor8 m-b-20 how-pos4-parent">
-                        <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="Lname" placeholder=" Last Name" value="{{ old('Lname') }}">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="Lname" placeholder=" Last Name" value="{{ old('Lname') }}" required>
                      
                     </div>
 
 
                     <div class="bor8 m-b-20 how-pos4-parent">
-                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="email" name="email" placeholder=" Email Address" value="{{ old('email') }}">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="email" name="email" placeholder=" Email Address" value="{{ old('email') }}" required>
                         <img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
                     </div>
 
                     <div class="bor8 m-b-20 how-pos4-parent">
-                        <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="subject" placeholder="Contact subject" value="{{ old('subject') }}">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="subject" placeholder="Contact subject" value="{{ old('subject') }}" required>
                       
                     </div>
 
                     
 
                     <div class="bor8 m-b-30">
-                        <textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="message" placeholder="How Can We Help?">{{ old('message') }}</textarea>
+                        <textarea class="stext-111 cl2 plh3 size-120 p-lr-28 p-tb-25" name="message" placeholder="How Can We Help?" required>{{ old('message') }}</textarea>
                     </div>
 
                
@@ -128,21 +128,21 @@
             
                     <div class="bor8 m-b-20 how-pos4-parent">
                         <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="name" placeholder="Your Name" 
-                        value="{{ auth()->check() ? auth()->user()->Fname . ' ' . auth()->user()->Lname : '' }}">
+                        value="{{ auth()->check() ? auth()->user()->Fname . ' ' . auth()->user()->Lname : '' }}" required>
                     </div>
             
                     <input type="hidden" value="{{ auth()->check() ? auth()->user()->id : '' }}" name="user_id">
             
                     <div class="bor8 m-b-20 how-pos4-parent">
                         <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Your Email Address" 
-                        value="{{ auth()->check() ? auth()->user()->email : '' }}">
+                        value="{{ auth()->check() ? auth()->user()->email : '' }}" required>
                         <img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
                     </div>
             
                   
             
                     <div class="bor8 m-b-20 how-pos4-parent">
-                        <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="message" placeholder="Your feedback" value="{{ old('message') }}">
+                        <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="message" placeholder="Your feedback" value="{{ old('message') }}" required>
                     </div>
             
                     <button type="submit" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">

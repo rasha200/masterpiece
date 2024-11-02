@@ -37,6 +37,19 @@ class LoginController extends Controller
             // Redirect to the contact page
             return route('contact');
         }
+
+        if (session()->has('from_serviceFeedback')) {
+            // Get the service ID from the session
+            $serviceId = session('service_id');
+    
+            // Remove the session variable after use
+            session()->forget('from_serviceFeedback');
+            session()->forget('service_id'); // Remove service ID after use
+    
+            // Redirect to the service_details page with the service ID
+            return route('service_details', ['id' => $serviceId]);
+        }
+
     
     if (Auth::user()->role == 'receptionist' || Auth::user()->role == 'veterinarian' || Auth::user()->role == 'manager') {
     return '/dashboard';

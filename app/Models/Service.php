@@ -18,4 +18,11 @@ class Service extends Model
 {
     return $this->hasMany(ServiceImage::class);
 }
+
+public function service_feedbacks()
+{
+    return $this->hasMany(ServiceFeedback::class);
+}
+
+
 }

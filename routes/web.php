@@ -11,6 +11,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\ServiceFeedbackController;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -76,6 +77,21 @@ Route::get('/service_details/{id}', [ServiceController::class, 'show_user_side']
 
 
 
+// <!--==========================================  (Service feedback)  =====================================================-->
+// Protected routes
+Route::middleware(['auth', 'role'])->group(function () {
+    Route::get('/serviceFeedbacks', [ServiceFeedbackController::class, 'index'])->name('serviceFeedbacks.index'); // List all serviceFeedbacks (dashboard)
+    Route::get('/serviceFeedbacks/{serviceFeedback}', [ServiceFeedbackController::class, 'show'])->name('serviceFeedbacks.show'); // Show
+    Route::delete('/serviceFeedbacks/{serviceFeedback}', [ServiceFeedbackController::class, 'destroy'])->name('serviceFeedbacks.destroy'); // Delete
+});
+// Public routes
+Route::post('/serviceFeedbacks', [ServiceFeedbackController::class, 'store'])->name('serviceFeedbacks.store'); // Create
+Route::get('/serviceFeedbacks/create', [ServiceFeedbackController::class, 'create'])->name('serviceFeedbacks.create'); // Create form (user side)
+
+
+
+
+
 // <!--==========================================  (Pets)  =====================================================-->
 Route::resource('pets', PetController::class)->middleware(['auth' , 'role']);
 Route::get('/pet_adoption',[PetController::class, 'index_user_side'])->name("pet_adoption");//view all the pets in the user side
@@ -86,15 +102,12 @@ Route::get('/pet_details/{id}', [PetController::class, 'show_user_side'])->name(
 // <!--==========================================  (Contacts)  =====================================================-->
 Route::middleware(['auth', 'role'])->group(function () {
     Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index'); // List all contacts (dashboard)
-
-    Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy'); // Delete
     Route::get('/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show'); // Show
+    Route::delete('/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy'); // Delete
 });
-
 // Public routes
-Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store'); // Create
 Route::get('/contacts/create', [ContactController::class, 'create'])->name('contacts.create'); // Create form (user side)
-
+Route::post('/contacts', [ContactController::class, 'store'])->name('contacts.store'); // Create
 
 
 Route::get('/contact', function () {
@@ -109,13 +122,14 @@ Route::get('/contact', function () {
 // Protected routes
 Route::middleware(['auth', 'role'])->group(function () {
     Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index'); // List all testimonials (dashboard)
-    Route::delete('/testimonials/{testimonial}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy'); // Delete
     Route::get('/testimonials/{testimonial}', [TestimonialController::class, 'show'])->name('testimonials.show'); // Show
+    Route::delete('/testimonials/{testimonial}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy'); // Delete
 });
 
 // Public routes
-Route::get('/testimonials/create', [TestimonialController::class, 'create'])->name('testimonials.create'); // Create form (user side)
 Route::post('/testimonials', [TestimonialController::class, 'store'])->name('testimonials.store'); // Create
+Route::get('/testimonials/create', [TestimonialController::class, 'create'])->name('testimonials.create'); // Create form (user side)
+
 
 
 // <!--==========================================  (About us page)  =====================================================-->

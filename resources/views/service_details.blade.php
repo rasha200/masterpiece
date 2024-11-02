@@ -2,7 +2,8 @@
 
 @section('content')
 
-<!-- Content page -->
+ <!--==========================================  (ٌService)  =====================================================-->
+
 <section class="bg0 p-t-52 p-b-20">
     <div class="container">
         <div class="row">
@@ -56,26 +57,224 @@
                         </h4>
 
                         <p class="stext-117 cl6 p-b-26">
-                            {{ $service->description }}                        </p>
+                            {{ $service->description }}                       
+                         </p>
 
                        
                     </div>
 
-                    <div class="flex-w flex-t p-t-16">
-                        <span class="size-216 stext-116 cl8 p-t-4">
-                            Tags
-                        </span>
 
-                        <div class="flex-w size-217">
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                Streetstyle
-                            </a>
 
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                Crafts
-                            </a>
+
+
+
+
+ <!--==========================================  (ٌReview)  =====================================================-->
+ <div class="bor10 m-t-50 p-t-43 p-b-40">
+    <!-- Tab01 -->
+    <div class="tab01">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item p-b-10">
+                <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Reviews ({{ count($servicefeedbacks) }})</a>
+            </li>
+
+            
+
+            <li class="nav-item p-b-10">
+                <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Add Review</a>
+            </li>
+        </ul>
+
+
+
+        <!----------- Reviews ------------->
+        <div class="tab-content p-t-43">
+            <div class="tab-pane fade show active" id="description" role="tabpanel">
+                <div class="how-pos2 p-lr-15-md">
+                    @foreach ($servicefeedbacks as $servicefeedback)
+                    <div class="flex-w flex-t p-b-68">
+                        <div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
+                            <img src="{{asset('images/user 2.webp')}}" alt="AVATAR">
+                        </div>
+
+                        <div class="size-207">
+                            <div class="flex-w flex-sb-m p-b-17">
+                                <span class="mtext-107 cl2 p-r-20">
+                                   
+                                    {{$servicefeedback->feedback}}
+                                </span>
+
+                                <span class="fs-18 cl11">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <i class="zmdi {{ $i <= $servicefeedback->rating ? 'zmdi-star' : 'zmdi-star-outline' }}"></i>
+                                    @endfor
+                                </span>
+
+                            </div>
+
+                            <p class="stext-102 cl6">
+                                {{$servicefeedback->user->Fname}} {{$servicefeedback->user->Lname}}
+                            </p>
+
+                            <p class="stext-102 cl6">
+                                {{$servicefeedback->created_at->format('Y-m-d')}}
+                            </p>
                         </div>
                     </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- - -->
+         
+
+            <!-------------- Success & error modal ------------->
+            @if (Session::get('success'))
+
+                <div class="swal-overlay swal-overlay--show-modal" tabindex="-1">
+                    <div class="swal-modal">
+                        <div class="swal-icon swal-icon--success">
+                            <span class="swal-icon--success__line swal-icon--success__line--long"></span>
+                            <span class="swal-icon--success__line swal-icon--success__line--tip"></span>
+                            <div class="swal-icon--success__ring"></div>
+                            <div class="swal-icon--success__hide-corners"></div>
+                        </div>
+                
+                        <div class="swal-title" style="">{{ Session::get('success') }}</div>
+                
+                        <div class="swal-footer">
+                            <div class="swal-button-container">
+                                <a href="{{ route('service_details', ['id' => $service->id]) }}" class="swal-button swal-button--confirm">OK</a>
+                                <div class="swal-button__loader">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            @elseif (Session::get('error'))
+                 <div class="swal-overlay swal-overlay--show-modal" tabindex="-1">
+                    <div class="swal-modal">
+                        <div class="swal-icon swal-icon--error">
+                            <div class="swal-icon--error__x-mark">
+                                <span class="swal-icon--error__line swal-icon--error__line--left"></span>
+                                <span class="swal-icon--error__line swal-icon--error__line--right"></span>
+                            </div>
+                        </div>
+                        
+                
+                        <div class="swal-title" style="">{{ Session::get('error') }}</div>
+                
+                        <div class="swal-footer">
+                            <div class="swal-button-container">
+                                <a href="{{ route('login') }}" class="swal-button swal-button--confirm">Login</a>
+                                <div class="swal-button__loader">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif   
+
+
+
+             <!-------------------- Add review -------------->
+            <div class="tab-pane fade" id="reviews" role="tabpanel">
+                <div class="row">
+                    <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
+                        <div class="p-b-30 m-lr-15-sm">
+                           
+                            <form class="w-full" action="{{ route('serviceFeedbacks.store') }}" method="POST">
+                                @csrf
+                                <h5 class="mtext-108 cl2 p-b-7">
+                                    Add a review
+                                </h5>
+
+                                <p class="stext-102 cl6">
+                                    Your email address will not be published. Required fields are marked *
+                                </p>
+
+                                <div class="flex-w flex-m p-t-50 p-b-23">
+                                    <span class="stext-102 cl3 m-r-16">
+                                        Your Rating *
+                                    </span>
+
+                                    <span class="wrap-rating fs-18 cl11 pointer">
+                                        <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(1)"></i>
+                                        <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(2)"></i>
+                                        <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(3)"></i>
+                                        <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(4)"></i>
+                                        <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(5)"></i>
+                                        <input class="dis-none" type="hidden" name="rating" id="rating" value="" required>
+                                    </span>
+                                </div>
+
+                                <script>
+                                    function setRating(rating) {
+                                        document.getElementById('rating').value = rating;
+                                        // Update star visuals based on selected rating
+                                        const stars = document.querySelectorAll('.item-rating');
+                                        stars.forEach((star, index) => {
+                                            if (index < rating) {
+                                                star.classList.add('zmdi-star'); // Filled star class
+                                                star.classList.remove('zmdi-star-outline'); // Outline star class
+                                            } else {
+                                                star.classList.add('zmdi-star-outline');
+                                                star.classList.remove('zmdi-star');
+                                            }
+                                        });
+                                    }
+                                </script>
+
+                        <div class="row p-b-25">
+                              <div class="col-12 p-b-5">
+                                 <label class="stext-102 cl3" for="review">Your Review *</label>
+                                 <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="feedback" name="feedback" required>{{ old('feedback') }}</textarea>
+                              </div>
+
+                              <div class="col-12 p-b-5">
+                                 <label class="stext-102 cl3" for="name">Name *</label>
+                                 <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name"
+                                 value="{{ auth()->check() ? auth()->user()->Fname . ' ' . auth()->user()->Lname : '' }}" required>
+                              </div>
+
+                                 <input type="hidden" value="{{ auth()->check() ? auth()->user()->id : '' }}" name="user_id">
+                                 <input type="hidden" value="{{ $service->id }}" name="service_id">
+
+                             <div class="col-12 p-b-5">
+                                  <label class="stext-102 cl3" for="email">Email *</label>
+                                  <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email"
+                                  value="{{ auth()->check() ? auth()->user()->email : '' }}" required>
+                             </div>
+                        </div>
+
+                            <button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
+                                Submit
+                            </button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!--==========================================  (ٌReview)  =====================================================-->
+
+
+                    
+                  
 
                     <!--  -->
                     <div class="p-t-40">

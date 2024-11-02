@@ -83,6 +83,6 @@ class TestimonialController extends Controller
     {
         $testimonial->delete(); 
         
-        return to_route('testimonials.index')->with('success', 'Service deleted');
+        return to_route('testimonials.index')->with('success', 'Feedback deleted');
     }
 }

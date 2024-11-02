@@ -94,7 +94,8 @@ class ServiceController extends Controller
     {
         $service = Service::findOrFail($id); 
         $serviceImages = $service->service_images; 
-        return view('service_details' , ['service'=> $service,'serviceImages'=>$serviceImages]);
+        $servicefeedbacks = $service->service_feedbacks; 
+        return view('service_details' , ['service'=> $service,'serviceImages'=>$serviceImages,'servicefeedbacks'=>$servicefeedbacks]);
     }
 
 

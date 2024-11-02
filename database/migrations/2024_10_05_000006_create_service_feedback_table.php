@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('service_feedback', function (Blueprint $table) {
             $table->id();
-            $table->string('rating')->nullable();
+            $table->integer('rating')->nullable();
             $table->string('feedback');
     
             

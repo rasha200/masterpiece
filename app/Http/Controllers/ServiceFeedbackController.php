@@ -12,7 +12,9 @@ class ServiceFeedbackController extends Controller
      */
     public function index()
     {
-        //
+        $serviceFeedbacks = ServiceFeedback::all();
+
+        return view('dashboard.service_feedbacks.index' , ['serviceFeedbacks'=> $serviceFeedbacks]);
     }
 
     /**
@@ -28,7 +30,28 @@ class ServiceFeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $validation = $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'feedback' => 'required|string',
+        ]);
+
+        if (!auth()->check()) {
+            // Store a session variable to remember that the user came from the testimonial form
+            session(['from_serviceFeedback' => true, 'service_id' => $request->input('service_id')]);
+        
+            // Redirect back with the error message and input data
+            return redirect()->back()->with('error', 'Please log in to submit your reviwe.')->withInput();
+        }
+
+        ServiceFeedback::create([
+            'rating'=>$request->input('rating'),
+            'feedback'=>$request->input('feedback'),
+            'user_id'=>auth()->id(),
+            'service_id'=>$request->input('service_id'),
+        ]);
+
+        return redirect()->back()->with('success', 'Thank you for sharing your reviwe');
     }
 
     /**
@@ -36,7 +59,7 @@ class ServiceFeedbackController extends Controller
      */
     public function show(ServiceFeedback $serviceFeedback)
     {
-        //
+        return view('dashboard.service_feedbacks.show' , ['serviceFeedback'=> $serviceFeedback]);
     }
 
     /**
@@ -60,6 +83,8 @@ class ServiceFeedbackController extends Controller
      */
     public function destroy(ServiceFeedback $serviceFeedback)
     {
-        //
+        $serviceFeedback->delete(); 
+        
+        return to_route('serviceFeedbacks.index')->with('success', 'Review deleted');
     }
 }
