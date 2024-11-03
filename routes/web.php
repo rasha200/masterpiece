@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PetController;
+use App\Http\Controllers\PetImageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceImageController;
 use App\Http\Controllers\CategoryController;
@@ -92,6 +93,7 @@ Route::get('/serviceFeedbacks/create', [ServiceFeedbackController::class, 'creat
 
 // <!--==========================================  (Pets)  =====================================================-->
 Route::resource('pets', PetController::class)->middleware(['auth' , 'role']);
+Route::delete('/pet_images/{pet_image}', [PetImageController::class, 'destroy'])->name('pet_images.destroy')->middleware(['auth' , 'role']);
 Route::get('/pet_adoption',[PetController::class, 'index_user_side'])->name("pet_adoption");//view all the pets in the user side
 Route::get('/pet_details/{id}', [PetController::class, 'show_user_side'])->name('pet_details');
 

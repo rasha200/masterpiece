@@ -60,6 +60,14 @@ class PetImageController extends Controller
      */
     public function destroy(PetImage $petImage)
     {
-        //
+        $petId = $petImage->pet_id; 
+        
+       
+    
+        $petImage->delete();
+    
+       
+        return redirect()->route('pets.edit', ['pet' => $petId])
+            ->with('success', 'Pet image deleted successfully.');
     }
 }

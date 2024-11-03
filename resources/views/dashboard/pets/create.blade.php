@@ -51,6 +51,11 @@
                       </div>
 
                       <div class="form-group">
+                        <label for="image">Choose pet images</label>
+                        <input type="file" name="image[]" id="image" class="form-control" multiple/>
+                  </div>
+
+                      <div class="form-group">
                             <label for="image">Choose pet vaccinations image</label>
                             <input type="file" name="pet_vaccinations_image" id="pet_vaccinations_image" class="form-control">
                       </div>

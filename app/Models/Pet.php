@@ -13,4 +13,9 @@ class Pet extends Model
     protected $dates = ['deleted_at'];
 
     protected $guarded  = [];
+
+    public function pet_images()
+    {
+        return $this->hasMany(PetImage::class);
+    }
 }

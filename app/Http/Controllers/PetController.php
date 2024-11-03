@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pet;
+use App\Models\PetImage;
+
 use Illuminate\Http\Request;
 
 class PetController extends Controller
@@ -12,14 +14,14 @@ class PetController extends Controller
      */
     public function index()
     {
-        $pets = Pet::all();
+        $pets = Pet::with('pet_images')->get();
 
         return view('dashboard.pets.index' , ['pets'=> $pets]);
     }
 
     public function index_user_side()
     {
-        $pets = Pet::all();
+        $pets = Pet::with('pet_images')->get();
 
         return view('pet_adoption' , ['pets'=> $pets]);
     }
@@ -44,6 +46,7 @@ class PetController extends Controller
             'information' => 'required|string',
             'pet_vaccinations_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'Special_needs' => 'required|string',
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP|max:2048',
         ]);
 
         $filename = null;
@@ -54,7 +57,7 @@ class PetController extends Controller
             $file->move($path, $filename);
         }
 
-        Pet::create([
+        $pet = Pet::create([
             'name'=>$request->input('name'),
             'age'=>$request->input('age'),
             'gender'=>$request->input('gender'),
@@ -63,6 +66,27 @@ class PetController extends Controller
             'pet_vaccinations_image'=>$filename,
             'Special_needs'=>$request->input('Special_needs'),
         ]);
+
+
+        $images = [];
+
+        if ($request->hasFile('image')) {
+            foreach($request->file('image') as $file) {
+               
+                $filename = uniqid() . '_' . $file->getClientOriginalExtension();
+                $path = public_path('uploads/pet/');
+                $file->move($path, $filename);
+    
+               
+                $images[] = [
+                    'image' => 'uploads/pet/' . $filename,
+                    'pet_id'=> $pet->id, 
+                ];
+            }
+    
+            
+            PetImage::insert($images);
+        }
 
        
 
@@ -74,13 +98,18 @@ class PetController extends Controller
      */
     public function show(Pet $pet)
     {
-        return view('dashboard.pets.show' , ['pet'=> $pet]);
+        $petImages = $pet->pet_images; 
+        return view('dashboard.pets.show' , ['pet'=> $pet,'petImages'=>$petImages]);
     }
+
+
+
 
     public function show_user_side($id)
     {
         $pet = Pet::findOrFail($id); 
-        return view('pet_details' , ['pet'=> $pet]);
+        $petImages = $pet->pet_images; 
+        return view('pet_details' , ['pet'=> $pet,'petImages'=>$petImages]);
     }
 
     /**
@@ -88,7 +117,8 @@ class PetController extends Controller
      */
     public function edit(Pet $pet)
     {
-        return view ('dashboard.pets.edit' , ['pet' => $pet]);
+        $petImages = $pet->pet_images; 
+        return view ('dashboard.pets.edit' , ['pet' => $pet,'petImages'=>$petImages]);
     }
 
     /**
@@ -104,6 +134,7 @@ class PetController extends Controller
             'information' => 'required|string',
             'pet_vaccinations_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'Special_needs' => 'required|string',
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
        
@@ -127,6 +158,25 @@ class PetController extends Controller
             'Special_needs'=>$request->input('Special_needs'),
         ]);
 
+        $images = [];
+
+        if ($request->hasFile('image')) {
+            foreach($request->file('image') as $file) {
+               
+                $filename = uniqid() . '_' . $file->getClientOriginalExtension();
+                $path = public_path('uploads/pet/');
+                $file->move($path, $filename);
+    
+               
+                $images[] = [
+                    'image' => 'uploads/pet/' . $filename,
+                    'pet_id'=> $pet->id, 
+                ];
+            }
+    
+            
+            PetImage::insert($images);
+        }
        
 
         return to_route('pets.index')->with('success', 'Pet updated successfully');
