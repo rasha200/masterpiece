@@ -11,12 +11,12 @@
         </a>
 
         <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
-           Products
+           Store
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
         <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
-            Products
+            {{ $product->category->name }}
              <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
          </a>
 
@@ -87,7 +87,7 @@
                     </span>
 
                     <p class="stext-102 cl3 p-t-23">
-                        {{ $product->description }}
+                        {{ $product->small_description }}
                     </p>
                     
                     <!--  -->
@@ -152,7 +152,8 @@
                     <div class="tab-pane fade show active" id="description" role="tabpanel">
                         <div class="how-pos2 p-lr-15-md">
                             <p class="stext-102 cl6">
-                                Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus et elementum sed, sodales vitae eros. Ut ex quam, porta consequat interdum in, faucibus eu velit. Quisque rhoncus ex ac libero varius molestie. Aenean tempor sit amet orci nec iaculis. Cras sit amet nulla libero. Curabitur dignissim, nunc nec laoreet consequat, purus nunc porta lacus, vel efficitur tellus augue in ipsum. Cras in arcu sed metus rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
+                                {{ $product->description }}
+
                             </p>
                         </div>
                     </div>

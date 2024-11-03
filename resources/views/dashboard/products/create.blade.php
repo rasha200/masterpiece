@@ -26,14 +26,16 @@
                       </div>
 
                       <div class="form-group">
-                        <label for="exampleInputName1">Description</label>
-                        <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="{{ old('description') }}" required>
+                        <label for="exampleInputName1">Small Description</label>
+                        <input type="text" class="form-control" id="small_description" placeholder="Small Description" name="small_description" value="{{ old('small_description') }}" required>
                       </div>
 
                       <div class="form-group">
-                            <label for="image">Choose product image</label>
-                            <input type="file" name="image" id="image" class="form-control">
+                        <label for="exampleInputName1">Description</label>
+                        <textarea class="form-control" id="description" placeholder="Description" name="description" required>{{ old('description') }}</textarea>
                       </div>
+
+                  
 
                       <div class="form-group">
                         <label for="exampleInputEmail3">Price</label>

@@ -28,25 +28,19 @@
 
 
                       <div class="form-group">
+                        <label for="exampleInputName1">Small Description</label>
+                        <input type="text" class="form-control" id="small_description" placeholder="Small Description" name="small_description" value="{{$product->small_description}}" required>
+                      </div>
+
+
+
+                      <div class="form-group">
                         <label for="exampleInputEmail3">Description</label>
-                        <input type="text" class="form-control" id="description" placeholder="Description" name="description" value="{{$product->description}}" required>
-                      </div>
-
-                      <div class="form-group">
-                    <label for="image">Current image</label><br>
-                    @if($product->image)
-                        <img src="{{ asset('uploads/product/' . $product->image) }}" alt="product image" style="width: 100px;">
-                    @else
-                        <span>No image available</span>
-                    @endif
-                </div>
-
-                      <div class="form-group">
-                            <label for="image">Upload new image</label>
-                            <input type="file" name="image" id="image" class="form-control">
+                        <textarea class="form-control" id="description" placeholder="Description" name="description" required>{{ $product->description }}</textarea>
                       </div>
 
 
+          
                       <div class="form-group">
                         <label for="exampleInputName1">Price</label>
                         <input type="text" class="form-control" id="price" placeholder="Price" name="price" value="{{$product->price}}" required>

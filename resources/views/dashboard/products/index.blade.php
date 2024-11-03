@@ -46,12 +46,12 @@
                           <td>{{$product->id}}</td>
                           <td>{{$product->name}}</td>
                           <td>
-                          @if($product->image)
+                          {{-- @if($product->image)
                           
                             <img src="{{ asset('uploads/product/' . $product->image) }}" alt="product Image" style="width: 50px; border-radius: 50px;"></td>
                           @else
                               <span>No Image</span>
-                          @endif
+                          @endif --}}
 </td> 
                           <td>{{$product->price}}</td>
                           <td>{{$product->quantity}}</td>

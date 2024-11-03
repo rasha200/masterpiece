@@ -35,26 +35,17 @@ class ProductController extends Controller
     {
         $validation = $request->validate([
             'name' => 'required|string',
-            'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'small_description' => 'required|string',
+            'description' => 'required',
             'price' => 'required|numeric',
             'quantity' => 'required|numeric',
             'category_id' => 'required|string',
-            
         ]);
-
-        $filename = null;
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = public_path('uploads/product/');
-            $file->move($path, $filename);
-        }
 
         Product::create([
             'name'=>$request->input('name'),
+            'small_description'=>$request->input('small_description'),
             'description'=>$request->input('description'),
-            'image'=>$filename,
             'price'=>$request->input('price'),
             'quantity'=>$request->input('quantity'),
             'category_id'=>$request->input('category_id'),
@@ -102,32 +93,23 @@ class ProductController extends Controller
     {
         $validation = $request->validate([
             'name' => 'required|string',
-            'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'small_description' => 'required|string',
+            'description' => 'required',
             'price' => 'required|numeric',
             'quantity' => 'required|numeric',
             'category_id' => 'required|string',
             
         ]);
 
-        
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $path = public_path('uploads/product/');
-            $file->move($path, $filename);
-        } else {
-            $filename = $product->image; 
-        }
+    
 
         $product->update([
             'name'=>$request->input('name'),
+            'small_description'=>$request->input('small_description'),
             'description'=>$request->input('description'),
-            'image'=>$filename,
             'price'=>$request->input('price'),
             'quantity'=>$request->input('quantity'),
             'category_id'=>$request->input('category_id'),
-            
         ]);
 
        
