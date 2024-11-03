@@ -11,12 +11,17 @@
         </a>
 
         <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
-            Men
+           Products
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
+        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+            Products
+             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+         </a>
+
         <span class="stext-109 cl4">
-            Lightweight Jacket
+            {{ $product->name }}
         </span>
     </div>
 </div>

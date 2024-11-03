@@ -11,12 +11,12 @@
         </a>
 
         <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
-            Men
+           Pet Adoption
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
         <span class="stext-109 cl4">
-            Lightweight Jacket
+            {{ $pet->name }}
         </span>
     </div>
 </div>
@@ -33,38 +33,35 @@
                         <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                         <div class="slick3 gallery-lb">
-                            <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
-                                <div class="wrap-pic-w pos-relative">
-                                    <img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+         
 
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-01.jpg">
+                    @foreach ($petImages as $petImage)
+                            <div class="item-slick3" data-thumb="{{ asset($petImage->image) }}">
+                                <div class="wrap-pic-w pos-relative">
+                                    <img src="{{ asset($petImage->image) }}" alt="Pet images">
+
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset($petImage->image) }}">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
                             </div>
+                    @endforeach
                            
-                            <div class="item-slick3" data-thumb="images/product-detail-02.jpg">
+                   
+
+                @if($pet->pet_vaccinations_image)
+                            <div class="item-slick3" data-thumb="{{ asset('uploads/pet/' . $pet->pet_vaccinations_image) }}">
                                 <div class="wrap-pic-w pos-relative">
-                                    @if($pet->image)
-                                    <img src="{{ asset('uploads/pet/' . $pet->image) }}" alt="IMG-PRODUCT">
-                                    @else
-                                    <span style="color: #666; font-style: italic;">No image</span>
-                                @endif
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-02.jpg">
+                                    <img src="{{ asset('uploads/pet/' . $pet->pet_vaccinations_image) }}" alt="Pet vaccinations image">
+
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('uploads/pet/' . $pet->pet_vaccinations_image) }}">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
                             </div>
-
-                            <div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-                                <div class="wrap-pic-w pos-relative">
-                                    <img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="images/product-detail-03.jpg">
-                                        <i class="fa fa-expand"></i>
-                                    </a>
-                                </div>
-                            </div>
+                 @else
+                            <span style="color: #666; font-style: italic;">No image</span>
+                 @endif
                         </div>
                     </div>
                 </div>
@@ -73,23 +70,27 @@
             <div class="col-md-6 col-lg-5 p-b-30">
                 <div class="p-r-50 p-t-5 p-lr-0-lg">
                     <h6 class="mtext-50 cl2 js-name-detail p-b-14">
-                        <i class="fas fa-paw" style="color: #14535F;"></i> Name:<span class="stext-102 cl3 p-t-23"> {{ $pet->name }}</span>
+                        <i class="fa fa-paw" style="color: #14535F;"></i> Name:<span class="stext-102 cl3 p-t-23"> {{ $pet->name }}</span>
                     </h6>
 
                     <h6 class="mtext-50 cl2 js-name-detail p-b-14">
-                        <i class="fas fa-paw" style="color: #14535F;"></i> Type: <span class="stext-102 cl3 p-t-23"> {{ $pet->type }}</span>
+                        <i class="fa fa-paw" style="color: #14535F;"></i> Type: <span class="stext-102 cl3 p-t-23"> {{ $pet->type }}</span>
                     </h6>
 
                     <h6 class="mtext-50 cl2 js-name-detail p-b-14">
-                        <i class="fas fa-paw" style="color: #14535F;"></i> Age: <span class="stext-102 cl3 p-t-23"> {{ $pet->age }}</span>
+                        <i class="fa fa-paw" style="color: #14535F;"></i> Age: <span class="stext-102 cl3 p-t-23"> {{ $pet->age }}</span>
                     </h6>
 
                     <h6 class="mtext-50 cl2 js-name-detail p-b-14">
-                        <i class="fas fa-paw" style="color: #14535F;"></i> Gender: <span class="stext-102 cl3 p-t-23"> {{ $pet->gender }}</span>
+                        <i class="fa fa-paw" style="color: #14535F;"></i> Gender: <span class="stext-102 cl3 p-t-23"> {{ $pet->gender }}</span>
                     </h6>
 
                     <h6 class="mtext-50 cl2 js-name-detail p-b-14">
-                        <i class="fas fa-paw" style="color: #14535F;"></i> Pet information: <span class="stext-102 cl3 p-t-23"> {{ $pet->information }}</span>
+                        <i class="fa fa-paw" style="color: #14535F;"></i> Pet information: <span class="stext-102 cl3 p-t-23"> {{ $pet->information }}</span>
+                    </h6>
+
+                    <h6 class="mtext-50 cl2 js-name-detail p-b-14">
+                        <i class="fa fa-paw" style="color: #14535F;"></i> Special needs: <span class="stext-102 cl3 p-t-23"> {{ $pet->Special_needs }}</span>
                     </h6>
                     
                     <!--  -->

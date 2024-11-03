@@ -62,7 +62,7 @@
 
                       <div class="form-group">
                         <label for="exampleInputName1">Special needs</label>
-                        <input type="text" class="form-control" id="Special_needs" placeholder="Special needs" name="Special_needs" value="{{ old('Special_needs') }}" required>
+                        <input type="text" class="form-control" id="Special_needs" placeholder="Special needs" name="Special_needs" value="{{ old('Special_needs') }}" >
                       </div>
 
                       <button type="submit" class="btn btn-outline-info btn-fw">Create</button>

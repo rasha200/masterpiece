@@ -106,7 +106,7 @@
 
                       <div class="form-group">
                         <label for="exampleInputName1">Special needs</label>
-                        <input type="text" class="form-control" id="Special_needs" placeholder="Special needs" name="Special_needs" value="{{$pet->Special_needs}}" required>
+                        <input type="text" class="form-control" id="Special_needs" placeholder="Special needs" name="Special_needs" value="{{$pet->Special_needs}}" >
                       </div>
 
                       
