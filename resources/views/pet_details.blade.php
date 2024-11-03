@@ -22,7 +22,7 @@
 </div>
     
 
-<!-- Product Detail -->
+<!-- Pet Detail -->
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
     <div class="container">
         <div class="row">
@@ -38,7 +38,7 @@
                     @foreach ($petImages as $petImage)
                             <div class="item-slick3" data-thumb="{{ asset($petImage->image) }}">
                                 <div class="wrap-pic-w pos-relative">
-                                    <img src="{{ asset($petImage->image) }}" alt="Pet images">
+                                    <img src="{{ asset($petImage->image) }}" alt="Pet images" style="height: 500px; object-fit: cover; width: 100%;">
 
                                     <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset($petImage->image) }}">
                                         <i class="fa fa-expand"></i>
@@ -48,11 +48,11 @@
                     @endforeach
                            
                    
-
-                @if($pet->pet_vaccinations_image)
+                    @if(!empty($pet->pet_vaccinations_image))
+         
                             <div class="item-slick3" data-thumb="{{ asset('uploads/pet/' . $pet->pet_vaccinations_image) }}">
                                 <div class="wrap-pic-w pos-relative">
-                                    <img src="{{ asset('uploads/pet/' . $pet->pet_vaccinations_image) }}" alt="Pet vaccinations image">
+                                    <img src="{{ asset('uploads/pet/' . $pet->pet_vaccinations_image) }}" alt="Pet vaccinations image" style="height: 500px; object-fit: cover; width: 100%;">
 
                                     <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('uploads/pet/' . $pet->pet_vaccinations_image) }}">
                                         <i class="fa fa-expand"></i>
@@ -60,7 +60,15 @@
                                 </div>
                             </div>
                  @else
-                            <span style="color: #666; font-style: italic;">No image</span>
+                 <div class="item-slick3" data-thumb="{{ asset('images/hero-20.png') }}">
+                    <div class="wrap-pic-w pos-relative">
+                        <img src="{{ asset('images/hero-20.png') }}" alt="Pet vaccinations image" style="height: 500px">
+
+                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('images/hero-20.png') }}">
+                            <i class="fa fa-expand"></i>
+                        </a>
+                    </div>
+                </div>
                  @endif
                         </div>
                     </div>

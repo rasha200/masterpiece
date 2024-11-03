@@ -46,7 +46,7 @@ class PetController extends Controller
             'information' => 'required|string',
             'pet_vaccinations_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'Special_needs' => 'nullable|string',
-            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP|max:2048',
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP,AVIF|max:2048',
         ]);
 
         $filename = null;
@@ -134,7 +134,7 @@ class PetController extends Controller
             'information' => 'required|string',
             'pet_vaccinations_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP|max:2048',
             'Special_needs' => 'nullable|string',
-            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP|max:2048',
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP,AVIF|max:2048',
         ]);
 
        
