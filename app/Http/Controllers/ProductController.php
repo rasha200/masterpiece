@@ -74,6 +74,18 @@ class ProductController extends Controller
         return view('dashboard.products.show' , ['product'=> $product]);
     }
 
+
+
+
+    public function show_user_side( $id)
+    {
+        $product = Product::findOrFail($id); 
+        // $serviceImages = $service->service_images; 
+        // $servicefeedbacks = $service->service_feedbacks; 
+        return view('product_details' , ['product'=> $product]);
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      */

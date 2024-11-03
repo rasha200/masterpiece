@@ -57,9 +57,7 @@ Route::resource('categories', CategoryController::class)->middleware(['auth' , '
 
 // <!--==========================================  (Products)  =====================================================-->
 Route::resource('products', ProductController::class)->middleware(['auth' , 'role']);
-Route::get('/product_details', function () {
-    return view('product_details');
-})->name("product_details");
+Route::get('/product_details/{id}',[ProductController::class, 'show_user_side'])->name("product_details");
 
 
 

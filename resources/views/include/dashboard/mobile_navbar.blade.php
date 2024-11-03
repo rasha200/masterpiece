@@ -17,15 +17,7 @@
         </div>
         <ul class="navbar-nav navbar-nav-right">
             
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="mdi mdi-login me-2"></i> Logout
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
+                    
 
                     <li class="nav-item">
                         <a class="nav-link" href="}">
@@ -37,6 +29,16 @@
                         <a class="nav-link" href="}">
                             {{ Auth::user()->Fname }}  {{ Auth::user()->Lname }}
                         </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="mdi mdi-login me-2"></i> Logout
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </li>
                 
                     
