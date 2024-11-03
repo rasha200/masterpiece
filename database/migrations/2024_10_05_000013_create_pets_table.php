@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('information'); 
             $table->string('pet_vaccinations_image')->nullable();
-            $table->string('Special needs'); 
+            $table->string('Special_needs'); 
             $table->enum('is_adopted', ['Adopted', 'Available'])->default('Available');
 
             $table->softDeletes();

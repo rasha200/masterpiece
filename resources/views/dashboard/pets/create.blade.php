@@ -51,8 +51,13 @@
                       </div>
 
                       <div class="form-group">
-                            <label for="image">Choose pet image</label>
-                            <input type="file" name="image" id="image" class="form-control">
+                            <label for="image">Choose pet vaccinations image</label>
+                            <input type="file" name="pet_vaccinations_image" id="pet_vaccinations_image" class="form-control">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleInputName1">Special needs</label>
+                        <input type="text" class="form-control" id="Special_needs" placeholder="Special needs" name="Special_needs" value="{{ old('Special_needs') }}" required>
                       </div>
 
                       <button type="submit" class="btn btn-outline-info btn-fw">Create</button>

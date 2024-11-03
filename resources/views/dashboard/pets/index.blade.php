@@ -50,12 +50,12 @@
                           <td>{{$pet->gender}}</td>
                           <td>{{$pet->type}}</td>
                           <td>
-                          @if($pet->image)
+                          {{-- @if($pet->image)
                           
                             <img src="{{ asset('uploads/pet/' . $pet->image) }}" alt="pet Image" style="width: 50px; border-radius: 50px;"></td>
                           @else
                               <span>No Image</span>
-                          @endif
+                          @endif --}}
 </td> 
                           <td>{{$pet->is_adopted}}</td>
 

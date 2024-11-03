@@ -42,12 +42,13 @@ class PetController extends Controller
             'gender' => 'required|string',
             'type' => 'required|string',
             'information' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'pet_vaccinations_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'Special_needs' => 'required|string',
         ]);
 
         $filename = null;
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
+        if ($request->hasFile('pet_vaccinations_image')) {
+            $file = $request->file('pet_vaccinations_image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = public_path('uploads/pet/');
             $file->move($path, $filename);
@@ -59,7 +60,8 @@ class PetController extends Controller
             'gender'=>$request->input('gender'),
             'type'=>$request->input('type'),
             'information'=>$request->input('information'),
-            'image'=>$filename,
+            'pet_vaccinations_image'=>$filename,
+            'Special_needs'=>$request->input('Special_needs'),
         ]);
 
        
@@ -100,18 +102,19 @@ class PetController extends Controller
             'gender' => 'required|string',
             'type' => 'required|string',
             'information' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'pet_vaccinations_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'Special_needs' => 'required|string',
         ]);
 
        
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
+        if ($request->hasFile('pet_vaccinations_image')) {
+            $file = $request->file('pet_vaccinations_image');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $path = public_path('uploads/pet/');
             $file->move($path, $filename);
         } 
         else {
-        $filename = $pet->image; 
+        $filename = $pet->pet_vaccinations_image; 
     }
 
         $pet->update([
@@ -120,7 +123,8 @@ class PetController extends Controller
             'gender'=>$request->input('gender'),
             'type'=>$request->input('type'),
             'information'=>$request->input('information'),
-            'image'=>$filename,
+            'pet_vaccinations_image'=>$filename,
+            'Special_needs'=>$request->input('Special_needs'),
         ]);
 
        

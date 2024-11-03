@@ -53,18 +53,23 @@
 
                       
                       <div class="form-group">
-                    <label for="image">Current image</label><br>
-                    @if($pet->image)
-                        <img src="{{ asset('uploads/pet/' . $pet->image) }}" alt="pet image" style="width: 100px;">
-                        <input type="hidden" name="image"id="image">
+                    <label for="image">Current pet vaccinations image</label><br>
+                    @if($pet->pet_vaccinations_image)
+                        <img src="{{ asset('uploads/pet/' . $pet->pet_vaccinations_image) }}" alt="Pet vaccinations image" style="width: 100px;">
+                        <input type="hidden" name="pet_vaccinations_image"id="pet_vaccinations_image">
                     @else
                         <span>No image available</span>
                     @endif
                 </div>
 
                       <div class="form-group">
-                            <label for="image">Upload new image</label>
-                            <input type="file" name="image" id="image" class="form-control">
+                            <label for="image">Upload new pet vaccinations image</label>
+                            <input type="file" name="pet_vaccinations_image" id="pet_vaccinations_image" class="form-control">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="exampleInputName1">Special needs</label>
+                        <input type="text" class="form-control" id="Special_needs" placeholder="Special needs" name="Special_needs" value="{{$pet->Special_needs}}" required>
                       </div>
 
                       
