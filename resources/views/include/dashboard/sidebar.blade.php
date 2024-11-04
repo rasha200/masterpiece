@@ -57,13 +57,24 @@
             </a>
         </li>
 
+
         <li class="nav-item">
-            <a class="nav-link" href="{{route('products.index')}}">
-                <span class="menu-title">Products</span>
-                <i class="mdi mdi-cart-outline menu-icon"></i>
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <span class="menu-title">Products</span>
+              <i class="menu-arrow"></i>
+              <i class="mdi mdi mdi-pharmacy menu-icon"></i>
             </a>
-        </li>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{route('products.index')}}">All Products</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('productFeedbacks.index')}}">Product Feedbacks</a></li>
+              </ul>
+            </div>
+          </li>
+
         @endif
+
+        
 
         <li class="nav-item">
             <a class="nav-link" href="">

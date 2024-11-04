@@ -37,7 +37,7 @@ class ServiceFeedbackController extends Controller
         ]);
 
         if (!auth()->check()) {
-            // Store a session variable to remember that the user came from the testimonial form
+            // Store a session variable to remember that the user came from the service feedback form
             session(['from_serviceFeedback' => true, 'service_id' => $request->input('service_id')]);
         
             // Redirect back with the error message and input data

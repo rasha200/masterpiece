@@ -92,13 +92,13 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item p-b-10">
-                <a class="nav-link active" data-toggle="tab" href="#description" role="tab">Reviews ({{ count($servicefeedbacks) }})</a>
+                <a class="nav-link active" data-toggle="tab" href="#reviews" role="tab">Reviews ({{ count($servicefeedbacks) }})</a>
             </li>
 
             
 
             <li class="nav-item p-b-10">
-                <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Add Review</a>
+                <a class="nav-link" data-toggle="tab" href="#add_review" role="tab">Add Review</a>
             </li>
         </ul>
 
@@ -106,7 +106,7 @@
 
         <!----------- Reviews ------------->
         <div class="tab-content p-t-43">
-            <div class="tab-pane fade show active" id="description" role="tabpanel">
+            <div class="tab-pane fade show active" id="reviews" role="tabpanel">
                 <div class="how-pos2 p-lr-15-md">
                     @foreach ($servicefeedbacks as $servicefeedback)
                     <div class="flex-w flex-t p-b-68">
@@ -205,7 +205,7 @@
 
 
              <!-------------------- Add review -------------->
-            <div class="tab-pane fade" id="reviews" role="tabpanel">
+            <div class="tab-pane fade" id="add_review" role="tabpanel">
                 <div class="row">
                     <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
                         <div class="p-b-30 m-lr-15-sm">

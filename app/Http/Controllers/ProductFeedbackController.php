@@ -12,7 +12,9 @@ class ProductFeedbackController extends Controller
      */
     public function index()
     {
-        //
+        $productfeedbacks = ProductFeedback::all();
+
+        return view('dashboard.product_feedbacks.index' , ['productfeedbacks'=> $productfeedbacks]);
     }
 
     /**
@@ -28,7 +30,27 @@ class ProductFeedbackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'feedback' => 'required|string',
+        ]);
+
+        if (!auth()->check()) {
+            // Store a session variable to remember that the user came from the product feedback form
+            session(['from_productFeedback' => true, 'product_id' => $request->input('product_id')]);
+        
+            // Redirect back with the error message and input data
+            return redirect()->back()->with('error', 'Please log in to submit your reviwe.')->withInput();
+        }
+
+        ProductFeedback::create([
+            'rating'=>$request->input('rating'),
+            'feedback'=>$request->input('feedback'),
+            'user_id'=>auth()->id(),
+            'product_id'=>$request->input('product_id'),
+        ]);
+
+        return redirect()->back()->with('success', 'Thank you for sharing your reviwe');
     }
 
     /**
@@ -36,7 +58,7 @@ class ProductFeedbackController extends Controller
      */
     public function show(ProductFeedback $productFeedback)
     {
-        //
+        return view('dashboard.product_feedbacks.show' , ['productFeedback'=> $productFeedback]);
     }
 
     /**
@@ -60,6 +82,8 @@ class ProductFeedbackController extends Controller
      */
     public function destroy(ProductFeedback $productFeedback)
     {
-        //
+        $productFeedback->delete(); 
+        
+        return to_route('productFeedbacks.index')->with('success', 'Review deleted');
     }
 }

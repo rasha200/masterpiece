@@ -6,13 +6,15 @@ use App\Http\Controllers\PetController;
 use App\Http\Controllers\PetImageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceImageController;
+use App\Http\Controllers\ServiceFeedbackController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductFeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TestimonialController;
-use App\Http\Controllers\ServiceFeedbackController;
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -59,6 +61,19 @@ Route::resource('categories', CategoryController::class)->middleware(['auth' , '
 // <!--==========================================  (Products)  =====================================================-->
 Route::resource('products', ProductController::class)->middleware(['auth' , 'role']);
 Route::get('/product_details/{id}',[ProductController::class, 'show_user_side'])->name("product_details");
+
+
+
+// <!--==========================================  (Product feedback)  =====================================================-->
+// Protected routes
+Route::middleware(['auth', 'role'])->group(function () {
+    Route::get('/productFeedbacks', [ProductFeedbackController::class, 'index'])->name('productFeedbacks.index'); // List all productFeedbacks (dashboard)
+    Route::get('/productFeedbacks/{productFeedback}', [ProductFeedbackController::class, 'show'])->name('productFeedbacks.show'); // Show
+    Route::delete('/productFeedbacks/{productFeedback}', [ProductFeedbackController::class, 'destroy'])->name('productFeedbacks.destroy'); // Delete
+});
+// Public routes
+Route::post('/productFeedbacks', [ProductFeedbackController::class, 'store'])->name('productFeedbacks.store'); // Create
+Route::get('/productFeedbacks/create', [ProductFeedbackController::class, 'create'])->name('productFeedbacks.create'); // Create form (user side)
 
 
 

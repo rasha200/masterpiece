@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="title-1">Service Feedbacks</h2>
+        <h2 class="title-1">Product Feedbacks</h2>
     </div>
 
      
@@ -25,31 +25,31 @@
                         <tr>
                           <th>Id</th>
                           <th>User Name</th>
-                          <th>Service Name</th>
+                          <th>Product Name</th>
                           <th>Rating</th>
                           <th>Date</th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($serviceFeedbacks as $serviceFeedback)
+                        @foreach($productfeedbacks as $productfeedback)
                         <tr>
-                          <td>{{$serviceFeedback->id}}</td>
-                          <td>{{$serviceFeedback->user->Fname}} {{$serviceFeedback->user->Lname}}</td>
-                          <td>{{$serviceFeedback->service->name}}</td>
+                          <td>{{$productfeedback->id}}</td>
+                          <td>{{$productfeedback->user->Fname}} {{$productfeedback->user->Lname}}</td>
+                          <td>{{$productfeedback->product->name}}</td>
                           <td>
                             <span class="fs-18 cl11">
                             @for ($i = 1; $i <= 5; $i++)
-                                <i class="zmdi {{ $i <= $serviceFeedback->rating ? 'zmdi-star' : 'zmdi-star-outline' }}" style="color: #f9ba48;"></i>
+                                <i class="zmdi {{ $i <= $productfeedback->rating ? 'zmdi-star' : 'zmdi-star-outline' }}" style="color: #f9ba48;"></i>
                             @endfor
                             </span>
                           </td>
-                          <td>{{$serviceFeedback->created_at->format('Y-m-d')}}</td>
+                          <td>{{$productfeedback->created_at->format('Y-m-d')}}</td>
 
                           <td> 
 
                             
-                          <a href="{{ route('serviceFeedbacks.show', $serviceFeedback->id) }}"  title="View">
+                          <a href="{{ route('productFeedbacks.show', $productfeedback->id) }}"  title="View">
                           <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
                             <i class="mdi mdi mdi-eye text-success"></i>
                           </button>
@@ -57,10 +57,10 @@
 
 
                           @if(Auth::user()->role == 'manager')
-                          <form action="{{ route('serviceFeedbacks.destroy', $serviceFeedback->id) }}" method="POST" style="display:inline;" title="Delete">
+                          <form action="{{ route('productFeedbacks.destroy', $productfeedback->id) }}" method="POST" style="display:inline;" title="Delete">
                             @csrf
                             @method('DELETE')
-                            <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"  onclick="confirmDeletion(event, '{{ route('serviceFeedbacks.destroy', $serviceFeedback->id) }}')">
+                            <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"  onclick="confirmDeletion(event, '{{ route('productFeedbacks.destroy', $productfeedback->id) }}')">
         <i class="mdi mdi mdi-delete text-danger"></i>
       </button>
                         </form>

@@ -50,6 +50,18 @@ class LoginController extends Controller
             return route('service_details', ['id' => $serviceId]);
         }
 
+        if (session()->has('from_productFeedback')) {
+            // Get the product ID from the session
+            $productId = session('product_id');
+    
+            // Remove the session variable after use
+            session()->forget('from_productFeedback');
+            session()->forget('product_id'); // Remove product ID after use
+    
+            // Redirect to the product_details page with the product ID
+            return route('product_details', ['id' => $productId]);
+        }
+
     
     if (Auth::user()->role == 'receptionist' || Auth::user()->role == 'veterinarian' || Auth::user()->role == 'manager') {
     return '/dashboard';

@@ -72,8 +72,8 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id); 
         // $serviceImages = $service->service_images; 
-        // $servicefeedbacks = $service->service_feedbacks; 
-        return view('product_details' , ['product'=> $product]);
+        $productfeedbacks = $product->product_feedbacks; 
+        return view('product_details' , ['product'=> $product,'productfeedbacks'=> $productfeedbacks]);
     }
 
 
