@@ -22,13 +22,17 @@
 
                 <!-- Dynamic Category Buttons -->
                 @foreach($categories as $category)
+                
                 <form action="{{ route('store') }}" method="GET" style="display:inline-block">
                     <input type="hidden" value="{{ $category->id }}" name="category_id">
                     <button type="submit" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 {{ request('category_id') == $category->id ? 'how-active1' : '' }}">
                         {{ $category->name }}
                     </button>
                 </form>
+               
                 @endforeach
+              
+            
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
@@ -276,9 +280,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal for Quick View -->
-            @include('include.modal.product')
-            <!-- End Modal -->
+         
             @endforeach
         </div>
 

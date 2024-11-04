@@ -9,7 +9,15 @@
         <p><strong>User Name:</strong> {{$testimonial->user->Fname}} {{$testimonial->user->Lname}}</p>
         <p><strong>User Email:</strong> {{$testimonial->user->email}}</p>
         <p><strong>Date:</strong> {{$testimonial->created_at->format('Y-m-d')}}</p>
-
+        <p><strong>Rating:</strong>
+            <span class="fs-18 cl11">
+                @for ($i = 1; $i <= 5; $i++)
+                    <i class="zmdi {{ $i <= $testimonial->rating ? 'zmdi-star' : 'zmdi-star-outline' }}" style="color: #f9ba48;"></i>
+                @endfor
+            </span>
+            
+            
+            </p>
         <p><strong>Feedback:</strong> {{$testimonial->message}}</p>
        
         

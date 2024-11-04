@@ -115,19 +115,22 @@
                         </div>
 
                         <div class="size-207">
-                            <div class="flex-w flex-sb-m p-b-17">
-                                <span class="mtext-107 cl2 p-r-20">
-                                   
-                                    {{$servicefeedback->feedback}}
-                                </span>
-
+                           
                                 <span class="fs-18 cl11">
                                     @for ($i = 1; $i <= 5; $i++)
                                         <i class="zmdi {{ $i <= $servicefeedback->rating ? 'zmdi-star' : 'zmdi-star-outline' }}"></i>
                                     @endfor
                                 </span>
+                                <br>
 
-                            </div>
+                                <p class="mtext-107 cl2 p-r-20">
+                                   
+                                    {{$servicefeedback->feedback}}
+                                </p>
+                                
+
+                                
+                          
 
                             <p class="stext-102 cl6">
                                 {{$servicefeedback->user->Fname}} {{$servicefeedback->user->Lname}}

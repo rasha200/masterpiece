@@ -33,7 +33,7 @@ class HomeController extends Controller
         $services = Service::all(); 
         $products = Product::all();
         $pets = Pet::all();
-        $testimonials = Testimonial::all();
+        $testimonials = Testimonial::orderBy('created_at', 'desc')->get();
 
 
         return view('landing_page' , [

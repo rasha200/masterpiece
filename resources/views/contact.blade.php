@@ -125,7 +125,21 @@
                 <form action="{{ route('testimonials.store') }}" method="POST">
                     @csrf
                     <h4 class="mtext-105 cl2 txt-center p-b-30">Leave a Review</h4>
-            
+                    <div class="flex-w flex-m p-t-50 p-b-23">
+                        <span class="stext-102 cl3 m-r-16">
+                            Your Rating *
+                        </span>
+
+                        <span class="wrap-rating fs-18 cl11 pointer">
+                            <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(1)"></i>
+                            <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(2)"></i>
+                            <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(3)"></i>
+                            <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(4)"></i>
+                            <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(5)"></i>
+                            <input class="dis-none" type="hidden" name="rating" id="rating" value="" required>
+                        </span>
+                    </div>
+                    
                     <div class="bor8 m-b-20 how-pos4-parent">
                         <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="name" placeholder="Your Name" 
                         value="{{ auth()->check() ? auth()->user()->Fname . ' ' . auth()->user()->Lname : '' }}" required>

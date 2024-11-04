@@ -38,7 +38,7 @@ class ProductController extends Controller
             'name' => 'required|string',
             'small_description' => 'required|string',
             'description' => 'required',
-            'price' => 'required|numeric',
+            'price' => 'required',
             'quantity' => 'required|numeric',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP,AVIF|max:2048',
         ]);
@@ -93,7 +93,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id); 
         $productImages = $product->product_images; 
-        $productfeedbacks = $product->product_feedbacks; 
+        $productfeedbacks = $product->product_feedbacks()->orderBy('created_at', 'desc')->get(); 
         $relatedProducts = Product::where('category_id', $product->category_id)
         ->where('id', '!=', $product->id)
         ->inRandomOrder() // Randomize order
@@ -132,7 +132,7 @@ class ProductController extends Controller
             'name' => 'required|string',
             'small_description' => 'required|string',
             'description' => 'required',
-            'price' => 'required|numeric',
+            'price' => 'required',
             'quantity' => 'required|numeric',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP,AVIF|max:2048',
         ]);

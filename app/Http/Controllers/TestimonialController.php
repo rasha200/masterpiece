@@ -33,6 +33,7 @@ class TestimonialController extends Controller
        
 
         $validation = $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
             'message' => 'required|string',
         ]);
 
@@ -46,6 +47,7 @@ class TestimonialController extends Controller
 
         Testimonial::create([
             'message'=>$request->input('message'),
+            'rating'=>$request->input('rating'),
             'user_id'=>auth()->id(),
         ]);
 

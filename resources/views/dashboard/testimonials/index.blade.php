@@ -25,7 +25,7 @@
                         <tr>
                           <th>Id</th>
                           <th>User Name</th>
-                          <th>Feedback</th>
+                          <th>Rating</th>
                           <th>Date</th>
                           <th></th>
                         </tr>
@@ -35,8 +35,14 @@
                         <tr>
                           <td>{{$testimonial->id}}</td>
                           <td>{{$testimonial->user->Fname}} {{$testimonial->user->Lname}}</td>
-                        
-                          <td>{{$testimonial->message}}</td>
+                          <td>
+                            <span class="fs-18 cl11">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <i class="zmdi {{ $i <= $testimonial->rating ? 'zmdi-star' : 'zmdi-star-outline' }}" style="color: #f9ba48;"></i>
+                            @endfor
+                            </span>
+                          </td>
+                          
                           <td>{{$testimonial->created_at->format('Y-m-d')}}</td>
 
                           <td> 
