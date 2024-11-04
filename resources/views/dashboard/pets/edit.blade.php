@@ -53,7 +53,6 @@
 
                         <div class="form-group">
                           <label for="image">Choose pet images</label>
-                          
                           <input type="file" name="image[]" id="image" class="form-control" multiple/>
                     </div>
 

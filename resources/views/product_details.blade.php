@@ -38,39 +38,21 @@
                         <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                         <div class="slick3 gallery-lb">
-                            <div class="item-slick3" data-thumb="{{ asset('uploads/product/' . $product->image) }}">
-                                <div class="wrap-pic-w pos-relative">
-                                    @if($product->image)
-                                            <img src="{{ asset('uploads/product/' . $product->image) }}" alt="IMG-PRODUCT">
-                                        @else
-                                            <span style="color: #666; font-style: italic;">No image</span>
-                                        @endif
 
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('uploads/product/' . $product->image) }}">
+
+                            @foreach ($productImages as $productImage)
+                            <div class="item-slick3" data-thumb="{{ asset($productImage->image) }}">
+                                <div class="wrap-pic-w pos-relative">
+                                    <img src="{{ asset($productImage->image) }}" alt="Pet images" style="height: 500px; object-fit: cover; width: 100%;">
+
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset($productImage->image) }}">
                                         <i class="fa fa-expand"></i>
                                     </a>
                                 </div>
                             </div>
+                    @endforeach
 
-                            <div class="item-slick3" data-thumb="{{ asset('uploads/product/' . $product->image) }}">
-                                <div class="wrap-pic-w pos-relative">
-                                    <img src="{{ asset('uploads/product/' . $product->image) }}" alt="IMG-PRODUCT">
 
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('uploads/product/' . $product->image) }}">
-                                        <i class="fa fa-expand"></i>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="item-slick3" data-thumb="{{ asset('uploads/product/' . $product->image) }}">
-                                <div class="wrap-pic-w pos-relative">
-                                    <img src="{{ asset('uploads/product/' . $product->image) }}" alt="IMG-PRODUCT">
-
-                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{ asset('uploads/product/' . $product->image) }}">
-                                        <i class="fa fa-expand"></i>
-                                    </a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -349,5 +331,59 @@
 </section>
 
 
+<!------------------------ Related Products ----------------->
+
+<section class="sec-relate-product bg0 p-t-45 p-b-105">
+    <div class="container">
+        <div class="p-b-45">
+            <h3 class="ltext-105 cl5 txt-center respon1">
+                Related Products
+            </h3>
+        </div>
+
+        <!-- Tab01 -->
+        <div class="tab01">
+            <!-- Tab panes -->
+            <div class="tab-content p-t-50">
+                <div class="tab-pane fade show active" id="best-seller" role="tabpanel">
+                    <div class="wrap-slick2">
+                        <div class="slick2">
+                            @foreach($relatedProducts as $product)
+                                <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
+                                    <!-- Product Block -->
+                                    <div class="block2">
+                                        <div class="block2-pic hov-img0">
+                                            @if($product->image)
+                                                <img src="{{ asset('uploads/product/' . $product->image) }}" alt="IMG-PRODUCT">
+                                            @else
+                                                <span>No Image</span>
+                                            @endif
+                                            <a href="{{ route('product_details', $product->id) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" >
+                                                Quick View
+                                            </a>
+                                        </div>
+            
+                                        <div class="block2-txt flex-w flex-t p-t-14">
+                                            <div class="block2-txt-child1 flex-col-l">
+                                                <a href="{{ route('product_details', $product->id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                                    {{ $product->name }}
+                                                </a>
+                                                <span class="stext-105 cl3">
+                                                    ${{ $product->price }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            @endforeach  
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
 
 @endsection

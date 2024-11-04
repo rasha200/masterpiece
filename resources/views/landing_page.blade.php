@@ -105,8 +105,9 @@
                                     <!-- Product Block -->
                                     <div class="block2">
                                         <div class="block2-pic hov-img0">
-                                            @if($product->image)
-                                                <img src="{{ asset('uploads/product/' . $product->image) }}" alt="IMG-PRODUCT">
+                                        
+                                            @if($product->product_images->isNotEmpty())
+                                                <img src="{{ asset($product->product_images[0]->image) }}" alt="IMG-PRODUCT">
                                             @else
                                                 <span>No Image</span>
                                             @endif

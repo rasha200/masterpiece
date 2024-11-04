@@ -26,6 +26,12 @@
                       </div>
 
                       <div class="form-group">
+                        <label for="image">Choose product images</label>
+                        <input type="file" name="image[]" id="image" class="form-control" multiple/>
+                      </div>
+
+
+                      <div class="form-group">
                         <label for="exampleInputName1">Small Description</label>
                         <input type="text" class="form-control" id="small_description" placeholder="Small Description" name="small_description" value="{{ old('small_description') }}" required>
                       </div>

@@ -60,6 +60,14 @@ class ProductImageController extends Controller
      */
     public function destroy(ProductImage $productImage)
     {
-        //
+        $productId = $productImage->product_id; 
+        
+       
+    
+        $productImage->delete();
+    
+       
+        return redirect()->route('products.edit', ['product' => $productId])
+            ->with('success', 'Product image deleted successfully.');
     }
 }

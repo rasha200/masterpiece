@@ -46,12 +46,12 @@
                           <td>{{$product->id}}</td>
                           <td>{{$product->name}}</td>
                           <td>
-                          {{-- @if($product->image)
-                          
-                            <img src="{{ asset('uploads/product/' . $product->image) }}" alt="product Image" style="width: 50px; border-radius: 50px;"></td>
-                          @else
-                              <span>No Image</span>
-                          @endif --}}
+                            @if($product->product_images->isNotEmpty())
+                
+                            <img src="{{ asset($product->product_images[0]->image) }}" alt="{{ $product->name }}" style="width: 50px; border-radius: 50px;" />
+                        @else
+                            <span>No image available</span>
+                        @endif
 </td> 
                           <td>{{$product->price}}</td>
                           <td>{{$product->quantity}}</td>

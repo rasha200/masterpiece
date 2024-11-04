@@ -31,7 +31,6 @@ class HomeController extends Controller
     {
         
         $services = Service::all(); 
-        $serviceImages = ServiceImage::all(); 
         $products = Product::all();
         $pets = Pet::all();
         $testimonials = Testimonial::all();
@@ -39,7 +38,6 @@ class HomeController extends Controller
 
         return view('landing_page' , [
             'services'=> $services ,
-            'serviceImages'=> $serviceImages ,
             'products'=> $products , 
             'pets'=> $pets,
             'testimonials'=> $testimonials

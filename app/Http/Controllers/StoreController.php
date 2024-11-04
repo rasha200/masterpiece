@@ -16,7 +16,7 @@ class StoreController extends Controller
     {
         $categories = Category::all(); 
 
-        $query = Product::query();
+        $query = Product::with('product_images');
         if ($request->has('category_id')) {
             $query->where('category_id', $request->input('category_id'));
         }
@@ -50,8 +50,9 @@ class StoreController extends Controller
     public function show(string $id)
     {
         $product = Product::findOrFail($id);
+        $productImages = $product->product_images; 
         
-        return view('store' , ['product'=>$product]);
+        return view('store' , ['product'=>$product,'productImages'=>$productImages]);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\category;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::with('product_images')->get();
 
         return view('dashboard.products.index' , ['products'=> $products]);
     }
@@ -39,18 +40,37 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'quantity' => 'required|numeric',
-            'category_id' => 'required|string',
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP,AVIF|max:2048',
         ]);
 
-        Product::create([
+        $product = Product::create([
             'name'=>$request->input('name'),
             'small_description'=>$request->input('small_description'),
             'description'=>$request->input('description'),
             'price'=>$request->input('price'),
             'quantity'=>$request->input('quantity'),
             'category_id'=>$request->input('category_id'),
-            
         ]);
+
+        $images = [];
+
+        if ($request->hasFile('image')) {
+            foreach($request->file('image') as $file) {
+               
+                $filename = uniqid() . '_' . $file->getClientOriginalExtension();
+                $path = public_path('uploads/productImages/');
+                $file->move($path, $filename);
+    
+               
+                $images[] = [
+                    'image' => 'uploads/productImages/' . $filename,
+                    'product_id'=> $product->id, 
+                ];
+            }
+    
+            
+            ProductImage::insert($images);
+        }
 
        
 
@@ -62,7 +82,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('dashboard.products.show' , ['product'=> $product]);
+        $productImages = $product->product_images; 
+        return view('dashboard.products.show' , ['product'=> $product,'productImages'=>$productImages]);
     }
 
 
@@ -71,9 +92,20 @@ class ProductController extends Controller
     public function show_user_side( $id)
     {
         $product = Product::findOrFail($id); 
-        // $serviceImages = $service->service_images; 
+        $productImages = $product->product_images; 
         $productfeedbacks = $product->product_feedbacks; 
-        return view('product_details' , ['product'=> $product,'productfeedbacks'=> $productfeedbacks]);
+        $relatedProducts = Product::where('category_id', $product->category_id)
+        ->where('id', '!=', $product->id)
+        ->inRandomOrder() // Randomize order
+        ->take(8) // Limit the number of related products displayed
+        ->get();
+
+        return view('product_details' , [
+            'product'=> $product,
+            'productfeedbacks'=> $productfeedbacks,
+            'relatedProducts' => $relatedProducts,
+            'productImages'=>$productImages,
+        ]);
     }
 
 
@@ -83,7 +115,12 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories= category::all();
-        return view ('dashboard.products.edit',['product'=>$product ,'categories'=>$categories]);
+        $productImages = $product->product_images;
+        return view ('dashboard.products.edit',[
+            'product'=>$product ,
+            'categories'=>$categories,
+            'productImages'=>$productImages,
+        ]);
     }
 
     /**
@@ -97,8 +134,7 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'quantity' => 'required|numeric',
-            'category_id' => 'required|string',
-            
+            'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP,AVIF|max:2048',
         ]);
 
     
@@ -111,6 +147,26 @@ class ProductController extends Controller
             'quantity'=>$request->input('quantity'),
             'category_id'=>$request->input('category_id'),
         ]);
+
+        $images = [];
+
+        if ($request->hasFile('image')) {
+            foreach($request->file('image') as $file) {
+               
+                $filename = uniqid() . '_' . $file->getClientOriginalExtension();
+                $path = public_path('uploads/productImages/');
+                $file->move($path, $filename);
+    
+               
+                $images[] = [
+                    'image' => 'uploads/productImages/' . $filename,
+                    'product_id'=> $product->id, 
+                ];
+            }
+    
+            
+            ProductImage::insert($images);
+        }
 
        
 
