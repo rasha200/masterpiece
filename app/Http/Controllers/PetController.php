@@ -40,7 +40,7 @@ class PetController extends Controller
     {
         $validation = $request->validate([
             'name' => 'required|string',
-            'age' => 'required|numeric',
+            'age' => 'required|string',
             'gender' => 'required|string',
             'type' => 'required|string',
             'information' => 'required|string',
@@ -128,7 +128,7 @@ class PetController extends Controller
     {
         $validation = $request->validate([
             'name' => 'required|string',
-            'age' => 'required|numeric',
+            'age' => 'required|string',
             'gender' => 'required|string',
             'type' => 'required|string',
             'information' => 'required|string',
