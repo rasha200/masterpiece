@@ -252,6 +252,12 @@
 
         <!-- Product -->
         <div class="row isotope-grid">
+            
+            @if($products->isEmpty())
+            <div class="col-12 text-center">
+                <h4>No products available in this category.</h4>
+            </div>
+        @else
             @foreach($products as $product)
             <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
                 <!-- Product Block -->
@@ -282,6 +288,7 @@
             </div>
          
             @endforeach
+            @endif
         </div>
 
         <!-- Pagination -->
@@ -298,7 +305,7 @@
     </div>
 </section>
 
-
+@if(isset($products) && $products->isNotEmpty())
 <script>
     // Function to show the modal
     function showModal(modalId) {
@@ -326,5 +333,6 @@
         showModal('modal-{{ $product->id }}');
     });
 </script>
+@endif
 
 @endsection

@@ -12,7 +12,7 @@ class ServiceFeedbackController extends Controller
      */
     public function index()
     {
-        $serviceFeedbacks = ServiceFeedback::all();
+        $serviceFeedbacks = ServiceFeedback::orderBy('created_at', 'desc')->get();
 
         return view('dashboard.service_feedbacks.index' , ['serviceFeedbacks'=> $serviceFeedbacks]);
     }
@@ -75,7 +75,18 @@ class ServiceFeedbackController extends Controller
      */
     public function update(Request $request, ServiceFeedback $serviceFeedback)
     {
-        //
+        $validation = $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'feedback' => 'required|string',
+        ]);
+
+      $serviceFeedback->update ([
+            'rating'=>$request->input('rating'),
+            'feedback'=>$request->input('feedback'),
+            'user_id'=>auth()->id(),
+            'service_id'=>$request->input('service_id'),
+        ]);
+        return redirect()->back()->with('success', 'Thank you for updating your reviwe');
     }
 
     /**

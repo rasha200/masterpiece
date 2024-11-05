@@ -155,6 +155,8 @@
                                         <span class="mtext-107 cl2 p-r-20">
                                             {{$productfeedback->feedback}}
                                         </span>
+
+                                       
         
                                         <span class="fs-18 cl11">
                                             @for ($i = 1; $i <= 5; $i++)
@@ -171,11 +173,81 @@
                                     <p class="stext-102 cl6">
                                         {{$productfeedback->created_at->format('Y-m-d')}}
                                     </p>
+
+
+                                    @if(Auth::id() === $productfeedback->user_id)
+                    <!-- Edit Icon -->
+                    <a href="javascript:void(0);" onclick="toggleEditForm({{ $productfeedback->id }})" class="edit-icon">
+                        <button style="border:solid 1px #14535F; background-color:#14535F;" title="Edit">
+                            <i class="item-rating pointer zmdi zmdi-edit" style="padding: 3px; color:#FFF;"></i>
+                        </button>
+                    </a>
+
+                    <!-- Edit Form (initially hidden) -->
+                    <div id="edit-form-{{ $productfeedback->id }}" style="display: none; margin-top: 10px;">
+                        <form action="{{ route('productFeedbacks.update', $productfeedback->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                         
+                            
+                            <div class="flex-w flex-m p-t-50 p-b-23">
+                                <span class="stext-102 cl3 m-r-16">
+                                    Your Rating *
+                                </span>
+        
+                                <span class="wrap-rating fs-18 cl11 pointer">
+                                    <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(1)"></i>
+                                    <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(2)"></i>
+                                    <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(3)"></i>
+                                    <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(4)"></i>
+                                    <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(5)"></i>
+                                    <input class="dis-none" type="hidden" name="rating" id="rating" value="" required>
+                                </span>
+                            </div>
+                            <script>
+                                function setRating(rating) {
+                                    document.getElementById('rating').value = rating;
+                                    // Update star visuals based on selected rating
+                                    const stars = document.querySelectorAll('.item-rating');
+                                    stars.forEach((star, index) => {
+                                        if (index < rating) {
+                                            star.classList.add('zmdi-star'); // Filled star class
+                                            star.classList.remove('zmdi-star-outline'); // Outline star class
+                                        } else {
+                                            star.classList.add('zmdi-star-outline');
+                                            star.classList.remove('zmdi-star');
+                                        }
+                                    });
+                                }
+                            </script>
+                            <div class="bor8 m-b-20 how-pos4-parent">
+                                <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="feedback" placeholder="Your feedback" value="{{ $productfeedback->feedback }}" required>
+                            </div>
+                            <input type="hidden" value="{{ auth()->check() ? auth()->user()->id : '' }}" name="user_id">
+                            <input type="hidden" value="{{ $product->id }}" name="product_id">
+
+                            <button type="submit" class="btn btn-primary mt-2" style="background-color: #14535F">Save</button>
+                            <button type="button" class="btn btn-secondary mt-2" onclick="toggleEditForm({{ $productfeedback->id }})">Cancel</button>
+                        </form>
+                    </div>
+                    @endif
+
                                 </div>
                             </div>
                             @endforeach
                         </div>
                     </div>
+
+                    <script>
+                        function toggleEditForm(feedbackId) {
+                            const editForm = document.getElementById(`edit-form-${feedbackId}`);
+                            if (editForm.style.display === 'none') {
+                                editForm.style.display = 'block';
+                            } else {
+                                editForm.style.display = 'none';
+                            }
+                        }
+                    </script>
 
 
             <!------------------ Success & error modal ----------------->

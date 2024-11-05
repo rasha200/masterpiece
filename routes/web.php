@@ -76,7 +76,8 @@ Route::middleware(['auth', 'role'])->group(function () {
 // Public routes
 Route::post('/productFeedbacks', [ProductFeedbackController::class, 'store'])->name('productFeedbacks.store'); // Create
 Route::get('/productFeedbacks/create', [ProductFeedbackController::class, 'create'])->name('productFeedbacks.create'); // Create form (user side)
-
+Route::get('/productFeedbacks/{productFeedback}/edit', [ProductFeedbackController::class, 'edit'])->name('productFeedbacks.edit'); // Edit form
+Route::put('/productFeedbacks/{productFeedback}', [ProductFeedbackController::class, 'update'])->name('productFeedbacks.update'); // Update feedback
 
 
 // <!--==========================================  (Store)  =====================================================-->
@@ -103,6 +104,7 @@ Route::middleware(['auth', 'role'])->group(function () {
 // Public routes
 Route::post('/serviceFeedbacks', [ServiceFeedbackController::class, 'store'])->name('serviceFeedbacks.store'); // Create
 Route::get('/serviceFeedbacks/create', [ServiceFeedbackController::class, 'create'])->name('serviceFeedbacks.create'); // Create form (user side)
+Route::put('/serviceFeedbacks/{serviceFeedback}', [ServiceFeedbackController::class, 'update'])->name('serviceFeedbacks.update'); // Update feedback
 
 
 

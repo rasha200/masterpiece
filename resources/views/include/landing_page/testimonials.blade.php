@@ -13,7 +13,7 @@
                                     <i class="zmdi {{ $i <= $testimonial->rating ? 'zmdi-star' : 'zmdi-star-outline' }}" style="color: #f9ba48;"></i>
                                 @endfor
                               </h5>
-                            <h5 class="ltext-201 cl2 p-t-19 p-b-8 respon1" style="font-size: 30px; font-width: 5px">
+                            <h5 class="ltext-201 cl2 p-t-19 p-b-8 respon1" style="font-size: 30px; font-weight: 100;">
                               “{{$testimonial->message}}”
                             </h5>
                             

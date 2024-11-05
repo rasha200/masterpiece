@@ -12,7 +12,7 @@ class ProductFeedbackController extends Controller
      */
     public function index()
     {
-        $productfeedbacks = ProductFeedback::all();
+        $productfeedbacks = ProductFeedback::orderBy('created_at', 'desc')->get();
 
         return view('dashboard.product_feedbacks.index' , ['productfeedbacks'=> $productfeedbacks]);
     }
@@ -74,7 +74,18 @@ class ProductFeedbackController extends Controller
      */
     public function update(Request $request, ProductFeedback $productFeedback)
     {
-        //
+        $validation = $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'feedback' => 'required|string',
+        ]);
+
+      $productFeedback->update ([
+            'rating'=>$request->input('rating'),
+            'feedback'=>$request->input('feedback'),
+            'user_id'=>auth()->id(),
+            'product_id'=>$request->input('product_id'),
+        ]);
+        return redirect()->back()->with('success', 'Thank you for updating your reviwe');
     }
 
     /**
