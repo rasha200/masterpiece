@@ -156,6 +156,44 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   background-color: #FFF;
 }
 
+.container {
+  max-width: 1200px;
+}
+
+.profile-sidebar {
+  background-color: #f8f9fa;
+  border: none;
+  border-radius: 8px;
+}
+
+.profile-photo img {
+  border: 3px solid #e1e1e1;
+}
+
+.profile-sidebar h4 {
+  font-weight: 600;
+  color: #333;
+}
+
+.nav-link {
+  color: #666;
+}
+
+.nav-link:hover {
+  color: #333;
+}
+
+.card h3 {
+  font-weight: 700;
+  color: #333;
+}
+
+.btn-primary {
+  background-color: #717fe0;
+  border-color: #717fe0;
+}
+
+
 .swal-icon--error {
   width: 80px;
   height: 80px;

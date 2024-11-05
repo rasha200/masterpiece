@@ -78,6 +78,11 @@ class UserController extends Controller
        return view('dashboard.user.show' , ['user'=> $user]);
     }
 
+    public function show_profile()
+    {
+        return view('profile');
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -95,7 +100,7 @@ class UserController extends Controller
         $validation = $request->validate([
             'Fname' => 'required|string|min:3',
             'Lname' => 'required|string|min:3',
-            'email' => 'required|email',
+            'email' => 'required|email,'. auth()->id(),
             'mobile' => 'required|numeric',
             'role' => 'required|string',
         ]);
@@ -113,6 +118,36 @@ class UserController extends Controller
 
         return to_route('users.index')->with('success', 'User updated successfully');
     }
+
+
+
+    public function update_profile(Request $request)
+    {
+       
+        $validation = $request->validate([
+            'Fname' => 'required|string|min:3',
+            'Lname' => 'required|string|min:3',
+            'email' => 'required|email|unique:users,email,' . auth()->id(), // Ensure unique email except for current user
+            'mobile' => 'required|numeric',
+        ]);
+    
+        // Get the authenticated user
+        $user = auth()->user();
+    
+      
+        $user->update([
+            'Fname' => $request->input('Fname'),
+            'Lname' => $request->input('Lname'),
+            'email' => $request->input('email'),
+            'mobile' => $request->input('mobile'),
+            'password' => $user->password, // Keeps the existing password unchanged
+        ]);
+    
+        return back()->with('success', 'Profile updated successfully');
+    }
+    
+
+
 
     /**
      * Remove the specified resource from storage.
