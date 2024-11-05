@@ -24,5 +24,19 @@ public function service_feedbacks()
     return $this->hasMany(ServiceFeedback::class);
 }
 
+protected static function booted()
+     {
+         static::deleting(function ($service) {
+             // If the service is being force-deleted, also force delete related feedback
+             if ($service->isForceDeleting()) {
+                 // Force delete related service feedback
+                 $service->service_feedbacks()->forceDelete();
+             } else {
+                 // Soft delete related service feedback
+                 $service->service_feedbacks()->delete();
+             }
+         });
+     }
+
 
 }

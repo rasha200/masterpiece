@@ -29,4 +29,18 @@ class Product extends Model
     return $this->hasMany(ProductFeedback::class);
 }
 
+protected static function booted()
+     {
+         static::deleting(function ($product) {
+             // If the product is being force-deleted, also force delete related feedback
+             if ($product->isForceDeleting()) {
+                 // Force delete related product feedback
+                 $product->product_feedbacks()->forceDelete();
+             } else {
+                 // Soft delete related product feedback
+                 $product->product_feedbacks()->delete();
+             }
+         });
+     }
+
 }

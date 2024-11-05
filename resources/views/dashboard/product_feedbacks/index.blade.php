@@ -35,7 +35,7 @@
                         @foreach($productfeedbacks as $productfeedback)
                         <tr>
                           <td>{{$productfeedback->id}}</td>
-                          <td>{{$productfeedback->user->Fname}} {{$productfeedback->user->Lname}}</td>
+                          <td>{{ optional($productfeedback->user)->Fname ?? 'Unknown User' }} {{ optional($productfeedback->user)->Lname ?? '' }}</td>
                           <td>{{$productfeedback->product->name}}</td>
                           <td>
                             <span class="fs-18 cl11">

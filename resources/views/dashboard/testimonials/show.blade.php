@@ -6,8 +6,8 @@
 <div class="card-body" style="border: 1px solid #e7dee9;">
     
 
-        <p><strong>User Name:</strong> {{$testimonial->user->Fname}} {{$testimonial->user->Lname}}</p>
-        <p><strong>User Email:</strong> {{$testimonial->user->email}}</p>
+        <p><strong>User Name:</strong> {{ optional($testimonial->user)->Fname ?? 'Unknown User' }} {{ optional($testimonial->user)->Lname ?? '' }}</p>
+        <p><strong>User Email:</strong> {{ optional($testimonial->user)->email ?? '' }}</p>
         <p><strong>Date:</strong> {{$testimonial->created_at->format('Y-m-d')}}</p>
         <p><strong>Rating:</strong>
             <span class="fs-18 cl11">

@@ -35,7 +35,7 @@
                         @foreach($serviceFeedbacks as $serviceFeedback)
                         <tr>
                           <td>{{$serviceFeedback->id}}</td>
-                          <td>{{$serviceFeedback->user->Fname}} {{$serviceFeedback->user->Lname}}</td>
+                          <td>{{ optional($serviceFeedback->user)->Fname ?? 'Unknown User' }} {{ optional($serviceFeedback->user)->Lname ?? '' }}</td>
                           <td>{{$serviceFeedback->service->name}}</td>
                           <td>
                             <span class="fs-18 cl11">

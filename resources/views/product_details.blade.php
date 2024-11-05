@@ -167,7 +167,7 @@
                                     </div>
         
                                     <p class="stext-102 cl6">
-                                        {{$productfeedback->user->Fname}} {{$productfeedback->user->Lname}}
+                                        {{ optional($productfeedback->user)->Fname ?? 'Unknown User' }} {{ optional($productfeedback->user)->Lname ?? '' }}
                                     </p>
         
                                     <p class="stext-102 cl6">

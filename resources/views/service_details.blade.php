@@ -130,7 +130,7 @@
                                 
 
                                 <p class="stext-102 cl6">
-                                     {{$servicefeedback->user->Fname}} {{$servicefeedback->user->Lname}}
+                                    {{ optional($servicefeedback->user)->Fname ?? 'Unknown User' }} {{ optional($servicefeedback->user)->Lname ?? '' }}
                                 </p>
 
                                <p class="stext-102 cl6">

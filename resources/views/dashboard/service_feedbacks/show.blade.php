@@ -6,8 +6,8 @@
 <div class="card-body" style="border: 1px solid #e7dee9;">
         
         <p><strong>Date:</strong>{{$serviceFeedback->created_at->format('Y-m-d H:i')}}</p>
-        <p><strong>User Name:</strong> {{$serviceFeedback->user->Fname}} {{$serviceFeedback->user->Lname}}</p>
-        <p><strong>User Email:</strong> {{$serviceFeedback->user->email}}</p>
+        <p><strong>User Name:</strong> {{ optional($serviceFeedback->user)->Fname ?? 'Unknown User' }} {{ optional($serviceFeedback->user)->Lname ?? '' }}</p>
+        <p><strong>User Email:</strong>  {{ optional($serviceFeedback->user)->email ?? '' }}</p>
         <p><strong>Service Name:</strong> {{$serviceFeedback->service->name}}</p>
         <p><strong>Rating:</strong>
             <span class="fs-18 cl11">

@@ -34,7 +34,7 @@
                         @foreach($testimonials as $testimonial)
                         <tr>
                           <td>{{$testimonial->id}}</td>
-                          <td>{{$testimonial->user->Fname}} {{$testimonial->user->Lname}}</td>
+                          <td> {{ optional($testimonial->user)->Fname ?? 'Unknown User' }} {{ optional($testimonial->user)->Lname ?? '' }}</td>
                           <td>
                             <span class="fs-18 cl11">
                             @for ($i = 1; $i <= 5; $i++)

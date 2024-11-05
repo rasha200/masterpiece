@@ -18,7 +18,7 @@
                             </h5>
                             
                             <span class="ltext-61 cl2 respon2 text-center p-b-43 testimonial-author">
-                                {{$testimonial->user->Fname}} {{$testimonial->user->Lname}} <br> {{$testimonial->created_at->format('Y-m-d')}}
+                                {{ optional($testimonial->user)->Fname ?? 'Unknown User' }} {{ optional($testimonial->user)->Lname ?? '' }} <br> {{$testimonial->created_at->format('Y-m-d')}}
                             </span>
             
                             <div class="layer-slick1 animated visible-false p-t-59 text-center" data-appear="zoomIn" data-delay="1600">
