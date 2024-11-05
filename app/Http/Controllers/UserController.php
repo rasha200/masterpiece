@@ -78,9 +78,28 @@ class UserController extends Controller
        return view('dashboard.user.show' , ['user'=> $user]);
     }
 
+
+
     public function show_profile()
     {
-        return view('profile');
+        $user = auth()->user();
+
+        
+        if ($user->role === 'user') {
+            
+            return view('profile', ['user'=> $user]);
+
+        } elseif (in_array($user->role, ['receptionist', 'store_manager', 'veterinarian', 'manager'])) {
+            
+            return redirect()->route('profile_dash.show');
+        }
+
+    }
+
+
+    public function show_profile_dash()
+    {
+        return view('dashboard.profile');
     }
 
     /**

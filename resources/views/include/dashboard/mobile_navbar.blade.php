@@ -20,13 +20,13 @@
                     
 
                     <li class="nav-item">
-                        <a class="nav-link" href="}">
+                        <a class="nav-link" href="{{ route('profile_dash.show') }}">
                             <i class="mdi mdi-account"></i> Profile
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="}">
+                        <a class="nav-link" href="{{ route('profile_dash.show') }}">
                             {{ Auth::user()->Fname }}  {{ Auth::user()->Lname }}
                         </a>
                     </li>
