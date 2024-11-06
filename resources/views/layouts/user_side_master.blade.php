@@ -10,10 +10,7 @@
 @include("include/user_side/cart")
 {{--include cart end--}}
 
-
-
 @yield("content")
-
 
 {{--include footer start--}}
 @include("include/user_side/footer")

@@ -33,9 +33,13 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+Route::get('/test' , function(){
+    return view('register');
+});
 
-
-
+Route::get('/test2' , function(){
+    return view('login');
+});
 
 // <!--==========================================  (HOME)  =====================================================-->
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -54,6 +58,9 @@ Route::get('/dashboard', function () {
 
 // <!--==========================================  (Users)  =====================================================-->
 Route::resource('users', UserController::class)->middleware(['auth' , 'role']);
+Route::get('/user/trash', [UserController::class, 'trash'])->name('users.trash')->middleware(['auth' , 'role']);
+Route::post('/users/{id}/restore', [UserController::class, 'restore'])->name('users.restore')->middleware(['auth' , 'role']);
+
 
 
 
@@ -99,8 +106,8 @@ Route::get('/store/{id}',[StoreController::class, 'show'])->name("single_product
 // <!--==========================================  (Services)  =====================================================-->
 Route::resource('services', ServiceController::class)->middleware(['auth' , 'role']);
 Route::delete('/service_images/{service_image}', [ServiceImageController::class, 'destroy'])->name('service_images.destroy')->middleware(['auth' , 'role']);
-Route::get('/service',[ServiceController::class, 'index_user_side'])->name("services");
-Route::get('/service_details/{id}', [ServiceController::class, 'show_user_side'])->name('service_details');
+Route::get('/service',[ServiceController::class, 'index_user_side'])->name("services"); //view the services in the user side
+Route::get('/service_details/{id}', [ServiceController::class, 'show_user_side'])->name('service_details'); // single page for each service in use side
 
 
 

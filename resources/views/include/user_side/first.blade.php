@@ -34,5 +34,11 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('css/util.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">
 <!--===============================================================================================-->
+<!-- MATERIAL DESIGN ICONIC FONT (register)-->
+<link rel="stylesheet" href="{{asset('fonts/material-design-iconic-font/css/material-design-iconic-font.min.css')}}">
+
+<!-- STYLE CSS (register)-->
+<link rel="stylesheet" href="{{asset('css/style.css')}}">
+
 </head>
 <body class="animsition">

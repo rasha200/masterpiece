@@ -178,4 +178,22 @@ class UserController extends Controller
         
         return to_route('users.index')->with('success', 'User deleted');
     }
+
+
+
+
+    public function trash()
+{
+    $deletedUsers = User::onlyTrashed()->get();
+    return view('dashboard.user.trash' , ['deletedUsers' => $deletedUsers]);
+}
+
+public function restore($id)
+{
+    $user = User::withTrashed()->find($id);
+    $user->restore();
+    return redirect()->route('users.trash')->with('success', 'User restored successfully');
+}
+
+
 }

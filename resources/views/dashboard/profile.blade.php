@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container-fluid">
-    <h2 class="title-1">Profile</h2>
+
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -49,7 +49,7 @@
 <div id="confirmationModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center;">
     <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
         <h5>Are you sure you want to update your profile?</h5>
-        <button id="confirmButton" class="btn btn-outline-info btn-fw">Update</button>
+        <button id="confirmButton" class="btn btn-outline-info btn-fw">Edit</button>
         <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>
     </div>
 </div>
