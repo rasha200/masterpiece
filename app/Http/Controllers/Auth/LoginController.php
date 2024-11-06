@@ -62,6 +62,18 @@ class LoginController extends Controller
             return route('product_details', ['id' => $productId]);
         }
 
+        if (session()->has('from_adoption')) {
+            // Get the pet ID from the session
+            $pet_id = session('pet_id');
+    
+            // Remove the session variable after use
+            session()->forget('from_adoption');
+            session()->forget('pet_id'); // Remove pet ID after use
+    
+            // Redirect to the toAdoupts page with the pet ID
+            return route('toAdoupts.create', ['pet_id' => $pet_id]);
+        }
+
     
     if (Auth::user()->role == 'receptionist' || Auth::user()->role == 'veterinarian' || Auth::user()->role == 'manager') {
     return '/dashboard';

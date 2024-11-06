@@ -18,4 +18,9 @@ class Pet extends Model
     {
         return $this->hasMany(PetImage::class);
     }
+
+    public function toAdopt()
+    {
+        return $this->hasOne(ToAdopt::class);
+    }
 }

@@ -91,6 +91,13 @@
             </a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('toAdoupts.index')}}">
+                <span class="menu-title">Adoption</span>
+                <i class="mdi mdi mdi-cat menu-icon"></i>
+            </a>
+        </li>
+
 
         <li class="nav-item">
             <a class="nav-link" href="{{route('contacts.index')}}">

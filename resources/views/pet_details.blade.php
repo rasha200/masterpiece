@@ -105,9 +105,9 @@
                     <div class="p-t-33">
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-204 flex-w flex-m respon6-next">
-                                <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                <a href="{{ route('toAdoupts.create', ['pet_id' => $pet->id]) }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">
                                     Adopt me
-                                </button>
+                                </a>
                             </div>
                         </div>	
                     </div>
