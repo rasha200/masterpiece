@@ -51,7 +51,7 @@
   <!------------------- Edit profile ------------------->
   <div class="tab-pane fade show active" id="profile" role="tabpanel">
     <h3 class="mb-4">My Profile</h3>
-    <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+    <form id="profile-form" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row mb-4">
@@ -79,11 +79,36 @@
            
         </div>
        
-        <button type="submit" class="btn btn-primary" style="background-color: #14535F">Save</button>
+        <button type="button" class="btn btn-primary" style="background-color: #14535F; margin-top: 0px;" data-toggle="modal" data-target="#confirmEditModal">Save</button>
     </form>
 
 
   </div>
+
+  <!-- Modal for Confirming Profile Edit -->
+<div class="modal fade" id="confirmEditModal" tabindex="-1" aria-labelledby="confirmEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmEditModalLabel">Confirm Profile Edit</h5>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to save the changes to your profile?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" style="background-color: #14535F;" id="confirmEditButton">Yes, Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to handle form submission on confirmation
+    document.getElementById('confirmEditButton').addEventListener('click', function() {
+        document.getElementById('profile-form').submit(); // Submit the form if confirmed
+    });
+</script>
   <!--------------------------- Adoption Requests Tab -------------------------->
                     <div class="tab-pane fade" id="adoption-requests" role="tabpanel">
                         <h3 class="mb-4">Adoption Requests</h3>

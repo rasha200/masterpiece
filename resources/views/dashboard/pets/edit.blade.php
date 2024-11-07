@@ -47,7 +47,7 @@
   </div>
 </div>
                    
-                    <form class="forms-sample" action="{{ route('pets.update',$pet->id) }}" method="POST" enctype="multipart/form-data">
+                    <form id="profileForm" class="forms-sample" action="{{ route('pets.update',$pet->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -113,60 +113,87 @@
                       </div>
 
                       
-                      <button type="submit" class="btn btn-outline-info btn-fw">Edit</button>
+                      <button type="button" id="editButton" class="btn btn-outline-info btn-fw">Edit</button>
                       <a href="{{route('pets.index')}}" class="btn btn-outline-secondary">Cancel</a>
                     </form>
                   </div>
                 </div>
               </div>
 
-              <div id="confirmationModal"
-    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
-    <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
-        <p>Are you sure you want to delete this image?</p>
-        <button id="confirmButton" class="btn btn-outline-danger">Delete</button>
-        <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>
-    </div>
+             
+             <!-- Image Deletion Confirmation Modal -->
+<div id="confirmationModalDelete"
+style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
+<div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
+    <p>Are you sure you want to delete this image?</p>
+    <button id="confirmButtonDelete" class="btn btn-outline-danger">Delete</button>
+    <button id="cancelButtonDelete" class="btn btn-outline-secondary">Cancel</button>
+</div>
+</div>
+
+<!-- Service Update Confirmation Modal -->
+<div id="confirmationModalUpdate"
+style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
+<div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
+    <h5>Are you sure you want to edit this pet?</h5>
+    <button id="confirmButtonUpdate" class="btn btn-outline-info btn-fw">Edit</button>
+    <button id="cancelButtonUpdate" class="btn btn-outline-secondary">Cancel</button>
+</div>
 </div>
 
 <script>
-    function confirmDeletion(event, url) {
-        event.preventDefault(); // Prevent the default form submission -. تريد منع نموذج من الإرسال عند النقر على زر الإرسال
-        var modal = document.getElementById('confirmationModal');
-        var confirmButton = document.getElementById('confirmButton');
-        var cancelButton = document.getElementById('cancelButton');
+// Function for Confirming Deletion of Image
+function confirmDeletion(event, url) {
+    event.preventDefault(); // Prevent the form submission
+    var modal = document.getElementById('confirmationModalDelete');
+    var confirmButton = document.getElementById('confirmButtonDelete');
+    var cancelButton = document.getElementById('cancelButtonDelete');
 
-        // Show the custom confirmation dialog
-        modal.style.display = 'flex';
+    // Show the confirmation modal
+    modal.style.display = 'flex';
 
-        // Set up the confirm button to submit the form
-        confirmButton.onclick = function () {
-            var form = document.createElement('form');
-            form.method = 'POST';
-            form.action = url;
+    // Set up the confirm button to submit the form
+    confirmButton.onclick = function () {
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = url;
 
-            var csrfToken = document.createElement('input');
-            csrfToken.type = 'hidden';
-            // "hidden" يُستخدم للإشارة إلى طرق مختلفة لجعل العناصر غير مرئية أو مخفية
-            csrfToken.name = '_token';
-            csrfToken.value = '{{ csrf_token() }}'; // Laravel CSRF token
-            form.appendChild(csrfToken);
+        var csrfToken = document.createElement('input');
+        csrfToken.type = 'hidden';
+        csrfToken.name = '_token';
+        csrfToken.value = '{{ csrf_token() }}';
+        form.appendChild(csrfToken);
 
-            var methodField = document.createElement('input');
-            methodField.type = 'hidden';
-            methodField.name = '_method';
-            methodField.value = 'DELETE';
-            form.appendChild(methodField);
+        var methodField = document.createElement('input');
+        methodField.type = 'hidden';
+        methodField.name = '_method';
+        methodField.value = 'DELETE';
+        form.appendChild(methodField);
 
-            document.body.appendChild(form);
-            form.submit();
-        };
+        document.body.appendChild(form);
+        form.submit();
+    };
 
-        // Set up the cancel button to hide the modal
-        cancelButton.onclick = function () {
-            modal.style.display = 'none';
-        };
-    }
+    // Set up the cancel button to hide the modal
+    cancelButton.onclick = function () {
+        modal.style.display = 'none';
+    };
+}
+
+// Function for Confirming Update of Service
+document.getElementById('editButton').onclick = function (event) {
+    event.preventDefault(); // Prevent the form submission
+    var modal = document.getElementById('confirmationModalUpdate');
+    modal.style.display = 'flex'; // Show the modal
+};
+
+document.getElementById('confirmButtonUpdate').onclick = function () {
+    document.getElementById('profileForm').submit(); // Submit the form
+};
+
+document.getElementById('cancelButtonUpdate').onclick = function () {
+    document.getElementById('confirmationModalUpdate').style.display = 'none'; // Hide the modal
+};
 </script>
-
+          
 @endsection

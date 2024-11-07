@@ -9,7 +9,7 @@
         <p><strong>Small Description:</strong> {{ $product->small_description }}</p>
         <p><strong>Description:</strong> {{ $product->description }}</p>
         <p><strong>Price:</strong> {{ $product->price }}</p>
-        <p><strong>Quantity:</strong> {{ $product->quantity }}</p>
+        {{-- <p><strong>Quantity:</strong> {{ $product->quantity }}</p> --}}
         <p><strong>Category name:</strong> {{ $product->category->name }}</p> 
         <div class="form-group">
             <p><strong>Product Images:</strong></p> 

@@ -49,10 +49,7 @@
                       </div>
 
 
-                      <div class="form-group">
-                        <label for="exampleInputName1">Quantity</label>
-                        <input type="number" class="form-control" id="quantity" placeholder="Quantity" name="quantity" value="{{ old('quantity') }}" required>
-                      </div>
+                     
 
                       <div class="form-group">
                         <label for="exampleSelectGender">Category name</label>

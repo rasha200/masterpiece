@@ -121,7 +121,7 @@ class UserController extends Controller
         $validation = $request->validate([
             'Fname' => 'required|string|min:3',
             'Lname' => 'required|string|min:3',
-            'email' => 'required|email,'. auth()->id(),
+            'email' => 'required|email|unique:users,email,' . $id,
             'mobile' => 'required|numeric',
             'role' => 'required|string',
         ]);
