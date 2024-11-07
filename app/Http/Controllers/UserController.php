@@ -86,8 +86,10 @@ class UserController extends Controller
 
         
         if ($user->role === 'user') {
-            
-            return view('profile', ['user'=> $user]);
+
+            $adoptionRequests = $user->toAdoupt()->with('pet.pet_images')->get();
+
+            return view('profile', ['user'=> $user , 'adoptionRequests'=> $adoptionRequests]);
 
         } elseif (in_array($user->role, ['receptionist', 'store_manager', 'veterinarian', 'manager'])) {
             

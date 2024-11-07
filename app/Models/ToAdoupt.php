@@ -23,4 +23,33 @@ class ToAdoupt extends Model
         return $this->belongsTo(User::class);
      }
 
+     protected static function booted()
+    {
+        static::saved(function ($toAdoupt) {
+            $toAdoupt->updatePetAdoptionStatus();
+        });
+
+    }
+
+    
+
+    public function updatePetAdoptionStatus()
+    {
+        $pet = $this->pet;
+
+        if ($pet) {
+            // Set `is_adopted` based on the single adoption request's status
+            if ($this->status == 'Accept') {
+                $pet->is_adopted = 'Adopted';
+            } elseif ($this->status == 'Pending') {
+                $pet->is_adopted = 'Pending';
+            } else {
+                $pet->is_adopted = 'Available';
+            }
+
+            $pet->save();
+        }
+    }
 }
+
+

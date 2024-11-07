@@ -46,9 +46,9 @@ class User extends Authenticatable
         return $this->hasMany(Testimonial::class);
         }
 
-        public function toAdopt()
+        public function toAdoupt()
         {
-            return $this->hasMany(ToAdopt::class);
+            return $this->hasMany(ToAdoupt::class);
         }
 
 }

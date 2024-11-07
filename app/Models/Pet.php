@@ -21,6 +21,6 @@ class Pet extends Model
 
     public function toAdopt()
     {
-        return $this->hasOne(ToAdopt::class);
+        return $this->hasMany(ToAdopt::class);
     }
 }

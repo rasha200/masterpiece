@@ -65,7 +65,7 @@ Route::post('/users/{id}/restore', [UserController::class, 'restore'])->name('us
 
 
 
-// <!--==========================================  (Dashboard)  ===============================================================================================================-->
+// <!--==========================================  (Profile)  ===============================================================================================================-->
 Route::get('/profile', [UserController::class, 'show_profile'])->name('profile.show');
 Route::get('/profile_dashboard', [UserController::class, 'show_profile_dash'])->name('profile_dash.show');
 Route::put('/profile', [UserController::class, 'update_profile'])->name('profile.update');
@@ -143,12 +143,14 @@ Route::get('/pet_details/{id}', [PetController::class, 'show_user_side'])->name(
 Route::middleware(['auth', 'role'])->group(function () {
     Route::get('/toAdoupts', [toAdouptController::class, 'index'])->name('toAdoupts.index'); // List all toAdoupts (dashboard)
     Route::get('/toAdoupts/{toAdoupt}', [toAdouptController::class, 'show'])->name('toAdoupts.show'); // Show
-    Route::delete('/toAdoupts/{toAdoupt}', [toAdouptController::class, 'destroy'])->name('toAdoupts.destroy'); // Delete
 });
 // Public routes
 Route::get('/toAdoupts/create/{pet_id}', [toAdouptController::class, 'create'])->name('toAdoupts.create'); // Create form (user side)
 Route::post('/toAdoupts', [toAdouptController::class, 'store'])->name('toAdoupts.store'); // Create
-Route::put('/toAdoupts/{toAdoupt}', [toAdouptController::class, 'update'])->name('toAdoupts.update'); // Update 
+Route::put('/toAdoupts/{toAdoupt}', [toAdouptController::class, 'update'])->name('toAdoupts.update'); // Update
+Route::put('/toadoupts/{toadoupt}', [toAdouptController::class, 'update_userside'])->name('toAdoupts_user.update'); // Update 
+
+Route::delete('/toAdoupts/{toAdoupt}', [toAdouptController::class, 'destroy'])->name('toAdoupts.destroy'); // Delete
 
 
 

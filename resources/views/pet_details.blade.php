@@ -102,15 +102,28 @@
                     </h6>
                     
                     <!--  -->
+
+                   
                     <div class="p-t-33">
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-204 flex-w flex-m respon6-next">
+                                @if($pet->is_adopted == "Available")
                                 <a href="{{ route('toAdoupts.create', ['pet_id' => $pet->id]) }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">
                                     Adopt me
                                 </a>
+
+                                @elseif($pet->is_adopted == "Pending")
+                                <p style="font-size: 20px;"><i class="fa fa-ban" style="color: #F79257;"></i> Not Available</p>
+                                @else
+
+                                <p style="font-size: 20px;"><i class="fa fa-times-circle" style="color: #14535F;"></i> Adopted</p>
+
+                                @endif
                             </div>
                         </div>	
                     </div>
+
+
         </div>
     </div>
 </div>

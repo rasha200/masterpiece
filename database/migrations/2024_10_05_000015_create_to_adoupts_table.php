@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('to_adoupts', function (Blueprint $table) {
             $table->id();
             $table->string('reason_for_adoption');
-            $table->enum('status', ['Accept ', 'Pending', 'Reject'])->default('Pending');
+            $table->enum('status', ['Accept ', 'Pending', 'Reject', 'Cancelled'])->default('Pending');
             $table->string('current_pets');
             $table->string('availability');
             $table->string('pet_experience');
             $table->string('contact_info');
             $table->string('address');
 
-            $table->unsignedBigInteger('pet_id')->unique();
+            $table->unsignedBigInteger('pet_id')->nullable();
             $table->foreign('pet_id')->references('id')->on('pets');
             
             $table->unsignedBigInteger('user_id')->nullable();

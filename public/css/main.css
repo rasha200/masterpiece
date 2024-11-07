@@ -156,6 +156,11 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   background-color: #FFF;
 }
 
+.custom-btn {
+  padding: 5px 10px; /* Adjust padding to make the button smaller */
+  font-size: 12px;    /* Reduce font size */
+} 
+
 .container {
   max-width: 1200px;
 }

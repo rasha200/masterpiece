@@ -34,11 +34,20 @@
                             </span>
                         </div>
 
-                        <div class="block1-txt-child2 p-b-4 trans-05">
-                            <div class="block1-link stext-101 cl0 trans-09">
-                                Adopt me
-                            </div>
+                        @if($pet->is_adopted == "Available")
+                       <div class="block1-txt-child2 p-b-4 trans-05">
+                           <div class="block1-link stext-101 cl0 trans-09">
+                               Adopt me
+                           </div>
+                       </div>
+                    @else
+                    <div class="block1-txt-child2 p-b-4 trans-05">
+                        <div class="block1-link stext-101 cl0 trans-09">
+                            View profile
                         </div>
+                    </div>
+                    @endif
+                    
                     </a>
                 </div>
             </div>

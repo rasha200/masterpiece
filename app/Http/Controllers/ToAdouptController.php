@@ -100,13 +100,27 @@ class ToAdouptController extends Controller
         return redirect()->back()->with('success', 'Adoption request updated successfully');
     }
 
+
+
+    public function update_userside(Request $request, ToAdoupt $toadoupt)
+    {
+        $validation = $request->validate([
+            'status' => 'required|in:Cancelled',
+        ]);
+
+        $toadoupt->update([
+            'status' => $request->input('status'),
+        ]);
+
+        return redirect()->back()->with('success', 'Adoption request cancelled successfully');
+    }
+
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(ToAdoupt $toAdoupt)
     {
-        $toAdoupt->delete(); 
-        
-        return to_route('categories.index')->with('success', 'Adoption Request deleted');
+       
     }
 }
