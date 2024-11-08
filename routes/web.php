@@ -12,6 +12,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\ProductFeedbackController;
+use App\Http\Controllers\WishListController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ContactController;
@@ -81,6 +82,14 @@ Route::resource('categories', CategoryController::class)->middleware(['auth' , '
 Route::resource('products', ProductController::class)->middleware(['auth' , 'role']);
 Route::delete('/product_images/{product_image}', [productImageController::class, 'destroy'])->name('product_images.destroy')->middleware(['auth' , 'role']);
 Route::get('/product_details/{id}',[ProductController::class, 'show_user_side'])->name("product_details");
+
+
+
+
+// <!--=================================================  (WishList)  =====================================================================================================================================-->
+Route::resource('wishLists', WishListController::class);
+
+
 
 
 

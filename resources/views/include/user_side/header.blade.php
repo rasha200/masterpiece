@@ -1,8 +1,11 @@
 <!-- Header -->
 
-<header class="header-v2">
+<header>
 
-    <!-- Topbar -->
+    <!-- Header desktop -->
+    <div class="container-menu-desktop">
+
+         <!-- Topbar -->
     <div class="top-bar">
         <div class="content-topbar flex-sb-m h-full container">
             <div class="left-top-bar">
@@ -50,11 +53,9 @@
     </div>
     <!-- End Topbar -->
 
-    
-    <!-- Header desktop -->
-    <div class="container-menu-desktop trans-03">
-        <div class="wrap-menu-desktop">
-            <nav class="limiter-menu-desktop p-l-45">
+
+       	<div class="wrap-menu-desktop">
+				<nav class="limiter-menu-desktop container">
                 
                 <!-- Logo desktop -->		
                 <a href="#" class="logo">
@@ -64,7 +65,7 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li class="active-menu">
+                        <li >
                             <a href="{{ route('home') }}">Home</a>
                         </li>
 
@@ -72,7 +73,7 @@
                             <a href="{{ route('about_us') }}">About</a>
                         </li>
 
-                        <li class="active-menu">
+                        <li >
                             <a href="{{ route('services') }}">Services</a>
                         </li>
 
@@ -92,14 +93,20 @@
                 </div>	
 
                 <!-- Icon header -->
-                <div class="wrap-icon-header flex-w flex-r-m h-full">
+                <div class="wrap-icon-header flex-w flex-r-m">
                     
                         
-                    <div class="flex-c-m h-full p-l-18 p-r-25 bor5">
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="2">
+                   
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="">
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
-                    </div>
+                        @if (Auth::check())
+                        <a href="{{ route('wishLists.index') }}" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="{{ $wishlistCount }}">
+							<i class="zmdi zmdi-favorite-outline"></i>
+						</a>
+                    @endif
+                       
+                  
                    
 
                 </div>

@@ -29,6 +29,12 @@ class Product extends Model
     return $this->hasMany(ProductFeedback::class);
 }
 
+public function wishList()
+{
+    return $this->hasMany(WishList::class);
+}
+
+
 protected static function booted()
      {
          static::deleting(function ($product) {

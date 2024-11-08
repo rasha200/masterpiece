@@ -194,7 +194,7 @@
                         @endforeach
                     </div>
 
-                    <!-- Other Tabs (Orders, Appointments) -->
+<!--------------------- Other Tabs (Orders, Appointments) -------------------------------------------------->
                     <div class="tab-pane fade" id="orders" role="tabpanel">
                         <h3 class="mb-4">Order History</h3>
                         <p>Here you will see your order history.</p>

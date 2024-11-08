@@ -46,8 +46,19 @@ class HomeController extends Controller
 
     public function show(string $id)
     {
-        dd($id);
+       
                                                                                                                                         
         return view('landing_page' , ['product'=>$product]);
     }
+
+    public function count_wishlist_layout(string $id)
+    {
+       $wishlistCount = Auth::check() ? Auth::user()->wishLists()->count() : 0;
+
+                                                                                                                                        
+        return view('layouts.user_side_master' , ['wishlistCount'=>$wishlistCount]);
+    }
+
+   
+    
 }

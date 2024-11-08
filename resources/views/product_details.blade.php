@@ -3,8 +3,8 @@
 @section('content')
 
 <!-- breadcrumb -->
-<div class="container">
-    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+<div class="container" style="margin-top: 50px;">
+    <div class="bread-crumb flex-w  p-r-15 p-t-30 p-lr-0-lg">
         <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
             Home
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
@@ -97,15 +97,21 @@
                     </div>
 
                     <!--  -->
+
+                    @if (Auth::check())
                     <div class="flex-w flex-m p-l-100 p-t-40 respon7">
                         <div class="flex-m bor9 p-r-10 m-r-11">
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-                                <i class="zmdi zmdi-favorite"></i>
-                            </a>
+                            <form action="{{ route('wishLists.store') }}" method="POST" id="wishlist-form-{{ $product->id }}">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <button type="submit" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist" id="add-to-wishlist-{{ $product->id }}">
+                                    <i class="zmdi zmdi-favorite-outline" id="heart-icon-{{ $product->id }}"></i>
+                                </button>
+                            </form>
                         </div>
-
-                       
                     </div>
+                    @endif
+
                 </div>
             </div>
         </div>

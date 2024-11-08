@@ -5,7 +5,7 @@
 	
 
 
-<div class="wrapper mt-4" style="background-color:#EEEEEE;">
+<div class="wrapper" style="background-color:#EEEEEE;">
     <div class="inner" style="border-radius: 10px; padding:0px !important; width:800px;">
        
         <div class="image-holder" style="" style="margin-right:0px !important;">
@@ -53,12 +53,12 @@
 
                         <div class="row mb-0" style="margin-top:0px !important; padding-top:0px !important;">
                             <div class="col-md-8 offset-md-4" style="margin-top:0px !important;padding-top:0px !important;">
-                                <button type="submit" class="btn btn-primary" style="background-color: #14535F;" style="margin-top:0px !important;">
+                                <button type="submit" class="btn btn-primary" style="background-color: #14535F; margin-top: 18px; margin-buttom: 15x;" style="margin-top:0px !important;">
                                     {{ __('Login') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}" style="color: #14535F;">
+                                    <a class="btn btn-link" href="{{ route('password.request') }}" style="color: #14535F; margin-top: 8px; margin-left: 0px; padding-left: 0px;">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif

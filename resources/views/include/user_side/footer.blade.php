@@ -206,43 +206,106 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script><a hre
 <!--===============================================================================================-->
 	<script src="{{asset('vendor/isotope/isotope.pkgd.min.js')}}"></script>
 <!--===============================================================================================-->
-	<script src="{{asset('vendor/sweetalert/sweetalert.min.js')}}"></script>
-	<script>
-		$('.js-addwish-b2').on('click', function(e){
-			e.preventDefault();
-		});
+<script src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
 
-		$('.js-addwish-b2').each(function(){
-			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
+<script>
+    // Function to update the heart icon based on the product's wishlist status
+    function updateHeartIcon(productId, isAdded) {
+        const heartIcon = document.getElementById(`heart-icon-${productId}`);
+        if (heartIcon) {
+            if (isAdded) {
+                heartIcon.classList.add('zmdi-favorite');
+                heartIcon.classList.remove('zmdi-favorite-outline');
+            } else {
+                heartIcon.classList.remove('zmdi-favorite');
+                heartIcon.classList.add('zmdi-favorite-outline');
+            }
+        }
+    }
+    
+    // Initialize heart icons based on the items in the wishlist
+    function initializeWishlistIcons() {
+        const wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+        wishlistItems.forEach(productId => updateHeartIcon(productId, true));
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeWishlistIcons(); // Set icons on page load
+    
+        // Handle adding/removing products to the wishlist when the heart icon is clicked
+        document.querySelectorAll('.js-addwish-detail').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+    
+                const productId = this.closest('form').querySelector('input[name="product_id"]').value;
+    
+                // Retrieve and parse wishlist from localStorage
+                let wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+    
+                // Toggle wishlist status and update localStorage and icon
+                if (wishlistItems.includes(productId)) {
+                    // Remove item if it exists in wishlist
+                    wishlistItems = wishlistItems.filter(id => id !== productId);
+                    updateHeartIcon(productId, false);
+                } else {
+                    // Add item if it's not already in the wishlist
+                    wishlistItems.push(productId);
+                    updateHeartIcon(productId, true);
+                }
+    
+                // Save updated wishlist in localStorage
+                localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+    
+                // Submit form to update the backend
+                document.getElementById(`wishlist-form-${productId}`).submit();
+            });
+        });
+    
+        // Handle deleting products from wishlist when the delete button is clicked
+        document.querySelectorAll('.delete-wishlist-item').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+    
+                const productId = this.closest('form').querySelector('input[name="product_id"]').value;
+    
+                // Retrieve and parse wishlist from localStorage
+                let wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+    
+                // Remove the item from wishlist
+                wishlistItems = wishlistItems.filter(id => id !== productId);
+    
+                // Update localStorage
+                localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+    
+                // Update UI (Heart Icon)
+                updateHeartIcon(productId, false);
+    
+                // Submit the form to remove the item from the backend
+                this.closest('form').submit(); // This will trigger the form submission
+            });
+        });
+    });
+    </script>
+    
+    
 
-				$(this).addClass('js-addedwish-b2');
-				$(this).off('click');
-			});
-		});
 
-		$('.js-addwish-detail').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
 
-				$(this).addClass('js-addedwish-detail');
-				$(this).off('click');
-			});
-		});
 
-		/*---------------------------------------------*/
 
-		$('.js-addcart-detail').each(function(){
-			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-	
-	</script>
+
+
+
+
+
+
+
+
+
+
+    
+
        
 <!--===============================================================================================-->
 	<script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>

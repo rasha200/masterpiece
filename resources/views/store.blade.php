@@ -250,7 +250,7 @@
             </div>
         </div>
 
-        <!-- Product -->
+<!---------------------------- Product ----------------------------------------------------->
         <div class="row isotope-grid">
             
             @if($products->isEmpty())
@@ -283,9 +283,14 @@
                                 ${{ $product->price }}
                             </span>
                         </div>
+                       
+
                     </div>
                 </div>
             </div>
+
+            @include("include/modal/product", ['product' => $product]) <!-- Pass product data to modal partial -->
+
          
             @endforeach
             @endif
@@ -307,32 +312,27 @@
 
 @if(isset($products) && $products->isNotEmpty())
 <script>
-    // Function to show the modal
-    function showModal(modalId) {
-        document.getElementById(modalId).style.display = 'block';
-        document.querySelector('.overlay-modal1').style.display = 'block';
-    }
-
-    // Function to hide the modal
-    function hideModal() {
-        const modals = document.querySelectorAll('.js-modal1');
-        modals.forEach(modal => {
-            modal.style.display = 'none';
+    // Open modal when Quick View button is clicked
+    document.querySelectorAll('.js-show-modal1').forEach(button => {
+        button.addEventListener('click', function() {
+            const modalId = this.getAttribute('data-modal');
+            document.getElementById(modalId).style.display = 'block';
+            document.querySelector('.overlay-modal1').style.display = 'block';
         });
-        document.querySelector('.overlay-modal1').style.display = 'none';
-    }
-
-    // Event listeners for showing and hiding the modal
-    document.querySelectorAll('.js-hide-modal1').forEach(button => {
-        button.addEventListener('click', hideModal);
     });
 
-    // Example: Show the modal when a specific button is clicked
-    // Replace 'yourButtonId' with the actual button ID
-    document.getElementById('yourButtonId').addEventListener('click', function() {
-        showModal('modal-{{ $product->id }}');
+    // Close modal when overlay or close button is clicked
+    document.querySelectorAll('.js-modal1').forEach(modal => {
+        modal.addEventListener('click', function(event) {
+            if (event.target.classList.contains('js-hide-modal1')) {
+                modal.style.display = 'none';
+                document.querySelector('.overlay-modal1').style.display = 'none';
+            }
+        });
     });
 </script>
 @endif
+
+
 
 @endsection

@@ -42,13 +42,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function testimonials(){
+    public function testimonials()
+    {
         return $this->hasMany(Testimonial::class);
-        }
+    }
 
-        public function toAdoupt()
-        {
-            return $this->hasMany(ToAdoupt::class);
-        }
+    public function toAdoupt()
+    {
+        return $this->hasMany(ToAdoupt::class);
+    }
+
+
+    public function wishList()
+    {
+        return $this->hasMany(WishList::class);
+    }
 
 }

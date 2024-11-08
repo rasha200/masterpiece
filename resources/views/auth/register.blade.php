@@ -1,21 +1,22 @@
 @extends('layouts.user_side_master')
 
 @section('content')
-<div class="wrapper mt-4" style="background-color:#D9D9D9; ">
-    <div class="inner" style="border-radius: 10px; padding:0px !important;">
+<div class="wrapper " style="background-color:#D9D9D9; ">
+    <div class="inner" style="border-radius: 10px; padding:0px !important; margin-top:90px;">
         <div class="image-holder" style="">
             <img src="{{asset('resgister/images/rigester.jpg')}}" alt="" style="height:500px; width:405px; border-radius: 10px 0 0 10px;">
         </div>
         
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" autocomplete="off">
                         @csrf
                         <h3>Create your account</h3>
 
                        
-
+                        <input type="text" name="dummy_Fname" style="display: none;">
+                        <input type="password" name="dummy_password" style="display: none;">
 
                         <div class="form-wrapper">
-                                <input id="Fname" type="text" placeholder="First Name" class="form-control @error('Fname') is-invalid @enderror" name="Fname" value="" required autocomplete="Fname" autofocus style="padding-left:15px;">
+                                <input id="Fname" type="text" placeholder="First Name" class="form-control @error('Fname') is-invalid @enderror" name="Fname" value="" required autocomplete="off" autofocus style="padding-left:15px;">
                                 <i class="zmdi zmdi-account"></i>
                                 @error('Fname')
                                     <span class="invalid-feedback" role="alert">
@@ -27,7 +28,7 @@
 
 
                         <div class="form-wrapper">
-                                <input id="Lname" type="text" placeholder="Last Name" class="form-control @error('Lname') is-invalid @enderror" name="Lname" value="" required autocomplete="Lname" autofocus style="padding-left:15px; ">
+                                <input id="Lname" type="text" placeholder="Last Name" class="form-control @error('Lname') is-invalid @enderror" name="Lname" value="" required autocomplete="off" autofocus style="padding-left:15px; ">
                                 <i class="zmdi zmdi-account"></i>
                                 @error('Lname')
                                     <span class="invalid-feedback" role="alert">
