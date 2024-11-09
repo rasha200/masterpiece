@@ -93,9 +93,41 @@
                         </td>
                         </tr>
                         @endforeach
+                                          
                       </tbody>
                     </table>
+
+
+                          
+
+
                   </div>
+
+<!-- Custom Pagination -->
+<div class="d-flex justify-content-center mt-2">
+  <div class="flex-c-m flex-w w-full p-t-38">
+    {{-- Loop through the pages --}}
+    @foreach ($users->getUrlRange(1, $users->lastPage()) as $page => $url)
+        @if ($page == $users->currentPage())
+            <a href="{{ $url }}" 
+               class="flex-c-m how-pagination1 m-all-7 active-pagination1"
+               style="background-color: #14535F; color: white; border-radius: 5px; padding: 8px 12px;">
+                {{ $page }}
+            </a>
+        @else
+            <a href="{{ $url }}" 
+               class="flex-c-m how-pagination1 m-all-7"
+               style="color: #14535F; border: 1px solid #14535F; border-radius: 5px; padding: 8px 12px; transition: background-color 0.3s, color 0.3s;"
+               onmouseover="this.style.backgroundColor='#14535F'; this.style.color='white';"
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#14535F';">
+                {{ $page }}
+            </a>
+        @endif
+    @endforeach
+  </div>
+</div>
+
+
                 </div>
               </div>
 

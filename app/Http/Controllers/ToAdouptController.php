@@ -14,7 +14,7 @@ class ToAdouptController extends Controller
      */
     public function index()
     {
-        $ToAdoupts = ToAdoupt::all(); 
+        $ToAdoupts = ToAdoupt::paginate(10); 
       
         return view('dashboard.ToAdoupts.index' , ['ToAdoupts'=> $ToAdoupts]);
     }

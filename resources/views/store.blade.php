@@ -296,17 +296,21 @@
             @endif
         </div>
 
-        <!-- Pagination -->
-        
-        <div class="flex-c-m flex-w w-full p-t-38">
-            <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
-                1
+    <!-- Custom Pagination -->
+<div class="flex-c-m flex-w w-full p-t-38">
+    {{-- Loop through the pages --}}
+    @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+        @if ($page == $products->currentPage())
+            <a href="{{ $url }}" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
+                {{ $page }}
             </a>
-
-            <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
-                2
+        @else
+            <a href="{{ $url }}" class="flex-c-m how-pagination1 trans-04 m-all-7">
+                {{ $page }}
             </a>
-        </div>
+        @endif
+    @endforeach
+</div>
     </div>
 </section>
 

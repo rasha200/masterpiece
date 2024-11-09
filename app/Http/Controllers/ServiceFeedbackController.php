@@ -15,7 +15,7 @@ class ServiceFeedbackController extends Controller
     public function index($service_id)
     {
        
-        $serviceFeedbacks = ServiceFeedback::where('service_id', $service_id)->orderBy('created_at', 'desc')->get();
+        $serviceFeedbacks = ServiceFeedback::where('service_id', $service_id)->orderBy('created_at', 'desc')->paginate(10);
         
        
         $service = Service::findOrFail($service_id); 

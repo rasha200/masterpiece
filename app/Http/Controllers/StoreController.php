@@ -20,7 +20,7 @@ class StoreController extends Controller
         if ($request->has('category_id')) {
             $query->where('category_id', $request->input('category_id'));
         }
-        $products = $query->get();
+        $products = $query->paginate(6);
 
        
 

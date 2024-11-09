@@ -14,14 +14,14 @@ class PetController extends Controller
      */
     public function index()
     {
-        $pets = Pet::with('pet_images')->get();
+        $pets = Pet::with('pet_images')->paginate(10);
 
         return view('dashboard.pets.index' , ['pets'=> $pets]);
     }
 
     public function index_user_side()
     {
-        $pets = Pet::with('pet_images')->get();
+        $pets = Pet::with('pet_images')->paginate(6);
 
         return view('pet_adoption' , ['pets'=> $pets]);
     }

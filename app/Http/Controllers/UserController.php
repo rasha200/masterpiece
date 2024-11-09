@@ -17,13 +17,13 @@ class UserController extends Controller
     public function index()
     {
         if (Auth::user()->role == 'receptionist' || Auth::user()->role == 'store_manager') {
-            $users = User::where('role', 'user')->get(); 
+            $users = User::where('role', 'user')->paginate(10); 
 
         } elseif (Auth::user()->role == 'veterinarian') {
-            $users = User::whereIn('role', ['user', 'receptionist', 'store_manager'])->get();
+            $users = User::whereIn('role', ['user', 'receptionist', 'store_manager'])->paginate(10);
 
         } elseif (Auth::user()->role == 'manager') {
-            $users = User::whereIn('role', ['user', 'receptionist', 'store_manager', 'veterinarian'])->get();
+            $users = User::whereIn('role', ['user', 'receptionist', 'store_manager', 'veterinarian'])->paginate(10);
 
         } else {
             

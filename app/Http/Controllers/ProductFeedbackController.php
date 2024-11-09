@@ -14,7 +14,7 @@ class ProductFeedbackController extends Controller
      */
     public function index($product_id)
     {
-        $productfeedbacks = ProductFeedback::where('product_id', $product_id)->orderBy('created_at', 'desc')->get();
+        $productfeedbacks = ProductFeedback::where('product_id', $product_id)->orderBy('created_at', 'desc')->paginate(10);
         $product = Product::findOrFail($product_id);
 
 

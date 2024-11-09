@@ -33,7 +33,7 @@
         <li class="nav-item">
             <a class="nav-link" href="{{route('services.index')}}">
                 <span class="menu-title">Services</span>
-                <i class="mdi mdi-account-circle menu-icon"></i>
+                <i class="mdi mdi mdi-pharmacy menu-icon"></i>
                
             </a>
         </li>
@@ -56,7 +56,7 @@
         <li class="nav-item">
             <a class="nav-link" href="{{route('products.index')}}">
                 <span class="menu-title">Products</span>
-                <i class="mdi mdi-collage menu-icon"></i>
+                <i class="mdi mdi-package-variant menu-icon"></i>
             </a>
         </li>
 

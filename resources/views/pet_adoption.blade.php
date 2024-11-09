@@ -56,7 +56,23 @@
                </div>
            </div>
            @endforeach
-
+   <!-- Custom Pagination -->
+<div class="flex-c-m flex-w w-full p-t-38">
+    {{-- Loop through the pages --}}
+    @foreach ($pets->getUrlRange(1, $pets->lastPage()) as $page => $url)
+        @if ($page == $pets->currentPage())
+            <a href="{{ $url }}" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
+                {{ $page }}
+            </a>
+        @else
+            <a href="{{ $url }}" class="flex-c-m how-pagination1 trans-04 m-all-7">
+                {{ $page }}
+            </a>
+        @endif
+    @endforeach
+</div>
+        
+  
        </div>
    </div>
 </div>
