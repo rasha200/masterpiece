@@ -22,8 +22,8 @@
         
        
         
-    
-        <a href="{{ route('productFeedbacks.index') }}" class="btn btn-outline-info btn-fw">Back to list</a>
+
+        <a href="{{ route('productFeedbacks.index', ['product_id' => $productFeedback->product_id]) }}" class="btn btn-outline-info btn-fw">Back to list</a>
        
     </div>
 </div>

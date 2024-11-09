@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ServiceFeedback;
+use App\Models\Service;
+
 use Illuminate\Http\Request;
 
 class ServiceFeedbackController extends Controller
@@ -10,12 +12,23 @@ class ServiceFeedbackController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($service_id)
     {
-        $serviceFeedbacks = ServiceFeedback::orderBy('created_at', 'desc')->get();
-
-        return view('dashboard.service_feedbacks.index' , ['serviceFeedbacks'=> $serviceFeedbacks]);
+       
+        $serviceFeedbacks = ServiceFeedback::where('service_id', $service_id)->orderBy('created_at', 'desc')->get();
+        
+       
+        $service = Service::findOrFail($service_id); 
+        
+        
+        return view('dashboard.service_feedbacks.index', [
+            'serviceFeedbacks' => $serviceFeedbacks,
+            'service_id' => $service_id,
+            'service_name' => $service->name, 
+        ]);
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -57,7 +70,7 @@ class ServiceFeedbackController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ServiceFeedback $serviceFeedback)
+    public function show($service_id, ServiceFeedback $serviceFeedback)
     {
         return view('dashboard.service_feedbacks.show' , ['serviceFeedback'=> $serviceFeedback]);
     }
@@ -94,8 +107,11 @@ class ServiceFeedbackController extends Controller
      */
     public function destroy(ServiceFeedback $serviceFeedback)
     {
+
+        $service_id = $serviceFeedback->service_id; // Get the service_id from the serviceFeedback
+
         $serviceFeedback->delete(); 
         
-        return to_route('serviceFeedbacks.index')->with('success', 'Review deleted');
+        return to_route('serviceFeedbacks.index', ['service_id' => $service_id])->with('success', 'Review deleted');
     }
 }

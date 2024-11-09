@@ -72,10 +72,16 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"  onclick="confirmDeletion(event, '{{ route('services.destroy', $service->id) }}')">
-                            <i class="mdi mdi mdi-delete text-danger"></i>
-                          </button>
-                                            </form>
-                                            @endif
+                                               <i class="mdi mdi mdi-delete text-danger"></i>
+                                               </button>
+                          </form>
+                            @endif
+
+                            <a href="{{ route('serviceFeedbacks.index', $service->id) }}"  title="View feedback">
+                              <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
+                                <i class="mdi mdi-comment-text-outline text-info"></i>
+                              </button>
+                              </a>      
                         </td>
                         </tr>
                         @endforeach

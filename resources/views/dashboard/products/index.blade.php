@@ -52,7 +52,7 @@
                         @else
                             <span>No image available</span>
                         @endif
-</td> 
+                        </td> 
                           <td>{{$product->price}}</td>
                           {{-- <td>{{$product->quantity}}</td> --}}
                           <td>{{$product->category->name}}</td>
@@ -81,6 +81,13 @@
                             <i class="mdi mdi mdi-delete text-danger"></i>
                           </button>
                                             </form>
+
+
+                              <a href="{{ route('productFeedbacks.index', $product->id) }}"  title="View feedback">
+                          <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
+                            <i class="mdi mdi-comment-text-outline text-info"></i>
+                          </button>
+                          </a>              
                                            
                         </td>
                         </tr>

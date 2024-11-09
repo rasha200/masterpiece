@@ -23,7 +23,7 @@
        
         
     
-        <a href="{{ route('serviceFeedbacks.index') }}" class="btn btn-outline-info btn-fw">Back to list</a>
+        <a href="{{ route('serviceFeedbacks.index', ['service_id' => $serviceFeedback->service_id]) }}" class="btn btn-outline-info btn-fw">Back to list</a>
        
     </div>
 </div>

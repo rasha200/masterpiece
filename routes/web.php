@@ -17,6 +17,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\SearchController;
+
 
 
 use Illuminate\Support\Facades\Auth;
@@ -35,13 +37,6 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-Route::get('/test' , function(){
-    return view('register');
-});
-
-Route::get('/test2' , function(){
-    return view('login');
-});
 
 // <!--==========================================  (HOME)  ========================================================================================================================-->
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -58,6 +53,15 @@ Route::get('/dashboard', function () {
 
 
 
+// <!--==========================================  (Search)  ========================================================================================================================-->
+Route::get('/search/store', [SearchController::class, 'search'])->name('search.store');
+Route::get('/search/pets', [SearchController::class, 'search'])->name('search.pets');
+
+
+
+
+
+
 // <!--==========================================  (Users)  ===============================================================================================================-->
 Route::resource('users', UserController::class)->middleware(['auth' , 'role']);
 Route::get('/user/trash', [UserController::class, 'trash'])->name('users.trash')->middleware(['auth' , 'role']);
@@ -68,18 +72,18 @@ Route::post('/users/{id}/restore', [UserController::class, 'restore'])->name('us
 
 // <!--==========================================  (Profile)  ===============================================================================================================-->
 Route::get('/profile', [UserController::class, 'show_profile'])->name('profile.show');
-Route::get('/profile_dashboard', [UserController::class, 'show_profile_dash'])->name('profile_dash.show');
+Route::get('/profile_dashboard', [UserController::class, 'show_profile_dash'])->name('profile_dash.show')->middleware(['auth' , 'role']);
 Route::put('/profile', [UserController::class, 'update_profile'])->name('profile.update');
 
 
 
 // <!--==========================================  (Categories)  =================================================================================================================-->
-Route::resource('categories', CategoryController::class)->middleware(['auth' , 'role']);
+Route::resource('categories', CategoryController::class)->middleware(['auth' , 'role' ,'store']);
 
 
 
 // <!--==========================================  (Products)  ===================================================================================================================-->
-Route::resource('products', ProductController::class)->middleware(['auth' , 'role']);
+Route::resource('products', ProductController::class)->middleware(['auth' , 'role','store']);
 Route::delete('/product_images/{product_image}', [productImageController::class, 'destroy'])->name('product_images.destroy')->middleware(['auth' , 'role']);
 Route::get('/product_details/{id}',[ProductController::class, 'show_user_side'])->name("product_details");
 
@@ -95,9 +99,9 @@ Route::resource('wishLists', WishListController::class);
 
 // <!--==========================================  (Product feedback)  ============================================================================================================-->
 // Protected routes
-Route::middleware(['auth', 'role'])->group(function () {
-    Route::get('/productFeedbacks', [ProductFeedbackController::class, 'index'])->name('productFeedbacks.index'); // List all productFeedbacks (dashboard)
-    Route::get('/productFeedbacks/{productFeedback}', [ProductFeedbackController::class, 'show'])->name('productFeedbacks.show'); // Show
+Route::middleware(['auth', 'role','store'])->group(function () {
+    Route::get('/productFeedbacks/{product_id}', [ProductFeedbackController::class, 'index'])->name('productFeedbacks.index'); // List all productFeedbacks (dashboard)
+    Route::get('/productFeedbacks/{product_id}/{productFeedback}', [ProductFeedbackController::class, 'show'])->name('productFeedbacks.show'); // Show
     Route::delete('/productFeedbacks/{productFeedback}', [ProductFeedbackController::class, 'destroy'])->name('productFeedbacks.destroy'); // Delete
 });
 // Public routes
@@ -124,8 +128,8 @@ Route::get('/service_details/{id}', [ServiceController::class, 'show_user_side']
 // <!--==========================================  (Service feedback)  ====================================================================================================================-->
 // Protected routes
 Route::middleware(['auth', 'role'])->group(function () {
-    Route::get('/serviceFeedbacks', [ServiceFeedbackController::class, 'index'])->name('serviceFeedbacks.index'); // List all serviceFeedbacks (dashboard)
-    Route::get('/serviceFeedbacks/{serviceFeedback}', [ServiceFeedbackController::class, 'show'])->name('serviceFeedbacks.show'); // Show
+    Route::get('/serviceFeedbacks/{service_id}', [ServiceFeedbackController::class, 'index'])->name('serviceFeedbacks.index'); // List all serviceFeedbacks (dashboard)
+    Route::get('/serviceFeedbacks/{service_id}/{serviceFeedback}', [ServiceFeedbackController::class, 'show'])->name('serviceFeedbacks.show'); // Show
     Route::delete('/serviceFeedbacks/{serviceFeedback}', [ServiceFeedbackController::class, 'destroy'])->name('serviceFeedbacks.destroy'); // Delete
 });
 // Public routes
@@ -186,7 +190,7 @@ Route::get('/contact', function () {
 
 // <!--==========================================  (Testimonials)  ==================================================================================================================-->
 // Protected routes
-Route::middleware(['auth', 'role'])->group(function () {
+Route::middleware(['auth', 'role','not_veterinarian'])->group(function () {
     Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index'); // List all testimonials (dashboard)
     Route::get('/testimonials/{testimonial}', [TestimonialController::class, 'show'])->name('testimonials.show'); // Show
     Route::delete('/testimonials/{testimonial}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy'); // Delete

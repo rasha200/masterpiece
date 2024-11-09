@@ -109,10 +109,18 @@
         document.getElementById('profile-form').submit(); // Submit the form if confirmed
     });
 </script>
+
+
+
   <!--------------------------- Adoption Requests Tab -------------------------->
                     <div class="tab-pane fade" id="adoption-requests" role="tabpanel">
                         <h3 class="mb-4">Adoption Requests</h3>
-                        
+
+                        @if($adoptionRequests->isEmpty())
+                        <p>Here you will see your adoption requests</p>
+                    @else
+                       
+
                         <!-- Adoption Request Cards -->
                         @foreach ($adoptionRequests as $adoptRequest)
                             <div class="adoption-request-card mb-4">
@@ -192,6 +200,7 @@
 </div>
 
                         @endforeach
+                        @endif
                     </div>
 
 <!--------------------- Other Tabs (Orders, Appointments) -------------------------------------------------->

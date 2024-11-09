@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductFeedback;
+use App\Models\Product;
+
 use Illuminate\Http\Request;
 
 class ProductFeedbackController extends Controller
@@ -10,11 +12,17 @@ class ProductFeedbackController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($product_id)
     {
-        $productfeedbacks = ProductFeedback::orderBy('created_at', 'desc')->get();
+        $productfeedbacks = ProductFeedback::where('product_id', $product_id)->orderBy('created_at', 'desc')->get();
+        $product = Product::findOrFail($product_id);
 
-        return view('dashboard.product_feedbacks.index' , ['productfeedbacks'=> $productfeedbacks]);
+
+        return view('dashboard.product_feedbacks.index' , [
+            'productfeedbacks'=> $productfeedbacks,
+            'product_id'=> $product_id,
+            'product_name' => $product->name, 
+        ]);
     }
 
     /**
@@ -56,7 +64,7 @@ class ProductFeedbackController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProductFeedback $productFeedback)
+    public function show($product_id, ProductFeedback $productFeedback)
     {
         return view('dashboard.product_feedbacks.show' , ['productFeedback'=> $productFeedback]);
     }
@@ -93,8 +101,11 @@ class ProductFeedbackController extends Controller
      */
     public function destroy(ProductFeedback $productFeedback)
     {
-        $productFeedback->delete(); 
-        
-        return to_route('productFeedbacks.index')->with('success', 'Review deleted');
+
+        $productFeedback->delete();
+
+        $product_id = $productFeedback->product_id; 
+
+        return to_route('productFeedbacks.index', ['product_id' => $product_id])->with('success', 'Review deleted');
     }
 }

@@ -38,8 +38,12 @@
                         @foreach($ToAdoupts as $ToAdoupt)
                         <tr>
                           <td>{{$ToAdoupt->id}}</td>
-                          <td>{{$ToAdoupt->user->Fname}} {{$ToAdoupt->user->Lname}}</td>
-                          <td>{{$ToAdoupt->pet->name}} </td>
+                          <td> 
+                            {{ optional($ToAdoupt->user)->Fname ?? 'Deleted User' }} {{ optional($ToAdoupt->user)->Lname ?? '' }}
+                          </td>
+                          <td>
+                            {{ optional($ToAdoupt->pet)->name ?? 'Deleted pet' }} 
+                          </td>
                           
                           @if($ToAdoupt->status == 'Accept')
                              <td><label class="badge badge-danger">{{$ToAdoupt->status}}</label></td>

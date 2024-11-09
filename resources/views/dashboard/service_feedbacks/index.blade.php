@@ -3,8 +3,13 @@
 @section('content')
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="title-1">Service Feedbacks</h2>
-    </div>
+  <h2 class="title-1">Service Feedbacks for<span style="color:#F79257"> ({{ $service_name }}) </span></h2>
+
+  <a href="{{route('services.index')}}">
+    <button type="button" class="btn btn-outline-info btn-fw">
+       Back to product list
+    </button>
+</a>    </div>
 
      
     
@@ -25,7 +30,7 @@
                         <tr>
                           <th>Id</th>
                           <th>User Name</th>
-                          <th>Service Name</th>
+                         
                           <th>Rating</th>
                           <th>Date</th>
                           <th></th>
@@ -36,7 +41,6 @@
                         <tr>
                           <td>{{$serviceFeedback->id}}</td>
                           <td>{{ optional($serviceFeedback->user)->Fname ?? 'Unknown User' }} {{ optional($serviceFeedback->user)->Lname ?? '' }}</td>
-                          <td>{{$serviceFeedback->service->name}}</td>
                           <td>
                             <span class="fs-18 cl11">
                             @for ($i = 1; $i <= 5; $i++)
@@ -49,7 +53,7 @@
                           <td> 
 
                             
-                          <a href="{{ route('serviceFeedbacks.show', $serviceFeedback->id) }}"  title="View">
+                          <a href="{{ route('serviceFeedbacks.show', ['service_id' => $serviceFeedback->service_id, 'serviceFeedback' => $serviceFeedback->id]) }}"  title="View">
                           <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
                             <i class="mdi mdi mdi-eye text-success"></i>
                           </button>

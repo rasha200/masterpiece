@@ -9,9 +9,9 @@
 @endif
     <div class="card-body" style="border: 1px solid #e7dee9;">
        
-        <p><strong>User Name:</strong> {{ $toAdoupt->user->Fname }} {{ $toAdoupt->user->Lname }} </p>
-        <p><strong>User Email:</strong> {{ $toAdoupt->user->email }} </p>
-        <p><strong>Pet Name:</strong> {{ $toAdoupt->pet->name }} </p>
+        <p><strong>User Name:</strong>{{ optional($toAdoupt->user)->Fname ?? 'Deleted User' }} {{ optional($toAdoupt->user)->Lname ?? '' }}</p>
+        <p><strong>User Email:</strong> {{ optional($toAdoupt->user)->email ?? '' }} </p>
+        <p><strong>Pet Name:</strong>  {{ optional($toAdoupt->pet)->name ?? 'Deleted pet' }}  </p>
         <p><strong>Reason For Adoption:</strong>{{ $toAdoupt->reason_for_adoption }} </p>
         <p><strong>Current Pets:</strong> {{ $toAdoupt->current_pets }} </p>
         <p><strong>Availability:</strong> {{ $toAdoupt->availability }} </p>
