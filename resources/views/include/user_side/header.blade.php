@@ -24,7 +24,15 @@
                     Sign Up
                 </a>
                 @endif
+
                 @else
+
+                @if (Auth::user()->role == 'manager' || Auth::user()->role == 'veterinarian' || Auth::user()->role == 'store_manager'|| Auth::user()->role == 'receptionist')
+                <a href="{{ route('dashboard') }}" class="flex-c-m trans-04 p-lr-25">
+                    Dashboard
+                </a>
+                @endif
+
                 <a href="{{ route('profile.show') }}" class="flex-c-m trans-04 p-lr-25">
                     <i class="zmdi zmdi-account"></i>
                  </a>

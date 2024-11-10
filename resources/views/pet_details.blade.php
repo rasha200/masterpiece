@@ -5,12 +5,12 @@
 <!-- breadcrumb -->
 <div class="container" style="margin-top: 50px;">
     <div class="bread-crumb flex-w  p-r-15 p-t-30 p-lr-0-lg">
-        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        <a href="{{ route('home') }}" class="stext-109 cl8 hov-cl1 trans-04">
             Home
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
-        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+        <a href="{{ route('pet_adoption') }}" class="stext-109 cl8 hov-cl1 trans-04">
            Pet Adoption
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
@@ -107,13 +107,12 @@
                     <div class="p-t-33">
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-204 flex-w flex-m respon6-next">
-                                @if($pet->is_adopted == "Available")
+                                @if($pet->is_adopted == "Available" ||$pet->is_adopted == "Pending")
                                 <a href="{{ route('toAdoupts.create', ['pet_id' => $pet->id]) }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 ">
                                     Adopt me
                                 </a>
 
-                                @elseif($pet->is_adopted == "Pending")
-                                <p style="font-size: 20px;"><i class="fa fa-ban" style="color: #F79257;"></i> Not Available</p>
+                               
                                 @else
 
                                 <p style="font-size: 20px;"><i class="fa fa-times-circle" style="color: #14535F;"></i> Adopted</p>

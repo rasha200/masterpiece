@@ -6,13 +6,29 @@
         <h2 class="title-1">Products</h2>
 
        
-        <a href="{{ route('products.create') }}">
+        <a href="{{ route('products.create') }}" style="margin-right: 43px;">
             <button type="button" class="btn btn-outline-info btn-fw">
                 <i class="zmdi zmdi-plus"></i> Add new product
             </button>
         </a>
     
     </div>
+
+    <form action="{{route('products.index')}}" method="GET" class="container mt-4" style="margin-left: 26px; width:891px;">
+      @csrf
+      <div class="form-group">
+          <div class="input-group" style="margin-top: 10px">
+
+
+              <input type="text" id="query" name="query" class="form-control" placeholder="Search products..." style="border: rgb(204, 204, 204) solid 1px">
+              <input type="hidden" name="type" value="products">
+              <button type="submit" class="search-btn" style="border: rgb(204, 204, 204) solid 1px">
+                <i class="zmdi zmdi-search"></i>
+            </button>
+             
+          </div>
+      </div>
+  </form>
 
      
     

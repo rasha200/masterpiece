@@ -166,7 +166,7 @@
 
                                     @if($adoptRequest->status == "Pending")
                                    
-                                        <button class="btn btn-danger custom-btn" data-toggle="modal" data-target="#cancelModal{{ $adoptRequest->id }}" style="background-color: #A71619; padding:0px !important; width:120px !important; height : 40px !important;  border-radius: 20px !important;">Cancel Adoption</button>
+                                        <button class="btn btn-danger custom-btn" data-toggle="modal" data-target="#cancelModal{{ $adoptRequest->id }}" style="margin-top:18px; background-color: #A71619; padding:0px !important; width:120px !important; height : 40px !important;  border-radius: 20px !important;">Cancel Adoption</button>
                                    
                                     @endif
                                     </div>

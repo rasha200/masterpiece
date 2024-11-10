@@ -37,7 +37,7 @@
                           <th>Gender</th>
                           <th>Type</th>
                           <th>Image</th>
-                          <th>Is Adote</th>
+                          <th>Is Adopte</th>
                           <th></th>
                         </tr>
                       </thead>

@@ -23,6 +23,9 @@ class ServiceController extends Controller
     public function index_user_side()
     {
         $services = Service::with('service_images')->get();
+        foreach ($services as $service) {
+            $service->averageRating = $service->service_feedbacks()->avg('rating') ?? 0;
+        }
         return view('services' , ['services'=> $services]);
     }
 
@@ -85,6 +88,7 @@ class ServiceController extends Controller
     public function show(Service $service)
     {
         $serviceImages = $service->service_images; 
+        
         return view('dashboard.services.show' , ['service'=> $service,'serviceImages'=>$serviceImages]);
     }
 
@@ -94,8 +98,14 @@ class ServiceController extends Controller
     {
         $service = Service::findOrFail($id); 
         $serviceImages = $service->service_images; 
+        $averageRating = $service->service_feedbacks()->avg('rating')?? 0;
         $servicefeedbacks = $service->service_feedbacks()->orderBy('created_at', 'desc')->get();
-        return view('service_details' , ['service'=> $service,'serviceImages'=>$serviceImages,'servicefeedbacks'=>$servicefeedbacks]);
+        return view('service_details' , [
+            'service'=> $service,
+            'serviceImages'=>$serviceImages,
+            'servicefeedbacks'=>$servicefeedbacks,
+            'averageRating'=>$averageRating,
+        ]);
     }
 
 

@@ -168,7 +168,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 /* Style for the filled heart icon */
 .zmdi-favorite {
-  color: #ff0000;  /* Red color for filled heart */
+  color: #14535F;  /* Red color for filled heart */
   font-size: 24px;  /* Adjust size */
   transition: color 0.3s ease;
 }
@@ -182,12 +182,12 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 /* Wishlist Custom Styles */
 .wishlist-remove-btn button {
-  background-color: #f95b5b;
+  background-color: #14535F;
   color: white;
   border: none;
 }
 .wishlist-remove-btn button:hover {
-  background-color: #d44a4a;
+  background-color: #14535F;
 }
 
 

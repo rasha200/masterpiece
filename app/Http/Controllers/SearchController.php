@@ -3,18 +3,65 @@
 namespace App\Http\Controllers;
 
 use App\Models\Search;
+use App\Models\Product;
+use App\Models\Pet;
+use App\Models\Testimonial;
+use App\Models\User;
+use App\Models\Service;
+use App\Models\Category;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
 
 
+    public function search(Request $request)
+{
+    $query = $request->input('query');
+    $type = $request->input('type'); 
 
-    public function search()
-    {
-       
+    if ($type === 'products') {
+
+        $results = Product::where('name', 'LIKE', '%' . $query . '%')->get();
+        return view('dashboard.products.index', compact('results', 'query'));
+
+    } elseif ($type === 'pets') {
+
+        $results = Pet::where('name', 'LIKE', '%' . $query . '%')->get();
+        return view('dashboard.pets.index', compact('results', 'query'));
+
+    } elseif ($type === 'testimonials') {
+
+        $results = Testimonial::where('content', 'LIKE', '%' . $query . '%')->get();
+        return view('dashboard.testimonials.index', compact('results', 'query'));
+
+    } elseif ($type === 'users') {
+
+        $results = User::where('name', 'LIKE', '%' . $query . '%')->orWhere('email', 'LIKE', '%' . $query . '%')->get();
+        return view('dashboard.user.index', compact('results', 'query'));
+
+    } elseif ($type === 'services') {
+
+        $results = Service::where('title', 'LIKE', '%' . $query . '%')->get();
+        return view('dashboard.services.index', compact('results', 'query'));
+
+    } elseif ($type === 'categories') {
+
+        $results = Category::where('name', 'LIKE', '%' . $query . '%')->get();
+        return view('dashboard.categories.index', compact('results', 'query'));
+
+    } elseif ($type === 'contacts') {
+
+        $results = Contact::where('message', 'LIKE', '%' . $query . '%')->get();
+        return view('dashboard.contacts.index', compact('results', 'query'));
+
+    } else {
+        return redirect()->back()->with('error', 'Invalid search type.');
     }
+}
 
+    
 
 
     /**

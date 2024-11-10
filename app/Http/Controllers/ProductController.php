@@ -12,9 +12,21 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+   
+
+
+    public function index(Request $request)
     {
-        $products = Product::with('product_images')->paginate(10);
+
+        $query = $request->input('query');
+
+        if ($query) {  // If there's a search query, perform the search
+            $products = Product::with('product_images')
+                ->where('name', 'LIKE', '%' . $query . '%')
+                ->paginate(10);
+        } else {
+             $products = Product::with('product_images')->paginate(10);
+            }
 
         return view('dashboard.products.index' , ['products'=> $products]);
     }
@@ -92,6 +104,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id); 
         $productImages = $product->product_images; 
         $productfeedbacks = $product->product_feedbacks()->orderBy('created_at', 'desc')->get(); 
+        $averageRating = $product->product_feedbacks()->avg('rating')?? 0;
         $relatedProducts = Product::where('category_id', $product->category_id)
         ->where('id', '!=', $product->id)
         ->inRandomOrder() // Randomize order
@@ -103,6 +116,7 @@ class ProductController extends Controller
             'productfeedbacks'=> $productfeedbacks,
             'relatedProducts' => $relatedProducts,
             'productImages'=>$productImages,
+            'averageRating'=>$averageRating,
         ]);
     }
 

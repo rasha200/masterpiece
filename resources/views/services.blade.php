@@ -62,12 +62,14 @@
                                     </span>
 
                                     <span>
-                                        StreetStyle, Fashion, Couple  
+                                       ( {{ count($service->service_feedbacks)}} Reviews )
                                         <span class="cl12 m-l-4 m-r-6">|</span>
                                     </span>
 
-                                    <span>
-                                        8 Comments
+                                    <span style="color:#f9ba48;"> 
+                                        @for ($i = 1; $i <= 5; $i++)
+                                        <i class="zmdi {{ $i <= $service->averageRating ? 'zmdi-star' : 'zmdi-star-outline' }}"></i>
+                                       @endfor
                                     </span>
                                 </span>
 

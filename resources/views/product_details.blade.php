@@ -5,20 +5,20 @@
 <!-- breadcrumb -->
 <div class="container" style="margin-top: 50px;">
     <div class="bread-crumb flex-w  p-r-15 p-t-30 p-lr-0-lg">
-        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        <a href="{{ route('home') }}" class="stext-109 cl8 hov-cl1 trans-04">
             Home
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
-        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+        <a href="{{ route('store') }}" class="stext-109 cl8 hov-cl1 trans-04">
            Store
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
         </a>
 
-        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+        <span class="stext-109 cl4">
             {{ $product->category->name }}
              <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-         </a>
+         </span>
 
         <span class="stext-109 cl4">
             {{ $product->name }}
@@ -61,10 +61,20 @@
             <div class="col-md-6 col-lg-5 p-b-30">
                 <div class="p-r-50 p-t-5 p-lr-0-lg">
                     <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                        {{ $product->name }}
+                        {{ $product->name }} 
+                         <span class="stext-102 cl3 p-b-23" style="color:#f9ba48;"> ({{ count($productfeedbacks) }} Reviews) <span class="fs-18 cl11">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <i class="zmdi {{ $i <= $averageRating ? 'zmdi-star' : 'zmdi-star-outline' }}"></i>
+                            @endfor
+                        </span>
+                        </span>
                     </h4>
 
-                    <span class="mtext-106 cl2">
+                   
+
+                    
+
+                    <span class="mtext-106 cl2 " style="color:rgb(250, 99, 56);">
                         ${{ $product->price }}
                     </span>
 
@@ -189,8 +199,8 @@
                         </button>
                     </a>
 
-                    <!-- Edit Form (initially hidden) -->
-                    <div id="edit-form-{{ $productfeedback->id }}" style="display: none; margin-top: 10px;">
+                      <!-- Edit Form (initially hidden) -->
+                      <div id="edit-form-{{ $productfeedback->id }}" style="display: none; margin-top: 10px;">
                         <form action="{{ route('productFeedbacks.update', $productfeedback->id) }}" method="POST">
                             @csrf
                             @method('PUT')
@@ -236,6 +246,45 @@
                             <button type="button" class="btn btn-secondary mt-2" onclick="toggleEditForm({{ $productfeedback->id }})">Cancel</button>
                         </form>
                     </div>
+
+
+                   <!-- Delete Icon Button (styled like the edit button) -->
+<a href="javascript:void(0);" onclick="toggleDeleteModal({{ $productfeedback->id }})" class="delete-icon">
+    <button style="border: solid 1px #A71619; background-color: #A71619;" title="Delete">
+        <i class="item-rating pointer zmdi zmdi-delete" style="padding: 3px; color: #FFF;"></i>
+    </button>
+</a>
+
+<!-- Delete Modal (hidden initially) -->
+<div class="modal fade" id="deleteModal{{ $productfeedback->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $productfeedback->id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel{{ $productfeedback->id }}">Confirm Deletion</h5>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this feedback for product {{ $product->name }}?
+            </div>
+            <div class="modal-footer">
+                <form action="{{ route('productFeedbacks_userside.destroy', $productfeedback->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger" style="background-color: #A71619">Yes, Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Toggle the modal visibility for delete
+    function toggleDeleteModal(feedbackId) {
+        $('#deleteModal' + feedbackId).modal('show');
+    }
+</script>
+
+                  
                     @endif
 
                                 </div>
@@ -330,12 +379,12 @@
                                     </h5>
     
                                     <p class="stext-102 cl6">
-                                        Your email address will not be published. Required fields are marked *
+                                       Required fields are marked *
                                     </p>
     
-                                    <div class="flex-w flex-m p-t-50 p-b-23">
+                                    <div class="flex-w flex-m p-t-30 p-b-23">
                                         <span class="stext-102 cl3 m-r-16">
-                                            Your Rating *
+                                            Your Rating *Required*
                                         </span>
     
                                         <span class="wrap-rating fs-18 cl11 pointer">

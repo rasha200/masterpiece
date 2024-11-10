@@ -49,13 +49,13 @@ Route::get('/home/{id}', [HomeController::class, 'show'])->name('landing_single_
 // <!--==========================================  (Dashboard)  ============================================================================================================================-->
 Route::get('/dashboard', function () {
     return view('layouts.dashboard_master');
-})->middleware(['auth' , 'role']);
+})->name('dashboard')->middleware(['auth' , 'role']);
 
 
 
 // <!--==========================================  (Search)  ========================================================================================================================-->
-Route::get('/search/store', [SearchController::class, 'search'])->name('search.store');
-Route::get('/search/pets', [SearchController::class, 'search'])->name('search.pets');
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+
 
 
 
@@ -109,6 +109,8 @@ Route::post('/productFeedbacks', [ProductFeedbackController::class, 'store'])->n
 Route::get('/productFeedbacks/create', [ProductFeedbackController::class, 'create'])->name('productFeedbacks.create'); // Create form (user side)
 Route::get('/productFeedbacks/{productFeedback}/edit', [ProductFeedbackController::class, 'edit'])->name('productFeedbacks.edit'); // Edit form
 Route::put('/productFeedbacks/{productFeedback}', [ProductFeedbackController::class, 'update'])->name('productFeedbacks.update'); // Update feedback
+Route::delete('/productFeedbacks/{productFeedback}', [ProductFeedbackController::class, 'destroy_userside'])->name('productFeedbacks_userside.destroy'); // Delete
+
 
 
 // <!--=================================================  (Store)  =====================================================================================================================================-->
@@ -136,6 +138,7 @@ Route::middleware(['auth', 'role'])->group(function () {
 Route::post('/serviceFeedbacks', [ServiceFeedbackController::class, 'store'])->name('serviceFeedbacks.store'); // Create
 Route::get('/serviceFeedbacks/create', [ServiceFeedbackController::class, 'create'])->name('serviceFeedbacks.create'); // Create form (user side)
 Route::put('/serviceFeedbacks/{serviceFeedback}', [ServiceFeedbackController::class, 'update'])->name('serviceFeedbacks.update'); // Update feedback
+Route::delete('/serviceFeedbacks/{serviceFeedback}', [ServiceFeedbackController::class, 'destroy_userside'])->name('servicefeedbacks_userside.destroy'); // Delete
 
 
 
@@ -163,7 +166,6 @@ Route::post('/toAdoupts', [toAdouptController::class, 'store'])->name('toAdoupts
 Route::put('/toAdoupts/{toAdoupt}', [toAdouptController::class, 'update'])->name('toAdoupts.update'); // Update
 Route::put('/toadoupts/{toadoupt}', [toAdouptController::class, 'update_userside'])->name('toAdoupts_user.update'); // Update 
 
-Route::delete('/toAdoupts/{toAdoupt}', [toAdouptController::class, 'destroy'])->name('toAdoupts.destroy'); // Delete
 
 
 

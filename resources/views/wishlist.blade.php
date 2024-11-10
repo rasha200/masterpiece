@@ -3,7 +3,7 @@
 @section('content')
 <div class="container" style="margin-top: 50px;">
     <div class="bread-crumb flex-w  p-r-15 p-t-30 p-lr-0-lg">
-        <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+        <span class="stext-109 cl4">
             @if (Auth::check())
             {{ Auth::user()->Fname }} {{ Auth::user()->Lname }}
         @else
@@ -11,12 +11,12 @@
             Guest
         @endif
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-        </a>
+        </span>
 
-        <a href="product.html" class="stext-109 cl8 hov-cl1 trans-04">
+        <span class="stext-109 cl4">
           Your wishlist
             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-        </a>
+        </span>
     </div>
 </div>
 <section class="sec-product bg0 p-t-40 p-b-50" style="margin-right: 100px; margin-left: 100px;" >

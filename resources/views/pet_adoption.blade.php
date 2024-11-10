@@ -38,7 +38,7 @@
                                {{$pet->type}}
                            </span>
                        </div>
-                    @if($pet->is_adopted == "Available")
+                    @if($pet->is_adopted == "Available" ||$pet->is_adopted == "Pending")
                        <div class="block1-txt-child2 p-b-4 trans-05">
                            <div class="block1-link stext-101 cl0 trans-09">
                                Adopt me

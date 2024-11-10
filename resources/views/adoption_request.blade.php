@@ -2,6 +2,32 @@
 
 @section('content')
 
+<!-- breadcrumb -->
+<div class="container" style="margin-top: 50px;">
+    <div class="bread-crumb flex-w  p-r-15 p-t-30 p-lr-0-lg">
+        <a href="{{ route('home') }}" class="stext-109 cl8 hov-cl1 trans-04">
+            Home
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <a href="{{ route('pet_adoption') }}" class="stext-109 cl8 hov-cl1 trans-04">
+           Pet Adoption
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <a href="{{ route('pet_details', ['id' => $pet->id]) }}" class="stext-109 cl8 hov-cl1 trans-04">
+            {{ $pet->name }}
+             <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+         </a>
+
+        <span class="stext-109 cl4">
+           Adoption request
+        </span>
+    </div>
+</div>
+
+
+
 <!-- Success and Error Modals -->
 @if (Session::get('success'))
     <div class="swal-overlay swal-overlay--show-modal" tabindex="-1">

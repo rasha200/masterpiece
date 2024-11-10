@@ -7,7 +7,7 @@
 
   <a href="{{route('services.index')}}">
     <button type="button" class="btn btn-outline-info btn-fw">
-       Back to product list
+       Back to service list
     </button>
 </a>    </div>
 

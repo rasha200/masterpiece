@@ -108,4 +108,14 @@ class ProductFeedbackController extends Controller
 
         return to_route('productFeedbacks.index', ['product_id' => $product_id])->with('success', 'Review deleted');
     }
+
+    public function destroy_userside(ProductFeedback $productFeedback)
+    {
+
+        $productFeedback->delete();
+
+        $product_id = $productFeedback->product_id; 
+
+        return to_route('product_details', ['id' => $product_id])->with('success', 'Review deleted');
+    }
 }

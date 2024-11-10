@@ -105,6 +105,14 @@
         </li>
         @endif
 
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('home')}}">
+                <span class="menu-title">User side</span>
+                <i class="mdi mdi-eye menu-icon"></i>
+            </a>
+        </li>
+
     </ul>
 </nav>
 <!-- partial -->
