@@ -90,20 +90,30 @@
                           </button>
                           </a>
                           
-                          <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;" title="Delete">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"  onclick="confirmDeletion(event, '{{ route('products.destroy', $product->id) }}')">
-                            <i class="mdi mdi mdi-delete text-danger"></i>
-                          </button>
-                                            </form>
+                         
+
+
+                                            <a href="{{ route('productVariations.index', $product->id) }}"  title="Add variation">
+                                              <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
+                                                <i class="mdi mdi-tag-multiple text-info"></i>
+                                              </button>
+                                              </a>      
 
 
                               <a href="{{ route('productFeedbacks.index', $product->id) }}"  title="View feedback">
                           <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
                             <i class="mdi mdi-comment-text-outline text-info"></i>
                           </button>
-                          </a>              
+                          </a>         
+                          
+                          
+                          <form action="{{ route('products.destroy', $product->id) }}" method="POST" style="display:inline;" title="Delete">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"  onclick="confirmDeletion(event, '{{ route('products.destroy', $product->id) }}')">
+        <i class="mdi mdi mdi-delete text-danger"></i>
+      </button>
+                        </form>
                                            
                         </td>
                         </tr>

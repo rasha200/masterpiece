@@ -11,6 +11,7 @@ use App\Http\Controllers\ServiceFeedbackController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
+use App\Http\Controllers\ProductVariationController;
 use App\Http\Controllers\ProductFeedbackController;
 use App\Http\Controllers\WishListController;
 use App\Http\Controllers\HomeController;
@@ -83,9 +84,26 @@ Route::resource('categories', CategoryController::class)->middleware(['auth' , '
 
 
 // <!--==========================================  (Products)  ===================================================================================================================-->
-Route::resource('products', ProductController::class)->middleware(['auth' , 'role','store']);
+Route::resource('products', ProductController::class)->middleware(['auth' , 'role', 'store']);
 Route::delete('/product_images/{product_image}', [productImageController::class, 'destroy'])->name('product_images.destroy')->middleware(['auth' , 'role']);
 Route::get('/product_details/{id}',[ProductController::class, 'show_user_side'])->name("product_details");
+
+
+
+// <!--==========================================  (Product Variation)  ===================================================================================================================-->
+// Protected routes
+Route::middleware(['auth', 'role','store'])->group(function () {
+    Route::get('/productVariations/{product_id}', [ProductVariationController::class, 'index'])->name('productVariations.index'); 
+    Route::get('/productVariations/{product_id}/create', [ProductVariationController::class, 'create'])->name('productVariations.create'); 
+    Route::post('/productVariations', [ProductVariationController::class, 'store'])->name('productVariations.store'); 
+    Route::get('/productVariations/{product_id}/{productVariation}', [ProductVariationController::class, 'show'])->name('productVariations.show'); 
+    Route::get('/productVariations/{product_id}/{productVariation}/edit', [ProductVariationController::class, 'edit'])->name('productVariations.edit'); 
+    Route::put('/productVariations/{productVariation}', [ProductVariationController::class, 'update'])->name('productVariations.update'); 
+    Route::delete('/productVariations/{product_id}/{productVariation}', [ProductVariationController::class, 'destroy'])->name('productVariations.destroy'); 
+});
+
+
+
 
 
 
