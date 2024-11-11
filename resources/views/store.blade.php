@@ -279,6 +279,11 @@
                             <a href="{{ route('product_details', $product->id) }}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                 {{ $product->name }}
                             </a>
+                            <span style="color:#f9ba48;"> 
+                                @for ($i = 1; $i <= 5; $i++)
+                                <i class="zmdi {{ $i <= $product->averageRating ? 'zmdi-star' : 'zmdi-star-outline' }}" style="display: inline-block; vertical-align: middle;"></i>
+                               @endfor
+                            </span>
                             <span class="stext-105 cl3">
                                 ${{ $product->price }}
                             </span>

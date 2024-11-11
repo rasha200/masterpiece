@@ -49,12 +49,12 @@
                     <div class="p-t-32">
                         <span class="flex-w flex-m stext-111 cl2 p-b-19">
                             <span>
-                                <span class="cl4">By</span> Admin  
+                                <span class="cl4">By</span> Service Team
                                 <span class="cl12 m-l-4 m-r-6">|</span>
                             </span>
 
                             <span>
-                                22 Jan, 2018
+                                Highly Recommended
                                 <span class="cl12 m-l-4 m-r-6">|</span>
                             </span>
 
@@ -146,6 +146,14 @@
                                        <i class=" zmdi zmdi-edit" style="padding: 3px; color:#FFF;"></i>
                                    </button>
                                </a>
+
+                               
+                                 <!-- Delete Icon Button (styled like the edit button) -->
+<a href="javascript:void(0);" onclick="toggleDeleteModal({{ $servicefeedback->id }})" class="delete-icon">
+    <button style="border: solid 1px #A71619; background-color: #A71619;" title="Delete">
+        <i class="pointer zmdi zmdi-delete" style="padding: 3px; color: #FFF;"></i>
+    </button>
+</a>
            
                                <!-- Edit Form (initially hidden) -->
                                <div id="edit-form-{{ $servicefeedback->id }}" style="display: none; margin-top: 10px;">
@@ -165,25 +173,35 @@
                                                <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(3)"></i>
                                                <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(4)"></i>
                                                <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(5)"></i>
-                                               <input class="dis-none" type="hidden" name="rating" id="rating" value="" required>
+                                               <input class="dis-none" type="hidden" name="rating" id="rating" value="{{ $servicefeedback->rating }}" required>
                                            </span>
                                        </div>
-                                       <script>
-                                           function setRating(rating) {
-                                               document.getElementById('rating').value = rating;
-                                               // Update star visuals based on selected rating
-                                               const stars = document.querySelectorAll('.item-rating');
-                                               stars.forEach((star, index) => {
-                                                   if (index < rating) {
-                                                       star.classList.add('zmdi-star'); // Filled star class
-                                                       star.classList.remove('zmdi-star-outline'); // Outline star class
-                                                   } else {
-                                                       star.classList.add('zmdi-star-outline');
-                                                       star.classList.remove('zmdi-star');
-                                                   }
-                                               });
-                                           }
-                                       </script>
+                                       
+        <script>
+            // Function to update the stars based on the rating
+            function setRating(rating) {
+                // Set the hidden input field's value
+                document.getElementById('rating').value = rating;
+
+                // Update star visuals based on selected rating
+                const stars = document.querySelectorAll('.item-rating');
+                stars.forEach((star, index) => {
+                    if (index < rating) {
+                        star.classList.add('zmdi-star'); // Filled star class
+                        star.classList.remove('zmdi-star-outline'); // Outline star class
+                    } else {
+                        star.classList.add('zmdi-star-outline');
+                        star.classList.remove('zmdi-star');
+                    }
+                });
+            }
+
+            // Function to initialize the stars based on the existing rating
+            window.onload = function() {
+                const existingRating = {{ $servicefeedback->rating }};
+                setRating(existingRating);
+            }
+        </script>
                                        <div class="bor8 m-b-20 how-pos4-parent">
                                            <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="feedback" placeholder="Your feedback" value="{{ $servicefeedback->feedback }}" required>
                                        </div>
@@ -196,12 +214,6 @@
                                </div>
 
 
-                                 <!-- Delete Icon Button (styled like the edit button) -->
-<a href="javascript:void(0);" onclick="toggleDeleteModal({{ $servicefeedback->id }})" class="delete-icon">
-    <button style="border: solid 1px #A71619; background-color: #A71619;" title="Delete">
-        <i class="item-rating pointer zmdi zmdi-delete" style="padding: 3px; color: #FFF;"></i>
-    </button>
-</a>
 
 <!-- Delete Modal (hidden initially) -->
 <div class="modal fade" id="deleteModal{{ $servicefeedback->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $servicefeedback->id }}" aria-hidden="true">
@@ -335,7 +347,7 @@
 
                                 <div class="flex-w flex-m p-t-30 p-b-23">
                                     <span class="stext-102 cl3 m-r-16">
-                                        Your Rating *Required*
+                                        Your Rating <span id="rating-warning" style="color: red;">*Required*</span>
                                     </span>
 
                                     <span class="wrap-rating fs-18 cl11 pointer">

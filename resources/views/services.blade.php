@@ -29,7 +29,8 @@
                                      style="height: 200px; object-fit: cover; width: 100%;">
                             </div>
                        
-                   
+                   <!-- Show price only if it's not null -->
+                   @if($service->price)
                         <div class="flex-col-c-m size-123 bg9 how-pos5">
                             <span class="ltext-50 cl2 txt-center">
                                 Price
@@ -39,6 +40,7 @@
                                $ {{ $service->price }}
                             </span>
                         </div>
+                        @endif
                         @endforeach
                     </div>
                         </a>
@@ -57,7 +59,7 @@
                             <div class="flex-w flex-sb-m p-t-18">
                                 <span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
                                     <span>
-                                        <span class="cl4">By</span> Admin  
+                                        <span class="cl4">By</span> Service Team 
                                         <span class="cl12 m-l-4 m-r-6">|</span>
                                     </span>
 

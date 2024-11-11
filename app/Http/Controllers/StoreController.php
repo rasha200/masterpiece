@@ -22,7 +22,11 @@ class StoreController extends Controller
         }
         $products = $query->paginate(6);
 
-       
+        foreach ($products as $product) {
+            // Assuming 'product_feedbacks' is the relationship name for feedbacks on products
+            $product->averageRating = $product->product_feedbacks()->avg('rating') ?? 0;
+        }
+    
 
 
         return view('store' , ['categories'=> $categories, 'products'=> $products]);

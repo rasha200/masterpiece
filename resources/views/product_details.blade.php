@@ -195,9 +195,16 @@
                     <!-- Edit Icon -->
                     <a href="javascript:void(0);" onclick="toggleEditForm({{ $productfeedback->id }})" class="edit-icon">
                         <button style="border:solid 1px #14535F; background-color:#14535F;" title="Edit">
-                            <i class="item-rating pointer zmdi zmdi-edit" style="padding: 3px; color:#FFF;"></i>
+                            <i class=" pointer zmdi zmdi-edit" style="padding: 3px; color:#FFF;"></i>
                         </button>
                     </a>
+
+                    <!-- Delete Icon Button (styled like the edit button) -->
+<a href="javascript:void(0);" onclick="toggleDeleteModal({{ $productfeedback->id }})" class="delete-icon">
+    <button style="border: solid 1px #A71619; background-color: #A71619;" title="Delete">
+        <i class="pointer zmdi zmdi-delete" style="padding: 3px; color: #FFF;"></i>
+    </button>
+</a>
 
                       <!-- Edit Form (initially hidden) -->
                       <div id="edit-form-{{ $productfeedback->id }}" style="display: none; margin-top: 10px;">
@@ -217,12 +224,15 @@
                                     <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(3)"></i>
                                     <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(4)"></i>
                                     <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(5)"></i>
-                                    <input class="dis-none" type="hidden" name="rating" id="rating" value="" required>
+                                    <input class="dis-none" type="hidden" name="rating" id="rating" value="{{ $productfeedback->rating }}" required>
                                 </span>
                             </div>
                             <script>
+                                // Function to update the stars based on the rating
                                 function setRating(rating) {
+                                    // Set the hidden input field's value
                                     document.getElementById('rating').value = rating;
+                            
                                     // Update star visuals based on selected rating
                                     const stars = document.querySelectorAll('.item-rating');
                                     stars.forEach((star, index) => {
@@ -234,6 +244,12 @@
                                             star.classList.remove('zmdi-star');
                                         }
                                     });
+                                }
+                            
+                                // Function to initialize the stars based on the existing rating
+                                window.onload = function() {
+                                    const existingRating = {{ $productfeedback->rating }}; // Get the existing rating from the backend
+                                    setRating(existingRating); // Set the rating based on the fetched value
                                 }
                             </script>
                             <div class="bor8 m-b-20 how-pos4-parent">
@@ -248,12 +264,7 @@
                     </div>
 
 
-                   <!-- Delete Icon Button (styled like the edit button) -->
-<a href="javascript:void(0);" onclick="toggleDeleteModal({{ $productfeedback->id }})" class="delete-icon">
-    <button style="border: solid 1px #A71619; background-color: #A71619;" title="Delete">
-        <i class="item-rating pointer zmdi zmdi-delete" style="padding: 3px; color: #FFF;"></i>
-    </button>
-</a>
+                   
 
 <!-- Delete Modal (hidden initially) -->
 <div class="modal fade" id="deleteModal{{ $productfeedback->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $productfeedback->id }}" aria-hidden="true">
@@ -384,7 +395,7 @@
     
                                     <div class="flex-w flex-m p-t-30 p-b-23">
                                         <span class="stext-102 cl3 m-r-16">
-                                            Your Rating *Required*
+                                            Your Rating <span id="rating-warning" style="color: red;">*Required*</span>
                                         </span>
     
                                         <span class="wrap-rating fs-18 cl11 pointer">
