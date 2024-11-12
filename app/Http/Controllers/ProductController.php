@@ -101,8 +101,10 @@ class ProductController extends Controller
 
     public function show_user_side( $id)
     {
+        
         $product = Product::findOrFail($id); 
         $productImages = $product->product_images; 
+        $productVariations = $product->product_variation; 
         $productfeedbacks = $product->product_feedbacks()->orderBy('created_at', 'desc')->get(); 
         $averageRating = $product->product_feedbacks()->avg('rating')?? 0;
         $relatedProducts = Product::where('category_id', $product->category_id)
@@ -113,6 +115,7 @@ class ProductController extends Controller
 
         return view('product_details' , [
             'product'=> $product,
+            'productVariations' => $productVariations,
             'productfeedbacks'=> $productfeedbacks,
             'relatedProducts' => $relatedProducts,
             'productImages'=>$productImages,

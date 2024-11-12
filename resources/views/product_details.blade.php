@@ -74,13 +74,127 @@
 
                     
 
-                    <span class="mtext-106 cl2 " style="color:rgb(250, 99, 56);">
+                    <span id="product-price" class="mtext-106 cl2 " style="color:rgb(250, 99, 56);">
                         ${{ $product->price }}
                     </span>
 
                     <p class="stext-102 cl3 p-t-23">
                         {{ $product->small_description }}
                     </p>
+
+                    <!-- Variations Section -->
+        <div class="p-t-33">
+            @php
+                $attributes = ['size', 'color', 'flavour', 'age_group', 'disinfected'];
+            @endphp
+
+            @foreach ($attributes as $attribute)
+                @php
+                    $options = $productVariations->whereNotNull($attribute)->pluck($attribute)->unique();
+                @endphp
+
+                @if ($options->isNotEmpty())
+                    <div class="variation-group">
+                        <span class="variation-title">{{ ucfirst($attribute) }}:</span>
+                        <div class="variation-options">
+                            @foreach ($options as $option)
+                                @if ($attribute === 'color')
+                                    <!-- For color options, display the actual color as background -->
+                                    <button 
+                                        class="color-option attribute-option stext-102 m-r-5 m-tb-4" 
+                                        data-attribute="{{ $attribute }}" 
+                                        data-value="{{ $option }}" 
+                                        data-price="{{ $productVariations->where($attribute, $option)->first()->price }}"
+                                        style="background-color: {{ $option }};">
+                                    </button>
+                                @else
+                                    <!-- For other options, display text -->
+                                    <button 
+                                        class="attribute-option stext-102 cl2 size-72 m-r-5 m-tb-4" 
+                                        data-attribute="{{ $attribute }}" 
+                                        data-value="{{ $option }}" 
+                                        data-price="{{ $productVariations->where($attribute, $option)->first()->price }}">
+                                        {{ $option }}
+                                    </button>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+        </div>
+
+    <style>
+        .variation-group {
+            margin-bottom: 15px;
+        }
+        
+        .variation-title {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .variation-options {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .attribute-option {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 5px;
+            cursor: pointer;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+        
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            padding: 0;
+            margin-right: 10px;
+        }
+        
+        .attribute-option:hover,
+        .color-option:hover {
+            border-color: #ffa500;
+        }
+        
+        .attribute-option.active,
+        .color-option.active {
+            border-color: #ffa500;
+            background-color: #ffe4b5;
+        }
+        </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const attributeOptions = document.querySelectorAll('.attribute-option');
+        const productPriceEl = document.getElementById('product-price');
+    
+        attributeOptions.forEach(option => {
+            option.addEventListener('click', function () {
+                // Remove active class from other options in the same group
+                const attribute = this.dataset.attribute;
+                document.querySelectorAll(`.attribute-option[data-attribute="${attribute}"]`)
+                    .forEach(btn => btn.classList.remove('active'));
+    
+                // Add active class to the selected option
+                this.classList.add('active');
+    
+                // Update price display only if the attribute is 'size'
+                if (attribute === 'size') {
+                    const price = this.dataset.price;
+                    productPriceEl.textContent = price;
+                }
+            });
+        });
+    });
+    </script>
+    
+        
                     
                     <!--  -->
                     <div class="p-t-33">

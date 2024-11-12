@@ -116,17 +116,12 @@ class ProductVariationController extends Controller
     ]);
 
     
-    $color = $request->input('color');
-
-   
-    if (empty($color) || $color === '#000000') {
-        $color = null;
-    }
+  
 
    
     $productVariation->update([
         'size' => $request->input('size'),
-        'color' => $color, 
+        'color' => $request->input('color'), 
         'flavour' => $request->input('flavour'),
         'age_group' => $request->input('age_group'),
         'disinfected' => $request->input('disinfected'),

@@ -51,7 +51,7 @@
                           <th>Name</th>
                           <th>Image</th>
                           <th>Price</th>
-                          {{-- <th>Quantity</th> --}}
+                          <th>Quantity</th>
                           <th>Category name</th>
                           <th></th>
                         </tr>
@@ -70,7 +70,7 @@
                         @endif
                         </td> 
                           <td>{{$product->price}}</td>
-                          {{-- <td>{{$product->quantity}}</td> --}}
+                          <td>{{$product->total_quantity}}</td>
                           <td>{{$product->category->name}}</td>
 
                           <td> 

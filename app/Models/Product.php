@@ -30,6 +30,11 @@ public function product_variation()
     return $this->hasMany(ProductVariation::class);
 }
 
+public function getTotalQuantityAttribute()
+{
+    return $this->product_variation()->sum('quantity');
+}
+
  public function product_feedbacks()
 {
     return $this->hasMany(ProductFeedback::class);

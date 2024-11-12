@@ -42,21 +42,7 @@
                         <input type="color" class="form-control" id="color" name="color" value="{{ old('color', $productVariation->color) }}">
                     </div>
                     
-                    <script>
-                      // When the form is submitted, update the hidden input with the selected color
-                      document.querySelector('form').addEventListener('submit', function(event) {
-                          var colorInput = document.getElementById('color');
-                          var colorValue = colorInput.value;
-                  
-                          // If no color is selected or the default black color is selected, set the hidden input to null
-                          if (colorValue === '' || colorValue === '#000000') {
-                              document.getElementById('color_hidden').value = ''; // Set to null if no color is selected
-                          } else {
-                              document.getElementById('color_hidden').value = colorValue; // Set to selected color
-                          }
-                      });
-                  </script>
-                  
+                   
 
                       <div class="form-group">
                         <label for="exampleInputEmail3">Flavour</label>
