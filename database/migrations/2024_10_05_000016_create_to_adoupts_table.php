@@ -21,10 +21,10 @@ return new class extends Migration
             $table->string('contact_info');
             $table->string('address');
 
-            $table->unsignedBigInteger('pet_id')->nullable();
+            $table->unsignedBigInteger('pet_id');
             $table->foreign('pet_id')->references('id')->on('pets');
             
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->softDeletes();

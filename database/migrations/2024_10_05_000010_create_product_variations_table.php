@@ -22,7 +22,7 @@ return new class extends Migration
             $table->float('price');
             $table->unsignedInteger('quantity');
 
-            $table->unsignedBigInteger('product_id')->nullable();
+            $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
             
             $table->softDeletes();

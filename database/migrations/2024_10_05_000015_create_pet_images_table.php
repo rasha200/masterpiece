@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('pet_images', function (Blueprint $table) {
             $table->id();
             $table->string('image');
-            $table->unsignedBigInteger('pet_id')->nullable();
+
+            $table->unsignedBigInteger('pet_id');
             $table->foreign('pet_id')->references('id')->on('pets');
             $table->timestamps();
         });

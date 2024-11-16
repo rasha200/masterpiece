@@ -7,6 +7,7 @@ use App\Http\Controllers\PetImageController;
 use App\Http\Controllers\ToAdouptController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceImageController;
+use App\Http\Controllers\AvailabilityTimeController;
 use App\Http\Controllers\ServiceFeedbackController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\ProductVariationController;
 use App\Http\Controllers\ProductFeedbackController;
 use App\Http\Controllers\WishListController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ContactController;
@@ -107,14 +109,6 @@ Route::get('/productVariations/{product_id}/{productVariation}', [ProductVariati
 
 
 
-
-// <!--=================================================  (WishList)  =====================================================================================================================================-->
-Route::resource('wishLists', WishListController::class);
-
-
-
-
-
 // <!--==========================================  (Product feedback)  ============================================================================================================-->
 // Protected routes
 Route::middleware(['auth', 'role','store'])->group(function () {
@@ -137,11 +131,45 @@ Route::get('/store/{id}',[StoreController::class, 'show'])->name("single_product
 
 
 
+// <!--=================================================  (WishList)  =====================================================================================================================================-->
+Route::resource('wishLists', WishListController::class);
+
+
+
+
+// <!--=================================================  (Cart)  =====================================================================================================================================-->
+Route::get('cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('cart/add', [CartController::class, 'store'])->name('cart.store');
+Route::post('cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::post('cart/delete/{id}', [CartController::class, 'deleteCartItem'])->name('cart.delete');
+Route::post('cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+
+
+
+
+
 // <!--==========================================  (Services)  =================================================================================================================-->
 Route::resource('services', ServiceController::class)->middleware(['auth' , 'role']);
 Route::delete('/service_images/{service_image}', [ServiceImageController::class, 'destroy'])->name('service_images.destroy')->middleware(['auth' , 'role']);
 Route::get('/service',[ServiceController::class, 'index_user_side'])->name("services"); //view the services in the user side
 Route::get('/service_details/{id}', [ServiceController::class, 'show_user_side'])->name('service_details'); // single page for each service in use side
+
+
+
+// <!--==========================================  (Service availability times)  ====================================================================================================================-->
+
+Route::middleware(['auth', 'role'])->group(function () {
+    Route::get('/availabilityTimes/{service_id}', [AvailabilityTimeController::class, 'index'])->name('availabilityTimes.index'); 
+    Route::get('/availabilityTimes/{service_id}/create', [AvailabilityTimeController::class, 'create'])->name('availabilityTimes.create');
+    Route::post('/availabilityTimes', [AvailabilityTimeController::class, 'store'])->name('availabilityTimes.store');  
+    Route::get('/availabilityTimes/{service_id}/{availabilityTime}', [AvailabilityTimeController::class, 'edit'])->name('availabilityTimes.edit');
+    Route::put('/availabilityTimes/{availabilityTime}', [AvailabilityTimeController::class, 'update'])->name('availabilityTimes.update'); 
+    Route::delete('/availabilityTimes/{service_id}/{availabilityTime}', [AvailabilityTimeController::class, 'destroy'])->name('availabilityTimes.destroy'); 
+});
+
+
+
+
 
 
 

@@ -75,6 +75,10 @@
                         <input type="text" class="form-control" id="price" placeholder="Price" name="price" value="{{$product->price}}" required>
                       </div>
 
+                      <div class="form-group">
+                        <label for="exampleInputName1">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" placeholder="quantity" name="quantity" value="{{$product->quantity}}" >
+                      </div>
 
                      
 

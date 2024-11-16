@@ -48,7 +48,10 @@
                         <input type="text" class="form-control" id="price" placeholder="Price" name="price" value="{{ old('price') }}" required>
                       </div>
 
-
+                      <div class="form-group">
+                        <label for="exampleInputName1">Quantity</label>
+                        <input type="number" class="form-control" id="quantity" placeholder="Quantity" name="quantity" value="{{ old('quantity') }}" >
+                      </div>
                      
 
                       <div class="form-group">

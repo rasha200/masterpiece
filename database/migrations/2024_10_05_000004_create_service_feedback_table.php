@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('service_feedback', function (Blueprint $table) {
             $table->id();
-            $table->integer('rating')->nullable();
+            $table->integer('rating');
             $table->string('feedback');
     
             
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
            
-            $table->unsignedBigInteger('service_id')->nullable();
+            $table->unsignedBigInteger('service_id');
             $table->foreign('service_id')->references('id')->on('services');
             $table->softDeletes();
             $table->timestamps();

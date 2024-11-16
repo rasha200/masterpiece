@@ -4,7 +4,7 @@
 
 <!-- page title -->
 <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/hero-16.webp');">
-    <h2 class="ltext-105 cl0 txt-center">
+    <h2 class="ltext-105 cl0 txt-center" style="color:#333;;">
         Adopt a Pet Today
     </h2>
 </section>		

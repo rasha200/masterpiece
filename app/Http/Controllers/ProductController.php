@@ -51,6 +51,7 @@ class ProductController extends Controller
             'small_description' => 'required|string',
             'description' => 'required',
             'price' => 'required',
+            'quantity' => 'nullable|integer',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP,AVIF|max:2048',
         ]);
 
@@ -59,6 +60,7 @@ class ProductController extends Controller
             'small_description'=>$request->input('small_description'),
             'description'=>$request->input('description'),
             'price'=>$request->input('price'),
+            'quantity'=>$request->input('quantity'),
             'category_id'=>$request->input('category_id'),
         ]);
 
@@ -148,6 +150,7 @@ class ProductController extends Controller
             'small_description' => 'required|string',
             'description' => 'required',
             'price' => 'required',
+            'quantity' => 'nullable|integer',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP,AVIF|max:2048',
         ]);
 
@@ -158,6 +161,7 @@ class ProductController extends Controller
             'small_description'=>$request->input('small_description'),
             'description'=>$request->input('description'),
             'price'=>$request->input('price'),
+            'quantity'=>$request->input('quantity'),
             'category_id'=>$request->input('category_id'),
         ]);
 

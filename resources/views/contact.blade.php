@@ -4,7 +4,7 @@
 
 <!-- page title -->
 <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/hero-16.webp');">
-    <h2 class="ltext-105 cl0 txt-center">
+    <h2 class="ltext-105 cl0 txt-center" style="color:#333;;">
         Connect with Us
     </h2>
 </section>	
@@ -126,9 +126,12 @@
                     @csrf
                     <h4 class="mtext-105 cl2 txt-center p-b-30">Leave a Review</h4>
                     <div class="flex-w flex-m p-t-50 p-b-23">
+                       
                         <span class="stext-102 cl3 m-r-16">
                             Your Rating *
                         </span>
+                        
+                        
 
                         <span class="wrap-rating fs-18 cl11 pointer">
                             <i class="item-rating pointer zmdi zmdi-star-outline" onclick="setRating(1)"></i>
@@ -139,6 +142,10 @@
                             <input class="dis-none" type="hidden" name="rating" id="rating" value="" required>
                         </span>
                     </div>
+                    @foreach ($errors->all() as $error)
+                        <li style="color:red;">{{ $error }}</li>
+                        <br>
+                    @endforeach
                     
                     <div class="bor8 m-b-20 how-pos4-parent">
                         <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="name" placeholder="Your Name" 
@@ -158,6 +165,8 @@
                     <div class="bor8 m-b-20 how-pos4-parent">
                         <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="message" placeholder="Your feedback" value="{{ old('message') }}" required>
                     </div>
+
+                   
             
                     <button type="submit" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer">
                         Submit

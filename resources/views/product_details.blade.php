@@ -98,26 +98,33 @@
                         <span class="variation-title">{{ ucfirst($attribute) }}:</span>
                         <div class="variation-options">
                             @foreach ($options as $option)
-                                @if ($attribute === 'color')
-                                    <!-- For color options, display the actual color as background -->
-                                    <button 
-                                        class="color-option attribute-option stext-102 m-r-5 m-tb-4" 
-                                        data-attribute="{{ $attribute }}" 
-                                        data-value="{{ $option }}" 
-                                        data-price="{{ $productVariations->where($attribute, $option)->first()->price }}"
-                                        style="background-color: {{ $option }};">
-                                    </button>
-                                @else
-                                    <!-- For other options, display text -->
-                                    <button 
-                                        class="attribute-option stext-102 cl2 size-72 m-r-5 m-tb-4" 
-                                        data-attribute="{{ $attribute }}" 
-                                        data-value="{{ $option }}" 
-                                        data-price="{{ $productVariations->where($attribute, $option)->first()->price }}">
-                                        {{ $option }}
-                                    </button>
-                                @endif
-                            @endforeach
+                            @php
+                                // Get the specific variation for the current attribute and option
+                                $matchingVariation = $productVariations->where($attribute, $option)->first();
+                            @endphp
+                            @if ($attribute === 'color')
+                                <!-- For color options, display the actual color as background -->
+                                <button
+                                    class="color-option attribute-option stext-102 m-r-5 m-tb-4"
+                                    data-attribute="{{ $attribute }}"
+                                    data-value="{{ $option }}"
+                                    data-price="{{ $matchingVariation->price ?? $product->price }}"
+                                    data-variation-id="{{ $matchingVariation->id ?? '' }}"
+                                    style="background-color: {{ $option }};">
+                                </button>
+                            @else
+                                <!-- For other options, display text -->
+                                <button
+                                    class="attribute-option stext-102 cl2 size-72 m-r-5 m-tb-4"
+                                    data-attribute="{{ $attribute }}"
+                                    data-value="{{ $option }}"
+                                    data-price="{{ $matchingVariation->price ?? $product->price }}"
+                                    data-variation-id="{{ $matchingVariation->id ?? '' }}">
+                                    {{ $option }}
+                                </button>
+                            @endif
+                        @endforeach
+                        
                         </div>
                     </div>
                 @endif
@@ -169,31 +176,6 @@
         }
         </style>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const attributeOptions = document.querySelectorAll('.attribute-option');
-        const productPriceEl = document.getElementById('product-price');
-    
-        attributeOptions.forEach(option => {
-            option.addEventListener('click', function () {
-                // Remove active class from other options in the same group
-                const attribute = this.dataset.attribute;
-                document.querySelectorAll(`.attribute-option[data-attribute="${attribute}"]`)
-                    .forEach(btn => btn.classList.remove('active'));
-    
-                // Add active class to the selected option
-                this.classList.add('active');
-    
-                // Update price display only if the attribute is 'size'
-                if (attribute === 'size') {
-                    const price = this.dataset.price;
-                    productPriceEl.textContent = price;
-                }
-            });
-        });
-    });
-    </script>
-    
         
                     
                     <!--  -->
@@ -213,9 +195,60 @@
                                     </div>
                                 </div>
 
-                                <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                    Add to cart
-                                </button>
+
+                                <form action="{{ route('cart.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" id="selected-variation-id" name="variation_id" value="">
+                                    <input type="hidden" name="name" value="{{ $product->name }}">
+                                    <input type="hidden" id="selected-price" name="price" value="">
+                                    <input type="hidden" name="quantity" value="1" min="1" max="{{$product->quantity}}">
+                                
+                                    <button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                                        Add to cart
+                                    </button>
+                                </form>
+
+
+                              
+                 
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const attributeOptions = document.querySelectorAll('.attribute-option');
+                const selectedVariationIdInput = document.getElementById('selected-variation-id');
+                const selectedPriceInput = document.getElementById('selected-price');
+                const productPriceEl = document.getElementById('product-price');
+            
+                attributeOptions.forEach(option => {
+                    option.addEventListener('click', function () {
+                        // Remove active class from other options in the same group
+                        const attribute = this.dataset.attribute;
+                        document.querySelectorAll(`.attribute-option[data-attribute="${attribute}"]`)
+                            .forEach(btn => btn.classList.remove('active'));
+            
+                        // Add active class to the selected option
+                        this.classList.add('active');
+            
+                        // Update variation ID and price
+                        const variationId = this.dataset.variationId;
+                        const price = this.dataset.price;
+            
+                        if (variationId) {
+                            selectedVariationIdInput.value = variationId;
+                        }
+            
+                        if (price) {
+                            selectedPriceInput.value = price;
+                            productPriceEl.textContent = `$${price}`;
+                        }
+                    });
+                });
+            });
+            
+            </script>
+                           
+
+                                
                             </div>
                         </div>	
                     </div>

@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reminders', function (Blueprint $table) {
+        Schema::create('availability_times', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->string('message');
-            $table->unsignedBigInteger('appointment_id')->nullable();
-            $table->foreign('appointment_id')->references('id')->on('appointments');
+            $table->string('day_of_week');
+            $table->time('start_time');
+            $table->time('end_time');
+
+            $table->unsignedBigInteger('service_id');
+            $table->foreign('service_id')->references('id')->on('services');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reminders');
+        Schema::dropIfExists('availability_times');
     }
 };

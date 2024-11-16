@@ -24,6 +24,11 @@ public function service_feedbacks()
     return $this->hasMany(ServiceFeedback::class);
 }
 
+public function availability_times()
+{
+    return $this->hasMany(AvailabilityTime::class);
+}
+
 protected static function booted()
      {
          static::deleting(function ($service) {

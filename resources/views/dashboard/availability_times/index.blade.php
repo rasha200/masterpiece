@@ -2,18 +2,25 @@
 
 @section('content')
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="title-1">Servics</h2>
+<div class="d-flex justify-content-between align-items-center ">
 
-        @if(Auth::user()->role == 'manager' || Auth::user()->role == 'veterinarian')
-        <a href="{{ route('services.create') }}">
+
+
+<h2 class="title-1">Availability times for <a href="{{route('services.index')}}" style="color:#F79257" title="Back to list"> ({{ $service_name }}) </a></h2>
+
+<div class="d-flex flex-column justify-content-center align-items-center mb-4">
+  @if(Auth::user()->role == 'manager' || Auth::user()->role == 'receptionist')
+
+        <a href="{{ route('availabilityTimes.create' , $service_id ) }}">
             <button type="button" class="btn btn-outline-info btn-fw">
-                <i class="zmdi zmdi-plus"></i> Add New Service
+                <i class="zmdi zmdi-plus"></i> Add availability times
             </button>
         </a>
         @endif
     </div>
+  </div>
 
+   
      
    
 
@@ -23,8 +30,8 @@
     </div>
 @endif
 
-<div class=" grid-margin stretch-card">
-                <div class="card">
+<div class=" grid-margin stretch-card" >
+                <div class="card" >
                   <div class="card-body">
                    
                     </p>
@@ -32,68 +39,46 @@
                       <thead>
                         <tr>
                           <th>Id</th>
-                          <th>Name</th>
-                          <th>image</th>
+                          <th>Day</th>
+                          <th>Start time</th>
+                          <th>End time</th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($services as $service)
+                        @foreach($AvailabilityTimes as $AvailabilityTime)
                         <tr>
-                          <td>{{$service->id}}</td>
-                          <td>{{$service->name}}</td>
-                          <td>
-                          @if($service->service_images->isNotEmpty())
-                
-                <img src="{{ asset($service->service_images[0]->image) }}" alt="{{ $service->name }}" style="width: 50px; border-radius: 50px;" />
-            @else
-                <span>No image available</span>
-            @endif
-                            </td>
+                          <td>{{$AvailabilityTime->id}}</td>
+                          <td>{{$AvailabilityTime->day_of_week}}</td>
+                          <td>{{ \Carbon\Carbon::parse($AvailabilityTime->start_time)->format('h:i A') }}</td>
+                          <td>{{ \Carbon\Carbon::parse($AvailabilityTime->end_time)->format('h:i A') }}</td>
 
                           <td> 
-                          <a href="{{ route('services.show', $service->id) }}"  title="View">
-                          <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
-                            <i class="mdi mdi mdi-eye text-success"></i>
-                          </button>
-                          </a>
+                      @if(Auth::user()->role == 'manager' || Auth::user()->role == 'receptionist')
 
-
-                           @if(Auth::user()->role == 'manager' || Auth::user()->role == 'veterinarian')
-                          <a href="{{ route('services.edit', $service->id) }}"  title="Edit">
+                          <a href="{{ route('availabilityTimes.edit', [$service_id, $AvailabilityTime->id]) }}"  title="Edit">
                           <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
                             <i class="mdi mdi mdi-rename-box text-primary"></i>
                           </button>
                           </a>
-                          @endif
-
-                          <a href="{{ route('availabilityTimes.index', $service->id) }}"  title="Add availability times">
-                            <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
-                              <i class="mdi mdi-calendar-clock text-info"></i>
-                            </button>
-                            </a>      
-
-                          @if(Auth::user()->role == 'manager')
-                          <form action="{{ route('services.destroy', $service->id) }}" method="POST" style="display:inline;" title="Delete">
+                          
+                          <form action="{{ route('availabilityTimes.destroy', [$service_id, $AvailabilityTime->id]) }}" method="POST" style="display:inline;" title="Delete">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"  onclick="confirmDeletion(event, '{{ route('services.destroy', $service->id) }}')">
-                                               <i class="mdi mdi mdi-delete text-danger"></i>
-                                               </button>
+                                                <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"  onclick="confirmDeletion(event, '{{ route('availabilityTimes.destroy', [$service_id, $AvailabilityTime->id]) }}')">
+                                                   <i class="mdi mdi mdi-delete text-danger"></i>
+                                                </button>
                           </form>
-                            @endif
-
-                            <a href="{{ route('serviceFeedbacks.index', $service->id) }}"  title="View feedback">
-                              <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
-                                <i class="mdi mdi-comment-text-outline text-info"></i>
-                              </button>
-                              </a>      
+                        @endif                
                         </td>
                         </tr>
                         @endforeach
                       </tbody>
                     </table>
                   </div>
+
+             
+
                 </div>
               </div>
 
@@ -101,7 +86,7 @@
 <div id="confirmationModal"
     style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; z-index: 1000;">
     <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
-        <p>Are you sure you want to delete this service?</p>
+        <p>Are you sure you want to delete this availability time?</p>
         <button id="confirmButton" class="btn btn-outline-danger">Delete</button>
         <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>
     </div>

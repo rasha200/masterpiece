@@ -32,6 +32,15 @@ public function product_variation()
 
 public function getTotalQuantityAttribute()
 {
+    // Check if the product has variations
+    if ($this->product_variation()->exists()) {
+        // Sum the quantities of the variations
+        return $this->product_variation()->sum('quantity');
+    } else {
+        // Return the quantity from the product table
+        return $this->quantity;
+    }
+
     return $this->product_variation()->sum('quantity');
 }
 

@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('wish_lists', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('product_id')->nullable();
+            $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
 
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             
             $table->timestamps();

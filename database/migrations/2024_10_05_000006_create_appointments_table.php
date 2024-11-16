@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->string('status');
-
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->timestamp('appointment_datetime');
+            $table->enum('status', ['Accept ', 'Pending', 'Reject', 'Cancelled'])->default('Pending');
+            $table->timestamp('reminder_time')->nullable();
+            $table->integer('pet_number')->default(1);
+            
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             
-            $table->unsignedBigInteger('service_id')->nullable();
+            $table->unsignedBigInteger('service_id');
             $table->foreign('service_id')->references('id')->on('services');
             
             $table->timestamps();
