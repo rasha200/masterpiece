@@ -30,17 +30,7 @@
                             </div>
                        
                    <!-- Show price only if it's not null -->
-                   @if($service->price)
-                        <div class="flex-col-c-m size-123 bg9 how-pos5">
-                            <span class="ltext-50 cl2 txt-center">
-                                Price
-                            </span>
-
-                            <span class="stext-109 cl3 txt-center">
-                               $ {{ $service->price }}
-                            </span>
-                        </div>
-                        @endif
+                 
                         @endforeach
                     </div>
                         </a>

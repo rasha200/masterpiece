@@ -275,22 +275,39 @@
                                     // Extract the appointment date from the `day` column (e.g., "Friday 2024-11-22")
                                     $appointmentDate = \Carbon\Carbon::createFromFormat('l Y-m-d', $UserAppointment->day);
                             
-                                    // Combine the date and the `start_time` to form a full datetime object
-                                    $appointmentDateTime = $appointmentDate->setTimeFromTimeString($UserAppointment->start_time);
+                                    // Combine the date and the `start_time` to form the start datetime
+                                    $appointmentStartTime = $appointmentDate->setTimeFromTimeString($UserAppointment->start_time);
                             
+                                    // Combine the date and the `end_time` to form the end datetime
+                                    $appointmentEndTime = $appointmentDate->setTimeFromTimeString($UserAppointment->end_time);
+                            
+
+                                    $appointmentDateTime = $appointmentDate->setTimeFromTimeString($UserAppointment->start_time);
+
                                     // Get the current time
                                     $currentTime = \Carbon\Carbon::now();
                             
                                     // Calculate the difference in minutes between now and the appointment start time
-                                    $timeDifference = $currentTime->diffInMinutes($appointmentDateTime, false); // Use `false` to get a negative value if the current time is past the appointment
+                                    $timeDifference = $currentTime->diffInMinutes($appointmentDateTime, false); // Use `false` for past/future difference
+                            
+                                    // Check if the appointment has ended
+                                    $hasEnded = $currentTime->greaterThan($appointmentEndTime);
                                 @endphp
                             
-                                @if($timeDifference >= 240) {{-- 240 minutes = 4 hours --}}
-                                    <button class="btn btn-danger custom-btn" data-toggle="modal" data-target="#cancelModal{{ $UserAppointment->id }}" style="margin-top:18px; background-color: #A71619; padding:0px !important; width:120px !important; height : 40px !important; border-radius: 20px !important;">Cancel Adoption</button>
+                                {{-- Check if appointment has ended --}}
+                                @if($hasEnded && $UserAppointment->status !== "Reject" && $UserAppointment->status !== "Cancelled")
+                                    <p style="color: green; font-weight: bold;">This appointment has ended.</p>
                                 @else
-                                    <button class="btn btn-secondary custom-btn" disabled style="margin-top:18px; padding:0px !important; width:120px !important; height : 40px !important; border-radius: 20px !important;">Cancel (Not Allowed)</button>
+                                    {{-- Show cancel button logic based on time difference if appointment is not ended --}}
+                                    @if($timeDifference >= 240) {{-- 240 minutes = 4 hours --}}
+        <button class="btn btn-danger custom-btn" data-toggle="modal" data-target="#cancelModal{{ $UserAppointment->id }}" style="margin-top:18px; background-color: #A71619; padding:0px !important; width:120px !important; height : 40px !important; border-radius: 20px !important;">Cancel Adoption</button>
+    @else
+        <button class="btn btn-secondary custom-btn" disabled style="margin-top:18px; padding:0px !important; width:120px !important; height : 40px !important; border-radius: 20px !important;">Cancel (Not Allowed)</button>
+    @endif
                                 @endif
                             @endif
+                            
+
                             
                             
                                     </div>

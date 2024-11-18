@@ -34,15 +34,7 @@
                             </div>
                        
                    
-                        <div class="flex-col-c-m size-123 bg9 how-pos5">
-                            <span class="ltext-50 cl2 txt-center">
-                                Price
-                            </span>
-
-                            <span class="stext-109 cl3 txt-center">
-                               $ {{ $service->price }}
-                            </span>
-                        </div>
+                       
                         @endforeach
                     </div>
 
@@ -87,35 +79,32 @@
                         Book appointment
                     </h4>
 
-
                     <div class="p-t-40">
                         <!-- Availability Form -->
-                        <form method="GET" action="{{ route('service_details', $service->id) }}" id="availability-form" >
+                        <form method="GET" action="{{ route('service_details', $service->id) }}" id="availability-form">
                             @csrf
-                            <div class="bor8 m-b-20">
-                                <label for="appointment-date" class="stext-111 cl2 m-b-10 d-block">Select a Date:</label>
+                            <div class="bor8 m-b-20 p-tb-15 p-lr-20 bg-light shadow-sm">
+                                <label for="appointment-date" class="stext-111 cl2 m-b-10 d-block font-weight-bold">Select a Date:</label>
                                 <input 
                                     type="date" 
                                     id="appointment-date" 
                                     name="date" 
-                                    class="stext-111 cl2 size-116 p-lr-15" 
+                                    class="stext-111 cl2 size-116 p-lr-15 border rounded shadow-sm" 
                                     value="{{ request('date', now()->format('Y-m-d')) }}" 
                                     min="{{ now()->startOfDay()->format('Y-m-d') }}" 
-                                    max="{{ now()->endOfWeek(Carbon\Carbon::THURSDAY)->format('Y-m-d') }}">
+                                    max="{{ now()->endOfWeek(Carbon\Carbon::THURSDAY)->format('Y-m-d') }}"
+                                    onchange="this.form.submit()"> <!-- Auto-submit form on date change -->
                             </div>
-                            <button type="submit" class="flex-c-m stext-101 cl0 size-121 bg3 bor2 hov-btn3 p-lr-15 trans-04">
-                                Check Availability
-                            </button>
                         </form>
                     
                         <!-- Time Slots Section -->
                         @if(count($timeSlots) > 0)
-                            <h3 class="stext-102 cl3 p-b-20">Available Slots for {{ request('date') }}</h3>
+                            <h3 class="stext-102 cl3 p-b-20 m-t-30 font-weight-bold">Available Slots for {{ request('date') }}</h3>
                             <div class="flex-w wrap-buttons m-b-20">
                                 @foreach($timeSlots as $slot)
                                     <button 
                                         type="button" 
-                                        class="slot-button flex-c-m stext-101 cl0 size-110 bg2 bor2 hov-btn2 p-lr-15 trans-04 m-r-10 m-b-10" 
+                                        class="slot-button attribute-option stext-102 cl2 size-72 m-r-5 m-tb-4" 
                                         data-start="{{ $slot['start_time'] }}" 
                                         data-end="{{ $slot['end_time'] }}">
                                         {{ $slot['start_time'] }}
@@ -123,25 +112,92 @@
                                 @endforeach
                             </div>
                         @else
-                            <p class="stext-102 cl6 p-b-20">No available slots for {{ request('date') }}</p>
+                            <p class="stext-102 cl6 p-b-20 text-center">No available slots for {{ request('date') }}</p>
                         @endif
+
+                        <script>
+                            // Wait for the DOM to load
+                            document.addEventListener('DOMContentLoaded', function () {
+                                // Select all buttons with the class 'attribute-option'
+                                const buttons = document.querySelectorAll('.attribute-option');
+                        
+                                // Add a click event listener to each button
+                                buttons.forEach(function(button) {
+                                    button.addEventListener('click', function() {
+                                        // Toggle the 'active' class on the clicked button
+                                        button.classList.toggle('active');
+                                    });
+                                });
+                            });
+                        </script>
+
+                        <style>
+                           .variation-group {
+    margin-bottom: 15px;
+}
+
+.variation-title {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.variation-options {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.attribute-option {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.color-option {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 0;
+    margin-right: 10px;
+}
+
+.attribute-option:hover,
+.color-option:hover {
+    border-color: #ffa500;
+}
+
+.attribute-option.active,
+.color-option.active {
+    border-color: #ffa500;
+    background-color: #ffe4b5; /* Highlight color */
+}
+
+                            </style>
+
+
+
                     
                         <!-- Booking Form -->
                         <form method="POST" action="{{ route('appointments.store') }}" id="booking-form">
                             @csrf
-                            <div class="bor8 m-b-20">
-                                <input type="number" name="pet_number" placeholder="Pet Number *" class="stext-111 cl2 size-116 p-lr-15" required>
+                            <div class="bor8 m-b-20 p-tb-15 p-lr-20 bg-light shadow-sm">
+                                <input type="number" name="pet_number" placeholder="Pet Number *" class="stext-111 cl2 size-116 p-lr-15 border rounded shadow-sm" required>
                             </div>
                             <input type="hidden" value="{{ auth()->check() ? auth()->user()->id : '' }}" name="user_id">
                             <input type="hidden" value="{{ $service->id }}" name="service_id">
                             <input type="hidden" name="status" value="Pending">
                             <input type="hidden" id="appointment_datetime" name="appointment_datetime">
                     
-                            <button type="submit" class="flex-c-m stext-101 cl0 size-121 bg3 bor2 hov-btn3 p-lr-15 trans-04">
+                            <button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
                                 Book Appointment
                             </button>
                         </form>
                     </div>
+                     
+                    
                     
                     
                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
