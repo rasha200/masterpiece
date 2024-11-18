@@ -228,20 +228,21 @@
                                     <div class="col-md-3">  
                                         @if($UserAppointment->service->service_images->isNotEmpty())
                                         <img src=" {{ asset($UserAppointment->service->service_images[0]->image) }}" alt="Pet Image" class="img-fluid rounded">
+                                        @else
+                                        <span>No image available</span>
+                                      @endif
                                     </div>
                                     <!-- Request Details -->
                                     <div class="col-md-7">
                                         <h5>Service name: {{ $UserAppointment->service->name }}</h5>
                                         <p><strong>Appointment date:</strong>{{ $UserAppointment->day }}</p>
-                                        <p><strong>Start time:</strong>{{ \Carbon\Carbon::parse($UserAppointment->start_time)->format('h:i A') }}</p>
-                                        <p><strong>End time:</strong>{{ \Carbon\Carbon::parse($UserAppointment->end_time)->format('h:i A') }}</p>
-                                        <p><strong>Appointment Duration:</strong>{{ $formattedDuration }}</p>
+                                        <p><strong>Start time:</strong>{{ \Carbon\Carbon::parse($UserAppointment->start_time)->format('h:i A') }} <strong>End time:</strong> {{ \Carbon\Carbon::parse($UserAppointment->end_time)->format('h:i A') }}</p>
                                         <p><strong>Pet number:</strong>{{ $UserAppointment->pet_number }}  </p>
 
                                        
                                     @if($UserAppointment->status == "Cancelled" )
                                     <p><strong>Status:</strong> 
-                                     <span > You have Cancelled this adoption request</span>
+                                     <span > You have Cancelled this appointment</span>
                                     </p>
 
                                      @else
@@ -257,23 +258,41 @@
 
                                     @if($UserAppointment->status == "Reject")
                                    
-                                    <p><strong>{{ auth()->user()->Fname }} {{ auth()->user()->Lname }}</strong> Thank you for your interest in adopting . Unfortunately, your adoption request has been rejected. We appreciate your time and understanding. Please feel free to check for other pets available for adoption.</p>
+                                    <p><strong>{{ auth()->user()->Fname }} {{ auth()->user()->Lname }}</strong> Your appointment has been rejected. Please contact us for further assistance.</p>
                               
                                 @endif
 
 
                                 @if($UserAppointment->status == "Accept") 
                                    
-                                <p><strong>{{ auth()->user()->Fname }} {{ auth()->user()->Lname }}</strong> Congratulations! Your adoption request for  has been approved. We will contact you with further details soon</p>
+                                <p><strong>{{ auth()->user()->Fname }} {{ auth()->user()->Lname }}</strong> Your appointment has been confirmed. See you soon!</p>
                               
                                 @endif
 
 
-                                    @if($UserAppointment->status == "Pending")
-                                   
-                                        <button class="btn btn-danger custom-btn" data-toggle="modal" data-target="#cancelModal{{ $UserAppointment->id }}" style="margin-top:18px; background-color: #A71619; padding:0px !important; width:120px !important; height : 40px !important;  border-radius: 20px !important;">Cancel Adoption</button>
-                                   
-                                    @endif
+                                @if($UserAppointment->status == "Pending" || $UserAppointment->status == "Accept")
+                                @php
+                                    // Extract the appointment date from the `day` column (e.g., "Friday 2024-11-22")
+                                    $appointmentDate = \Carbon\Carbon::createFromFormat('l Y-m-d', $UserAppointment->day);
+                            
+                                    // Combine the date and the `start_time` to form a full datetime object
+                                    $appointmentDateTime = $appointmentDate->setTimeFromTimeString($UserAppointment->start_time);
+                            
+                                    // Get the current time
+                                    $currentTime = \Carbon\Carbon::now();
+                            
+                                    // Calculate the difference in minutes between now and the appointment start time
+                                    $timeDifference = $currentTime->diffInMinutes($appointmentDateTime, false); // Use `false` to get a negative value if the current time is past the appointment
+                                @endphp
+                            
+                                @if($timeDifference >= 240) {{-- 240 minutes = 4 hours --}}
+                                    <button class="btn btn-danger custom-btn" data-toggle="modal" data-target="#cancelModal{{ $UserAppointment->id }}" style="margin-top:18px; background-color: #A71619; padding:0px !important; width:120px !important; height : 40px !important; border-radius: 20px !important;">Cancel Adoption</button>
+                                @else
+                                    <button class="btn btn-secondary custom-btn" disabled style="margin-top:18px; padding:0px !important; width:120px !important; height : 40px !important; border-radius: 20px !important;">Cancel (Not Allowed)</button>
+                                @endif
+                            @endif
+                            
+                            
                                     </div>
                                     
                                 </div>

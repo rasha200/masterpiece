@@ -89,6 +89,22 @@ class UserController extends Controller
 
             $adoptionRequests = $user->toAdoupt()->with('pet.pet_images')->get();
             $UserAppointments = $user->appointments()->with('service.service_images')->get(); 
+           
+            foreach ($UserAppointments as $appointment) {
+
+                // Calculate the total time for the appointment (in minutes)
+                $averageTime = $appointment->service->average_time;
+                $petNumber = $appointment->pet_number;
+                $totalMinutes = $averageTime * $petNumber;
+    
+                // Calculate hours and minutes
+                $hours = floor($totalMinutes / 60);
+                $minutes = $totalMinutes % 60;
+    
+                // Format the duration (e.g., "1h 30m")
+                $appointment->formattedDuration = ($hours > 0 ? $hours . 'h ' : '') . $minutes . 'm';
+            }
+
             return view('profile', [
                 'user'=> $user , 
                 'adoptionRequests'=> $adoptionRequests,

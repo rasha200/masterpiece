@@ -192,6 +192,18 @@ public function store(Request $request)
             'status' => $request->input('status'),
         ]);
 
+         // Update availability times to true when appointment is cancelled
+    $availabilityTimes = AvailabilityTime::where('service_id', $appointment->service_id)
+    ->where('is_available', 'false') // Make sure we're updating only unavailable times
+    ->where(function ($query) use ($appointment) {
+        // Adjust the query to match the time of the cancelled appointment
+        $query->whereTime('start_time', '>=', $appointment->start_time)
+              ->whereTime('end_time', '<=', $appointment->end_time);
+    })
+    ->update(['is_available' => 'true']);
+
+        
+
         return redirect()->back()->with('success', 'Appointment cancelled successfully');
     }
 
