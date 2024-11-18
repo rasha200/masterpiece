@@ -269,9 +269,9 @@
                                                 <span>No Image</span>
                                             @endif
                         
-                        <button type="button" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1" data-modal="modal-{{ $product->id }}">
+                        <a href="{{ route('product_details', $product->id) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 " >
                             Quick View
-                        </button>
+                        </a>
                     </div>
 
                     <div class="block2-txt flex-w flex-t p-t-14">
@@ -294,7 +294,6 @@
                 </div>
             </div>
 
-            @include("include/modal/product", ['product' => $product]) <!-- Pass product data to modal partial -->
 
          
             @endforeach

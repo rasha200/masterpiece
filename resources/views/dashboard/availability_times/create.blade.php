@@ -48,6 +48,7 @@
 
 
                       <input type="hidden" value="{{ $service->id }}" name="service_id">
+                      <input type="hidden" value="true" name="is_available">
 
           
 

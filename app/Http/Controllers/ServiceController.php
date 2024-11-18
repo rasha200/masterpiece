@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use App\Models\ServiceImage;
+use App\Models\AvailabilityTime;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -47,7 +49,8 @@ class ServiceController extends Controller
             'name' => 'required|string',
             'description' => 'required',
             'small_description' => 'required|string',
-            'price' => 'nullable',
+            'average_time' => 'required|integer',
+            'price' => 'nullable|integer',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp,WEBP|max:2048',
         ]);
 
@@ -55,6 +58,7 @@ class ServiceController extends Controller
             'name'=>$request->input('name'),
             'description'=>$request->input('description'),
             'small_description'=>$request->input('small_description'),
+            'average_time'=>$request->input('average_time'),
             'price'=>$request->input('price'),
         ]);
 
@@ -94,21 +98,42 @@ class ServiceController extends Controller
 
 
 
-    public function show_user_side( $id)
+    public function show_user_side(Request $request, $id)
     {
         $service = Service::findOrFail($id); 
         $serviceImages = $service->service_images; 
-        $averageRating = $service->service_feedbacks()->avg('rating')?? 0;
+        $averageRating = $service->service_feedbacks()->avg('rating') ?? 0;
         $servicefeedbacks = $service->service_feedbacks()->orderBy('created_at', 'desc')->get();
-        return view('service_details' , [
-            'service'=> $service,
-            'serviceImages'=>$serviceImages,
-            'servicefeedbacks'=>$servicefeedbacks,
-            'averageRating'=>$averageRating,
+    
+        // Get the date from the request, default to today's date if not provided
+        $date = $request->query('date', now()->format('Y-m-d')); 
+        $dayOfWeek = Carbon::parse($date)->format('l'); 
+    
+        // Fetch pre-slotted availability times for the selected day that are still available
+        $availableSlots = AvailabilityTime::where('service_id', $id)
+            ->where('day_of_week', $dayOfWeek)
+            ->where('is_available', true)
+            ->get(['id', 'start_time', 'end_time']); // Fetch only relevant columns
+    
+        // Prepare slots for display
+        $timeSlots = [];
+        foreach ($availableSlots as $slot) {
+            $timeSlots[] = [
+                'start_time' => Carbon::parse($slot->start_time)->format('h:i A'),
+                'end_time' => Carbon::parse($slot->end_time)->format('h:i A'),
+                'availability_time_id' => $slot->id,
+            ];
+        }
+    
+        return view('service_details', [
+            'service' => $service,
+            'serviceImages' => $serviceImages,
+            'averageRating' => $averageRating,
+            'servicefeedbacks' => $servicefeedbacks,
+            'timeSlots' => $timeSlots,
         ]);
     }
-
-
+    
     /**
      * Show the form for editing the specified resource.
      */
@@ -129,7 +154,8 @@ class ServiceController extends Controller
             'name' => 'required|string',
             'description' => 'required',
             'small_description' => 'required|string',
-            'price' => 'nullable',
+            'average_time' => 'required|integer',
+            'price' => 'nullable|integer',
             'image.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -137,6 +163,7 @@ class ServiceController extends Controller
             'name'=>$request->input('name'),
             'description'=>$request->input('description'),
             'small_description'=>$request->input('small_description'),
+            'average_time'=>$request->input('average_time'),
             'price'=>$request->input('price'),
         ]);
 

@@ -14,18 +14,33 @@ class AvailabilityTimeController extends Controller
      */
     public function index($service_id)
     {
-        $AvailabilityTimes = AvailabilityTime::where('service_id', $service_id)->get();
-        
-       
-        $service = Service::findOrFail($service_id); 
-        
-        
+        // Map days to a custom order, starting from Friday
+        $dayOrder = [
+            'Friday' => 0,
+            'Saturday' => 1,
+            'Sunday' => 2,
+            'Monday' => 3,
+            'Tuesday' => 4,
+            'Wednesday' => 5,
+            'Thursday' => 6,
+        ];
+    
+        // Retrieve and sort availability times
+        $AvailabilityTimes = AvailabilityTime::where('service_id', $service_id)
+            ->get()
+            ->sortBy(function ($availabilityTime) use ($dayOrder) {
+                return $dayOrder[$availabilityTime->day_of_week] ?? 7; // Default to last if day not mapped
+            });
+    
+        $service = Service::findOrFail($service_id);
+    
         return view('dashboard.availability_times.index', [
             'AvailabilityTimes' => $AvailabilityTimes,
             'service_id' => $service_id,
-            'service_name' => $service->name, 
+            'service_name' => $service->name,
         ]);
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -52,15 +67,42 @@ class AvailabilityTimeController extends Controller
             'end_time' => 'required|date_format:H:i|after:start_time',
         ]);
 
+        // Retrieve the average time for the selected service
+    $service = Service::find($request->input('service_id'));
+    $averageTime = $service->average_time; // Duration in minutes
+
+    // Parse the start and end times
+    $startTime = \Carbon\Carbon::createFromTimeString($request->input('start_time'));
+    $endTime = \Carbon\Carbon::createFromTimeString($request->input('end_time'));
+
+    // Loop to calculate and store individual slots
+    $currentSlotStart = $startTime;
+
+    while ($currentSlotStart < $endTime) {
+        $currentSlotEnd = $currentSlotStart->copy()->addMinutes($averageTime);
+
+        // Ensure the end time of the slot doesn't exceed the given end_time
+        if ($currentSlotEnd > $endTime) {
+            break;
+        }
+
+
+
         AvailabilityTime::create([
             'day_of_week'=>$request->input('day_of_week'),
-            'start_time'=>$request->input('start_time'),
-            'end_time'=>$request->input('end_time'),
+            'start_time'=>$currentSlotStart->format('H:i'),
+            'end_time'=>$currentSlotEnd->format('H:i'),
             'service_id'=>$request->input('service_id'),
+            'is_available'=>$request->input('is_available'),
         ]);
+          // Move to the next slot
+          $currentSlotStart = $currentSlotEnd;
+        }
 
         return to_route('availabilityTimes.index', ['service_id' => $request->input('service_id')])
-        ->with('success', 'Service availability Time created successfully');    }
+        ->with('success', 'Service availability Time created successfully');   
+     }
+    
 
     /**
      * Display the specified resource.
@@ -94,6 +136,7 @@ class AvailabilityTimeController extends Controller
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
         ]);
+        
 
       $availabilityTime->update ([
            'day_of_week'=>$request->input('day_of_week'),

@@ -81,7 +81,7 @@
 
                       <div class="form-group">
                         <label for="exampleInputName1">Quantity</label>
-                        <input type="number" class="form-control" id="quantity" placeholder="Quantity" name="quantity" value="{{ old('quantity') }}" required>
+                        <input type="number" class="form-control" id="quantity" placeholder="Quantity" name="quantity" value="{{ old('quantity') }}" required min="1" step="1">
                       </div>
 
                       <button type="submit" class="btn btn-outline-info btn-fw">Create</button>

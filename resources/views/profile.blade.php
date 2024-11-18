@@ -203,21 +203,131 @@
                         @endif
                     </div>
 
-<!--------------------- Other Tabs (Orders, Appointments) -------------------------------------------------->
+<!-----------------------------(Orders) -------------------------------------------------->
                     <div class="tab-pane fade" id="orders" role="tabpanel">
                         <h3 class="mb-4">Order History</h3>
                         <p>Here you will see your order history.</p>
                     </div>
 
+
+<!-----------------------------------(Appointments) -------------------------------------------------->
+
                     <div class="tab-pane fade" id="appointments" role="tabpanel">
                         <h3 class="mb-4">Your Appointments</h3>
+
+                        @if($adoptionRequests->isEmpty())
                         <p>Here you will see your appointments.</p>
+                    @else
+                       
+
+                        <!-- Adoption Request Cards -->
+                        @foreach ($UserAppointments as $UserAppointment)
+                            <div class="adoption-request-card mb-4">
+                                <div class="row">
+                                    <!-- Pet Image -->
+                                    <div class="col-md-3">  
+                                        @if($UserAppointment->service->service_images->isNotEmpty())
+                                        <img src=" {{ asset($UserAppointment->service->service_images[0]->image) }}" alt="Pet Image" class="img-fluid rounded">
+                                    </div>
+                                    <!-- Request Details -->
+                                    <div class="col-md-7">
+                                        <h5>Service name: {{ $UserAppointment->service->name }}</h5>
+                                        <p><strong>Appointment date:</strong>{{ $UserAppointment->day }}</p>
+                                        <p><strong>Start time:</strong>{{ \Carbon\Carbon::parse($UserAppointment->start_time)->format('h:i A') }}</p>
+                                        <p><strong>End time:</strong>{{ \Carbon\Carbon::parse($UserAppointment->end_time)->format('h:i A') }}</p>
+                                        <p><strong>Appointment Duration:</strong>{{ $formattedDuration }}</p>
+                                        <p><strong>Pet number:</strong>{{ $UserAppointment->pet_number }}  </p>
+
+                                       
+                                    @if($UserAppointment->status == "Cancelled" )
+                                    <p><strong>Status:</strong> 
+                                     <span > You have Cancelled this adoption request</span>
+                                    </p>
+
+                                     @else
+                                    <p><strong>Status:</strong> 
+                                        <span class="badge 
+                                        {{ $UserAppointment->status == 'Reject' ? 'badge-danger' : '' }}
+                                        {{ $UserAppointment->status == 'Pending' ? 'badge-warning' : '' }}
+                                        {{ $UserAppointment->status == 'Accept' ? 'badge-success' : '' }}">
+                                        {{ ucfirst($UserAppointment->status) }}
+                                    </span>
+                                    </p>
+                                    @endif
+
+                                    @if($UserAppointment->status == "Reject")
+                                   
+                                    <p><strong>{{ auth()->user()->Fname }} {{ auth()->user()->Lname }}</strong> Thank you for your interest in adopting . Unfortunately, your adoption request has been rejected. We appreciate your time and understanding. Please feel free to check for other pets available for adoption.</p>
+                              
+                                @endif
+
+
+                                @if($UserAppointment->status == "Accept") 
+                                   
+                                <p><strong>{{ auth()->user()->Fname }} {{ auth()->user()->Lname }}</strong> Congratulations! Your adoption request for  has been approved. We will contact you with further details soon</p>
+                              
+                                @endif
+
+
+                                    @if($UserAppointment->status == "Pending")
+                                   
+                                        <button class="btn btn-danger custom-btn" data-toggle="modal" data-target="#cancelModal{{ $UserAppointment->id }}" style="margin-top:18px; background-color: #A71619; padding:0px !important; width:120px !important; height : 40px !important;  border-radius: 20px !important;">Cancel Adoption</button>
+                                   
+                                    @endif
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                    
+                    
+            <!------------------------------------------- Modal to Confirm Cancellation -------------------------------------------------->
+<div class="modal fade" id="cancelModal{{ $UserAppointment->id }}" tabindex="-1" aria-labelledby="cancelModalLabel{{ $UserAppointment->id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelModalLabel{{ $UserAppointment->id }}">Confirm Cancellation</h5>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to cancel this appointment?
+            </div>
+            <div class="modal-footer">
+                <form action="{{ route('appointments_user.update', $UserAppointment->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="status" value="Cancelled">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger" style="background-color: #A71619">Yes, Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+                        @endforeach
+                        @endif
                     </div>
+
+
+
+
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
 
 @if (Session::get('success'))
     <div class="swal-overlay swal-overlay--show-modal" tabindex="-1">

@@ -9,6 +9,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceImageController;
 use App\Http\Controllers\AvailabilityTimeController;
 use App\Http\Controllers\ServiceFeedbackController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
@@ -114,14 +115,13 @@ Route::get('/productVariations/{product_id}/{productVariation}', [ProductVariati
 Route::middleware(['auth', 'role','store'])->group(function () {
     Route::get('/productFeedbacks/{product_id}', [ProductFeedbackController::class, 'index'])->name('productFeedbacks.index'); // List all productFeedbacks (dashboard)
     Route::get('/productFeedbacks/{product_id}/{productFeedback}', [ProductFeedbackController::class, 'show'])->name('productFeedbacks.show'); // Show
-    Route::delete('/productFeedbacks/{productFeedback}', [ProductFeedbackController::class, 'destroy'])->name('productFeedbacks.destroy'); // Delete
 });
 // Public routes
 Route::post('/productFeedbacks', [ProductFeedbackController::class, 'store'])->name('productFeedbacks.store'); // Create
 Route::get('/productFeedbacks/create', [ProductFeedbackController::class, 'create'])->name('productFeedbacks.create'); // Create form (user side)
 Route::get('/productFeedbacks/{productFeedback}/edit', [ProductFeedbackController::class, 'edit'])->name('productFeedbacks.edit'); // Edit form
 Route::put('/productFeedbacks/{productFeedback}', [ProductFeedbackController::class, 'update'])->name('productFeedbacks.update'); // Update feedback
-Route::delete('/productFeedbacks/{productFeedback}', [ProductFeedbackController::class, 'destroy_userside'])->name('productFeedbacks_userside.destroy'); // Delete
+Route::delete('/productFeedbacks/{productFeedback}', [ProductFeedbackController::class, 'destroy'])->name('productFeedbacks.destroy'); // Delete
 
 
 
@@ -178,15 +178,27 @@ Route::middleware(['auth', 'role'])->group(function () {
 Route::middleware(['auth', 'role'])->group(function () {
     Route::get('/serviceFeedbacks/{service_id}', [ServiceFeedbackController::class, 'index'])->name('serviceFeedbacks.index'); // List all serviceFeedbacks (dashboard)
     Route::get('/serviceFeedbacks/{service_id}/{serviceFeedback}', [ServiceFeedbackController::class, 'show'])->name('serviceFeedbacks.show'); // Show
-    Route::delete('/serviceFeedbacks/{serviceFeedback}', [ServiceFeedbackController::class, 'destroy'])->name('serviceFeedbacks.destroy'); // Delete
 });
 // Public routes
 Route::post('/serviceFeedbacks', [ServiceFeedbackController::class, 'store'])->name('serviceFeedbacks.store'); // Create
 Route::get('/serviceFeedbacks/create', [ServiceFeedbackController::class, 'create'])->name('serviceFeedbacks.create'); // Create form (user side)
 Route::put('/serviceFeedbacks/{serviceFeedback}', [ServiceFeedbackController::class, 'update'])->name('serviceFeedbacks.update'); // Update feedback
-Route::delete('/serviceFeedbacks/{serviceFeedback}', [ServiceFeedbackController::class, 'destroy_userside'])->name('servicefeedbacks_userside.destroy'); // Delete
+Route::delete('/serviceFeedbacks/{serviceFeedback}', [ServiceFeedbackController::class, 'destroy'])->name('serviceFeedbacks.destroy'); // Delete
 
 
+
+
+// <!--==========================================  (Appointment)  ====================================================================================================================-->
+Route::middleware(['auth', 'role', 'appointment'])->group(function () {
+    Route::get('/appointments', [AppointmentController::class, 'index'])->name('appointments.index'); 
+    Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show'); 
+});
+// Public routes
+Route::get('/checkAvailability/{id}', [AppointmentController::class, 'checkAvailability'])->name('checkAvailability'); 
+Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store'); 
+Route::put('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointments.update'); 
+Route::put('/Appointments/{appointment}', [AppointmentController::class, 'update_userside'])->name('appointments_user.update'); 
+Route::get('/veterinarian_schedule', [AppointmentController::class, 'veterinarian_schedule'])->name('veterinarian_schedule')->middleware(['auth' , 'veterinarian_schedule']); 
 
 
 

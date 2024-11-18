@@ -42,6 +42,14 @@
                       </div>
 
 
+                      <div class="form-group">
+                        <label for="average_time">Average time (in minutes)</label>
+                        <input type="number" class="form-control" id="average_time" name="average_time" 
+                               value="{{ old('average_time') }}" placeholder="Enter time in minutes" 
+                               required min="1" step="1">
+                        <small id="average_time_help" class="form-text text-muted">Please enter the average time in minutes.</small>
+                    </div>
+
                      
                       <div class="form-group">
                             <label for="image">Choose service images</label>

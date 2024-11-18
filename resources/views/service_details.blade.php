@@ -78,8 +78,104 @@
                             {{ $service->description }}                       
                          </p>
 
+                          
+
                        
                     </div>
+
+                    <h4 class="ltext-109 cl2 p-t-28 p-b-28">
+                        Book appointment
+                    </h4>
+
+
+                    <div class="p-t-40">
+                        <!-- Availability Form -->
+                        <form method="GET" action="{{ route('service_details', $service->id) }}" id="availability-form" >
+                            @csrf
+                            <div class="bor8 m-b-20">
+                                <label for="appointment-date" class="stext-111 cl2 m-b-10 d-block">Select a Date:</label>
+                                <input 
+                                    type="date" 
+                                    id="appointment-date" 
+                                    name="date" 
+                                    class="stext-111 cl2 size-116 p-lr-15" 
+                                    value="{{ request('date', now()->format('Y-m-d')) }}" 
+                                    min="{{ now()->startOfDay()->format('Y-m-d') }}" 
+                                    max="{{ now()->endOfWeek(Carbon\Carbon::THURSDAY)->format('Y-m-d') }}">
+                            </div>
+                            <button type="submit" class="flex-c-m stext-101 cl0 size-121 bg3 bor2 hov-btn3 p-lr-15 trans-04">
+                                Check Availability
+                            </button>
+                        </form>
+                    
+                        <!-- Time Slots Section -->
+                        @if(count($timeSlots) > 0)
+                            <h3 class="stext-102 cl3 p-b-20">Available Slots for {{ request('date') }}</h3>
+                            <div class="flex-w wrap-buttons m-b-20">
+                                @foreach($timeSlots as $slot)
+                                    <button 
+                                        type="button" 
+                                        class="slot-button flex-c-m stext-101 cl0 size-110 bg2 bor2 hov-btn2 p-lr-15 trans-04 m-r-10 m-b-10" 
+                                        data-start="{{ $slot['start_time'] }}" 
+                                        data-end="{{ $slot['end_time'] }}">
+                                        {{ $slot['start_time'] }}
+                                    </button>
+                                @endforeach
+                            </div>
+                        @else
+                            <p class="stext-102 cl6 p-b-20">No available slots for {{ request('date') }}</p>
+                        @endif
+                    
+                        <!-- Booking Form -->
+                        <form method="POST" action="{{ route('appointments.store') }}" id="booking-form">
+                            @csrf
+                            <div class="bor8 m-b-20">
+                                <input type="number" name="pet_number" placeholder="Pet Number *" class="stext-111 cl2 size-116 p-lr-15" required>
+                            </div>
+                            <input type="hidden" value="{{ auth()->check() ? auth()->user()->id : '' }}" name="user_id">
+                            <input type="hidden" value="{{ $service->id }}" name="service_id">
+                            <input type="hidden" name="status" value="Pending">
+                            <input type="hidden" id="appointment_datetime" name="appointment_datetime">
+                    
+                            <button type="submit" class="flex-c-m stext-101 cl0 size-121 bg3 bor2 hov-btn3 p-lr-15 trans-04">
+                                Book Appointment
+                            </button>
+                        </form>
+                    </div>
+                    
+                    
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                       $(document).ready(function () {
+                        // Handle slot selection
+                        $('.slot-button').click(function () {
+                            var selectedStartTime = $(this).data('start');
+                            var selectedDate = $('#appointment-date').val();
+                    
+                            if (!selectedDate) {
+                                alert('Please select a date first.');
+                                return;
+                            }
+                    
+                            // Combine selected date and time into a datetime value
+                            var appointmentDatetime = selectedDate + ' ' + selectedStartTime;
+                            $('#appointment_datetime').val(appointmentDatetime);
+                    
+                            // Highlight selected slot
+                            $('.slot-button').removeClass('selected');
+                            $(this).addClass('selected');
+                        });
+                    
+                        // Restrict this submit handler to the booking form only
+                        $('#booking-form').submit(function (e) {
+                            if (!$('#appointment_datetime').val()) {
+                                alert('Please select a time slot before booking.');
+                                e.preventDefault(); // Prevent the form from submitting
+                            }
+                        });
+                    });
+                    
+                    </script> 
 
 
 
@@ -148,12 +244,7 @@
                                </a>
 
                                
-                                 <!-- Delete Icon Button (styled like the edit button) -->
-<a href="javascript:void(0);" onclick="toggleDeleteModal({{ $servicefeedback->id }})" class="delete-icon">
-    <button style="border: solid 1px #A71619; background-color: #A71619;" title="Delete">
-        <i class="pointer zmdi zmdi-delete" style="padding: 3px; color: #FFF;"></i>
-    </button>
-</a>
+                               
            
                                <!-- Edit Form (initially hidden) -->
                                <div id="edit-form-{{ $servicefeedback->id }}" style="display: none; margin-top: 10px;">
@@ -215,34 +306,7 @@
 
 
 
-<!-- Delete Modal (hidden initially) -->
-<div class="modal fade" id="deleteModal{{ $servicefeedback->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $servicefeedback->id }}" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel{{ $servicefeedback->id }}">Confirm Deletion</h5>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this feedback for {{ $service->name }} service?
-            </div>
-            <div class="modal-footer">
-                <form action="{{ route('servicefeedbacks_userside.destroy', $servicefeedback->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger" style="background-color: #A71619">Yes, Delete</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
-<script>
-    // Toggle the modal visibility for delete
-    function toggleDeleteModal(feedbackId) {
-        $('#deleteModal' + feedbackId).modal('show');
-    }
-</script>
 
 
 
@@ -417,38 +481,11 @@
                     
                   
 
-                    <!--  -->
-                    <div class="p-t-40">
-                        <h5 class="mtext-113 cl2 p-b-12">
-                            Leave a Comment
-                        </h5>
 
-                        <p class="stext-107 cl6 p-b-40">
-                            Your email address will not be published. Required fields are marked *
-                        </p>
 
-                        <form>
-                            <div class="bor19 m-b-20">
-                                <textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="Comment..."></textarea>
-                            </div>
 
-                            <div class="bor19 size-218 m-b-20">
-                                <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" placeholder="Name *">
-                            </div>
 
-                            <div class="bor19 size-218 m-b-20">
-                                <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="email" placeholder="Email *">
-                            </div>
-
-                            <div class="bor19 size-218 m-b-30">
-                                <input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="web" placeholder="Website">
-                            </div>
-
-                            <button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04">
-                                Post Comment
-                            </button>
-                        </form>
-                    </div>
+                    
                 </div>
             </div>
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('day_of_week');
             $table->time('start_time');
             $table->time('end_time');
-
+            $table->enum('is_available', ['true ', 'false'])->default('true');
             $table->unsignedBigInteger('service_id');
             $table->foreign('service_id')->references('id')->on('services');
             $table->timestamps();

@@ -73,6 +73,15 @@
                     <textarea class="form-control" id="description" placeholder="Description" name="description" required>{{ $service->description }}</textarea>
                 </div>
 
+                <div class="form-group">
+                    <label for="average_time">Average time (in minutes)</label>
+                    <input type="number" class="form-control" id="average_time" name="average_time" 
+                           value="{{ $service->average_time }}" placeholder="Enter time in minutes" 
+                           required min="1" step="1">
+                    <small id="average_time_help" class="form-text text-muted">Please enter the average time in minutes.</small>
+                </div>
+
+
                 <button type="button" id="editButton" class="btn btn-outline-info btn-fw">Edit</button>
                 <a href="{{route('services.index')}}" class="btn btn-outline-secondary">Cancel</a>
             </form>

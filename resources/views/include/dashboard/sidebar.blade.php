@@ -38,9 +38,25 @@
             </a>
         </li>
 
+        @if(Auth::user()->role == 'veterinarian')
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('veterinarian_schedule')}}">
+                <span class="menu-title">Your schedule</span>
+                <i class="mdi mdi mdi-calendar-check menu-icon"></i>
+               
+            </a>
+        </li>
+        @endif
 
-
-
+        @if(Auth::user()->role == 'manager' || Auth::user()->role == 'receptionist')
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('appointments.index')}}">
+                <span class="menu-title">Appointments</span>
+                <i class="mdi mdi mdi-calendar-check menu-icon"></i>
+               
+            </a>
+        </li>
+        @endif
         
 
 

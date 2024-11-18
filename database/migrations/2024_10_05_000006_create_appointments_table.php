@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('appointment_datetime');
+            $table->string('day');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->enum('status', ['Accept ', 'Pending', 'Reject', 'Cancelled'])->default('Pending');
             $table->timestamp('reminder_time')->nullable();
             $table->integer('pet_number')->default(1);

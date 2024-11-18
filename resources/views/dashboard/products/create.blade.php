@@ -50,7 +50,7 @@
 
                       <div class="form-group">
                         <label for="exampleInputName1">Quantity</label>
-                        <input type="number" class="form-control" id="quantity" placeholder="Quantity" name="quantity" value="{{ old('quantity') }}" >
+                        <input type="number" class="form-control" id="quantity" placeholder="Quantity" name="quantity" value="{{ old('quantity') }}" min="1" step="1">
                       </div>
                      
 

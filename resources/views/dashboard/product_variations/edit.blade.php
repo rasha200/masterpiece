@@ -75,7 +75,7 @@
 
                       <div class="form-group">
                         <label for="exampleInputName1">Quantity</label>
-                        <input type="number" class="form-control" id="quantity" placeholder="Quantity" name="quantity" value="{{$productVariation->quantity}}" required>
+                        <input type="number" class="form-control" id="quantity" placeholder="Quantity" name="quantity" value="{{$productVariation->quantity}}" required min="1" step="1">
                       </div>
 
                       

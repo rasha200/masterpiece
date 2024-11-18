@@ -9,7 +9,8 @@
         <p><strong>Price:</strong> ${{ $service->price }}</p>
         <p><strong>Small Description:</strong> {{ $service->small_description }}</p>
         <p><strong>Description:</strong> {{ $service->description }}</p>
-       
+        <p><strong>Average Time:</strong> {{ $service->average_time }} minutes</p>
+
         <div class="form-group">
    
     <p><strong>Service images:</strong></p>

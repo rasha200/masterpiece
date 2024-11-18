@@ -346,12 +346,7 @@
                         </button>
                     </a>
 
-                    <!-- Delete Icon Button (styled like the edit button) -->
-<a href="javascript:void(0);" onclick="toggleDeleteModal({{ $productfeedback->id }})" class="delete-icon">
-    <button style="border: solid 1px #A71619; background-color: #A71619;" title="Delete">
-        <i class="pointer zmdi zmdi-delete" style="padding: 3px; color: #FFF;"></i>
-    </button>
-</a>
+                  
 
                       <!-- Edit Form (initially hidden) -->
                       <div id="edit-form-{{ $productfeedback->id }}" style="display: none; margin-top: 10px;">
@@ -413,34 +408,7 @@
 
                    
 
-<!-- Delete Modal (hidden initially) -->
-<div class="modal fade" id="deleteModal{{ $productfeedback->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $productfeedback->id }}" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel{{ $productfeedback->id }}">Confirm Deletion</h5>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this feedback for product {{ $product->name }}?
-            </div>
-            <div class="modal-footer">
-                <form action="{{ route('productFeedbacks_userside.destroy', $productfeedback->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger" style="background-color: #A71619">Yes, Delete</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
-<script>
-    // Toggle the modal visibility for delete
-    function toggleDeleteModal(feedbackId) {
-        $('#deleteModal' + feedbackId).modal('show');
-    }
-</script>
 
                   
                     @endif

@@ -116,13 +116,5 @@ class ServiceFeedbackController extends Controller
     }
 
 
-    public function destroy_userside(ServiceFeedback $serviceFeedback)
-    {
-
-        $service_id = $serviceFeedback->service_id; // Get the service_id from the serviceFeedback
-
-        $serviceFeedback->delete(); 
-        
-        return to_route('service_details', ['id' => $service_id])->with('success', 'Review deleted');
-    }
+   
 }

@@ -66,6 +66,8 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\role::class,
         'store' => \App\Http\Middleware\store::class,
         'not_veterinarian' => \App\Http\Middleware\not_veterinarian::class,
+        'appointment' => \App\Http\Middleware\appointment::class,
+        'veterinarian_schedule' => \App\Http\Middleware\veterinarian_schedule::class,
 
     ];
 }

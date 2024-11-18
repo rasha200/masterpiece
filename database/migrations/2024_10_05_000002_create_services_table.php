@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('small_description');
             $table->text('description');
             $table->float('price')->nullable();
+            $table->integer('average_time');
             $table->softDeletes();
             $table->timestamps();
         });

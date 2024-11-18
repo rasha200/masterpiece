@@ -33,6 +33,7 @@
                         <tr>
                           <th>Id</th>
                           <th>Name</th>
+                          <th>Average time</th>
                           <th>image</th>
                           <th></th>
                         </tr>
@@ -42,6 +43,7 @@
                         <tr>
                           <td>{{$service->id}}</td>
                           <td>{{$service->name}}</td>
+                          <td>{{$service->average_time}} minutes</td>
                           <td>
                           @if($service->service_images->isNotEmpty())
                 
@@ -73,21 +75,23 @@
                             </button>
                             </a>      
 
-                          @if(Auth::user()->role == 'manager')
-                          <form action="{{ route('services.destroy', $service->id) }}" method="POST" style="display:inline;" title="Delete">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"  onclick="confirmDeletion(event, '{{ route('services.destroy', $service->id) }}')">
-                                               <i class="mdi mdi mdi-delete text-danger"></i>
-                                               </button>
-                          </form>
-                            @endif
-
+                         
                             <a href="{{ route('serviceFeedbacks.index', $service->id) }}"  title="View feedback">
                               <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
                                 <i class="mdi mdi-comment-text-outline text-info"></i>
                               </button>
-                              </a>      
+                              </a> 
+                              
+                              @if(Auth::user()->role == 'manager')
+                              <form action="{{ route('services.destroy', $service->id) }}" method="POST" style="display:inline;" title="Delete">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon"  onclick="confirmDeletion(event, '{{ route('services.destroy', $service->id) }}')">
+                                                   <i class="mdi mdi mdi-delete text-danger"></i>
+                                                   </button>
+                              </form>
+                                @endif
+    
                         </td>
                         </tr>
                         @endforeach

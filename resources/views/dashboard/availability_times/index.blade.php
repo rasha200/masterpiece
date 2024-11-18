@@ -42,6 +42,7 @@
                           <th>Day</th>
                           <th>Start time</th>
                           <th>End time</th>
+                          <th>Is Available</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -52,7 +53,7 @@
                           <td>{{$AvailabilityTime->day_of_week}}</td>
                           <td>{{ \Carbon\Carbon::parse($AvailabilityTime->start_time)->format('h:i A') }}</td>
                           <td>{{ \Carbon\Carbon::parse($AvailabilityTime->end_time)->format('h:i A') }}</td>
-
+                          <td>{{$AvailabilityTime->is_available}}</td>
                           <td> 
                       @if(Auth::user()->role == 'manager' || Auth::user()->role == 'receptionist')
 

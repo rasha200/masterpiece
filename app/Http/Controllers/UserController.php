@@ -49,7 +49,7 @@ class UserController extends Controller
         $validation = $request->validate([
             'Fname' => 'required|string|min:3',
             'Lname' => 'required|string|min:3',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email,',
             'mobile' => 'required|numeric',
             'password' => 'required|confirmed',
             'role' => 'required|string',
@@ -88,8 +88,12 @@ class UserController extends Controller
         if ($user->role === 'user') {
 
             $adoptionRequests = $user->toAdoupt()->with('pet.pet_images')->get();
-
-            return view('profile', ['user'=> $user , 'adoptionRequests'=> $adoptionRequests]);
+            $UserAppointments = $user->appointments()->with('service.service_images')->get(); 
+            return view('profile', [
+                'user'=> $user , 
+                'adoptionRequests'=> $adoptionRequests,
+                'UserAppointments' => $UserAppointments,
+            ]);
 
         } elseif (in_array($user->role, ['receptionist', 'store_manager', 'veterinarian', 'manager'])) {
             
