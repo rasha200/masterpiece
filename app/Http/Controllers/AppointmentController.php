@@ -83,6 +83,14 @@ public function store(Request $request)
         'service_id' => 'required|exists:services,id',
     ]);
 
+    if (!auth()->check()) {
+        // Store a session variable to remember that the user came from the service feedback form
+        session(['from_appointment' => true, 'service_id' => $request->input('service_id')]);
+    
+        // Redirect back with the error message and input data
+        return redirect()->back()->with('error', 'Please log in to book your appointment.')->withInput();
+    }
+
     // Retrieve the service
     $service = Service::findOrFail($request->input('service_id'));
     $averageTimePerPet = $service->average_time; // Average time in minutes per pet

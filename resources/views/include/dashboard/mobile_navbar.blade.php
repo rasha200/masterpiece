@@ -48,57 +48,9 @@
 
            
 
-            <li class="nav-item dropdown">
-{{--                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"--}}
-{{--                   data-bs-toggle="dropdown" aria-expanded="false">--}}
-{{--                    <i class="mdi mdi-email-outline"></i>--}}
-{{--                    <span class="count-symbol bg-warning"></span>--}}
-{{--                </a>--}}
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                     aria-labelledby="messageDropdown">
-                    <h6 class="p-3 mb-0">Messages</h6>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <img src="/assets/images/faces/face4.jpg" alt="image" class="profile-pic">
-                        </div>
-                        <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark sent you a message</h6>
-                            <p class="text-gray mb-0">1 minute ago</p>
-                        </div>
-                    </a>
-                    <!-- Additional messages -->
-                </div>
-            </li>
+          
 
-            <li class="nav-item dropdown">
-                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
-                   data-bs-toggle="dropdown">
-                    <i class="mdi mdi-bell-outline"></i>
-                        <span class="count-symbol bg-danger"></span>
-                   
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                     aria-labelledby="notificationDropdown">
-                    <h6 class="p-3 mb-0">Notifications</h6>
-                    <div class="dropdown-divider"></div>
-                    
-                            <a class="dropdown-item preview-item" href="">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-success">
-                                        <i class="mdi mdi-calendar"></i>
-                                    </div>
-                                </div>
-                                <div
-                                    class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                                    <h6 class="preview-subject font-weight-normal mb-1">New Booking</h6>
-                                    <p class="text-gray ellipsis mb-0"></p>
-                                </div>
-                            </a>
-                        
-                    <!-- Additional notifications -->
-                </div>
-            </li>
+         
 
 {{--            <li class="nav-item nav-logout d-none d-lg-block">--}}
 {{--                <a class="nav-link" href="#">--}}
