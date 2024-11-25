@@ -270,6 +270,57 @@
                               
                                 @endif
 
+                                @if($UserAppointment->status == "Accept") 
+                                @php
+                                    $startDateTime = \Carbon\Carbon::createFromFormat('l Y-m-d H:i:s', 
+                                        "{$UserAppointment->day} {$UserAppointment->start_time}", 'Asia/Amman');
+                                    $currentDateTime = \Carbon\Carbon::now('Asia/Amman');
+                                    $remainingSeconds = $currentDateTime->lessThan($startDateTime) 
+                                        ? $currentDateTime->diffInSeconds($startDateTime) 
+                                        : 0;
+                                @endphp
+                            
+                                @if ($remainingSeconds > 0)
+                                    <p><strong>Appointment Deadline:</strong> 
+                                      (<span id="timer-{{ $UserAppointment->id }}" data-remaining="{{ $remainingSeconds }}" style="color:green;">
+                                            {{ gmdate('H:i:s', $remainingSeconds) }}
+                                        </span>)
+                                    </p>
+                                @endif
+                                @endif
+                            
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    // Select all timer elements
+                                    const timers = document.querySelectorAll('[id^="timer-"]');
+                            
+                                    timers.forEach(timer => {
+                                        let remainingTime = parseInt(timer.dataset.remaining);
+                            
+                                        if (remainingTime > 0) {
+                                            const interval = setInterval(() => {
+                                                if (remainingTime <= 0) {
+                                                    clearInterval(interval);
+                                                    timer.innerText = '00:00:00';
+                                                } else {
+                                                    remainingTime--;
+                                                    const hours = Math.floor(remainingTime / 3600);
+                                                    const minutes = Math.floor((remainingTime % 3600) / 60);
+                                                    const seconds = remainingTime % 60;
+                            
+                                                    timer.innerText =
+                                                        String(hours).padStart(2, '0') + ':' +
+                                                        String(minutes).padStart(2, '0') + ':' +
+                                                        String(seconds).padStart(2, '0');
+                                                }
+                                            }, 1000);
+                                        }
+                                    });
+                                });
+                            </script>
+                            
+    
+
 
                                 @if($UserAppointment->status == "Pending" || $UserAppointment->status == "Accept")
                                 @php
@@ -311,7 +362,7 @@
                                 @endif
                             @endif
                             
-
+                        
                             
                             
                                     </div>
