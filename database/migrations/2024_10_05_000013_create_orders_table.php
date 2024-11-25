@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('street')->nullable();
             $table->string('bulding_number')->nullable();
+            $table->string('mobile');
+
             
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');

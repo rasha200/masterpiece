@@ -20,7 +20,7 @@ class StoreController extends Controller
         if ($request->has('category_id')) {
             $query->where('category_id', $request->input('category_id'));
         }
-        $products = $query->paginate(6);
+        $products = $query->paginate(15);
 
         foreach ($products as $product) {
             // Assuming 'product_feedbacks' is the relationship name for feedbacks on products

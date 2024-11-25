@@ -11,10 +11,10 @@
 
 
 <!-- Categories -->
-<section class="bg0 p-t-23 p-b-130">
+<section class="bg0 p-t-23 p-b-130" >
     <div class="container">
         <div class="flex-w flex-sb-m p-b-52">
-            <div class="flex-w flex-l-m filter-tope-group m-tb-10">
+            <div class="flex-w flex-l-m filter-tope-group m-tb-10" style="margin-left: 230px;">
                 <!-- Button for All Products -->
                 <a href="{{ route('store') }}" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 {{ request()->has('category_id') ? '' : 'how-active1' }}">
                     All Products
@@ -36,17 +36,7 @@
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
-                <div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
-                    <i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
-                    <i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-                     Filter
-                </div>
-
-                <div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
-                    <i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-                    <i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-                    Search
-                </div>
+       
             </div>
             
             <!-- Search product -->
@@ -251,7 +241,7 @@
         </div>
 
 <!---------------------------- Product ----------------------------------------------------->
-        <div class="row isotope-grid">
+        <div class="row isotope-grid" style="margin-left: 130px;">
             
             @if($products->isEmpty())
             <div class="col-12 text-center">

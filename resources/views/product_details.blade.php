@@ -2,7 +2,7 @@
 
 @section('content')
 
-<!-- breadcrumb -->
+<!------------------------------------ breadcrumb -------------------------------------------------------------------------------------------------->
 <div class="container" style="margin-top: 50px;">
     <div class="bread-crumb flex-w  p-r-15 p-t-30 p-lr-0-lg">
         <a href="{{ route('home') }}" class="stext-109 cl8 hov-cl1 trans-04">
@@ -27,7 +27,7 @@
 </div>
     
 
-<!-- Product Detail -->
+<!------------------------------------------------------------------- Product Detail ----------------------------------------------------------------------------------------->
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
     <div class="container">
         <div class="row">
@@ -82,7 +82,8 @@
                         {{ $product->small_description }}
                     </p>
 
-                    <!-- Variations Section -->
+
+<!--------------------------------------------------------------- Variations Section ------------------------------------------------------------------------------------->
         <div class="p-t-33">
             @php
                 $attributes = ['size', 'color', 'flavour', 'age_group', 'disinfected'];
@@ -183,17 +184,7 @@
 
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-204 flex-w flex-m respon6-next">
-                                <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                    <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                        <i class="fs-16 zmdi zmdi-minus"></i>
-                                    </div>
-
-                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
-
-                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                        <i class="fs-16 zmdi zmdi-plus"></i>
-                                    </div>
-                                </div>
+                                
 
 
                                 <form action="{{ route('cart.store') }}" method="POST">
@@ -201,49 +192,82 @@
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <input type="hidden" id="selected-variation-id" name="variation_id" value="">
                                     <input type="hidden" name="name" value="{{ $product->name }}">
-                                    <input type="hidden" id="selected-price" name="price" value="">
-                                    <input type="hidden" name="quantity" value="1" min="1" max="{{$product->quantity}}">
+                                    <input type="hidden" id="selected-price" name="price" value=""> <!-- Ensure this field exists -->
+                                    <input type="hidden" name="quantity" id="hidden-quantity" value="1">
                                 
-                                    <button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+
+                                    <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                            <i class="fs-16 zmdi zmdi-minus"></i>
+                                        </div>
+
+                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="quantity" value="1" min="1" max="{{$product->quantity}}" required>
+
+                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                            <i class="fs-16 zmdi zmdi-plus"></i>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04" >
                                         Add to cart
                                     </button>
                                 </form>
 
 
+
+
+                             
+
+
                               
+
+                  <!------------------------------------------------ Edit the price ------------------------------------------------------>
+
                  
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const attributeOptions = document.querySelectorAll('.attribute-option');
-                const selectedVariationIdInput = document.getElementById('selected-variation-id');
-                const selectedPriceInput = document.getElementById('selected-price');
-                const productPriceEl = document.getElementById('product-price');
-            
-                attributeOptions.forEach(option => {
-                    option.addEventListener('click', function () {
-                        // Remove active class from other options in the same group
-                        const attribute = this.dataset.attribute;
-                        document.querySelectorAll(`.attribute-option[data-attribute="${attribute}"]`)
-                            .forEach(btn => btn.classList.remove('active'));
-            
-                        // Add active class to the selected option
-                        this.classList.add('active');
-            
-                        // Update variation ID and price
-                        const variationId = this.dataset.variationId;
-                        const price = this.dataset.price;
-            
-                        if (variationId) {
-                            selectedVariationIdInput.value = variationId;
-                        }
-            
-                        if (price) {
-                            selectedPriceInput.value = price;
-                            productPriceEl.textContent = `$${price}`;
-                        }
-                    });
-                });
-            });
+         document.addEventListener('DOMContentLoaded', function () {
+    const attributeOptions = document.querySelectorAll('.attribute-option');
+    const selectedVariationIdInput = document.getElementById('selected-variation-id');
+    const selectedPriceInput = document.getElementById('selected-price');
+    const productPriceEl = document.getElementById('product-price'); // Optional for display
+
+    attributeOptions.forEach(option => {
+        option.addEventListener('click', function () {
+            const attribute = this.dataset.attribute;
+            const variationId = this.dataset.variationId;
+            const price = this.dataset.price;
+
+            // Log to check if values are being read
+            console.log(`Selected Attribute: ${attribute}, Variation ID: ${variationId}, Price: ${price}`);
+
+            // Always update the selected variation ID
+            if (variationId) {
+                selectedVariationIdInput.value = variationId;
+            }
+
+            // Update price only if the attribute is 'size'
+            if (attribute === 'size') {
+                if (price) {
+                    selectedPriceInput.value = price;
+
+                    // Optional: Update displayed price
+                    if (productPriceEl) {
+                        productPriceEl.textContent = `$${price}`;
+                    }
+
+                    console.log(`Price updated to: ${price}`);
+                }
+            }
+
+            // Highlight active selection
+            document.querySelectorAll(`.attribute-option[data-attribute="${attribute}"]`)
+                .forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+});
+
+
             
             </script>
                            
@@ -253,11 +277,11 @@
                         </div>	
                     </div>
 
-                    <!--  -->
+                    <!--------------------------------- wishlist ------------------------------------>
 
-                    @if (Auth::check())
+                  
                     <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                        <div class="flex-m bor9 p-r-10 m-r-11">
+                        <div class="flex-m bor9 p-r-10 m-r-11" >
                             <form action="{{ route('wishLists.store') }}" method="POST" id="wishlist-form-{{ $product->id }}">
                                 @csrf
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -267,14 +291,14 @@
                             </form>
                         </div>
                     </div>
-                    @endif
+                
 
                 </div>
             </div>
         </div>
 
         <div class="bor10 m-t-50 p-t-43 p-b-40">
-            <!-- Tab01 -->
+            
             <div class="tab01">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
@@ -294,7 +318,7 @@
                 <!-- Tab panes -->
                 <div class="tab-content p-t-43">
 
-            <!-------------------- Description ---------------------->
+            <!--------------------------- Description ------------------------------>
                     <div class="tab-pane fade show active" id="description" role="tabpanel">
                         <div class="how-pos2 p-lr-15-md">
                             <p class="stext-102 cl6">
@@ -304,7 +328,7 @@
                         </div>
                     </div>
 
-            <!--------------------- Reviews ------------------------->
+            <!------------------------------ Reviews ------------------------------------>
                     <div class="tab-pane fade" id="reviews" role="tabpanel">
                         <div class="how-pos2 p-lr-15-md">
                             @foreach ($productfeedbacks as $productfeedback)
@@ -348,7 +372,7 @@
 
                   
 
-                      <!-- Edit Form (initially hidden) -->
+                      <!-------- Edit Form (initially hidden) ----------->
                       <div id="edit-form-{{ $productfeedback->id }}" style="display: none; margin-top: 10px;">
                         <form action="{{ route('productFeedbacks.update', $productfeedback->id) }}" method="POST">
                             @csrf
@@ -357,7 +381,7 @@
                             
                             <div class="flex-w flex-m p-t-50 p-b-23">
                                 <span class="stext-102 cl3 m-r-16">
-                                    Your Rating *
+                                    Your Rating <span style="color:red;">*</span>
                                 </span>
         
                                 <span class="wrap-rating fs-18 cl11 pointer">
@@ -434,7 +458,7 @@
                     </script>
 
 
-            <!------------------ Success & error modal ----------------->
+            <!------------------------- Success & error modal ------------------------------>
             @if (Session::get('success'))
 
             <div class="swal-overlay swal-overlay--show-modal" tabindex="-1">
@@ -492,7 +516,7 @@
         @endif   
 
 
-                 <!----------- Add review ------------->
+            <!------------------------------- Add review ---------------------------------->
                  <div class="tab-pane fade" id="add_review" role="tabpanel">
                     <div class="row">
                         <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
@@ -505,7 +529,7 @@
                                     </h5>
     
                                     <p class="stext-102 cl6">
-                                       Required fields are marked *
+                                       Required fields are marked <span style="color:red;">*</span>
                                     </p>
     
                                     <div class="flex-w flex-m p-t-30 p-b-23">
@@ -542,23 +566,23 @@
     
                             <div class="row p-b-25">
                                   <div class="col-12 p-b-5">
-                                     <label class="stext-102 cl3" for="review">Your Review *</label>
+                                     <label class="stext-102 cl3" for="review">Your Review <span style="color:red;">*</span></label>
                                      <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="feedback" name="feedback" required>{{ old('feedback') }}</textarea>
                                   </div>
     
                                   <div class="col-12 p-b-5">
-                                     <label class="stext-102 cl3" for="name">Name *</label>
+                                     <label class="stext-102 cl3" for="name">Name <span style="color:red;">*</span></label>
                                      <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name"
-                                     value="{{ auth()->check() ? auth()->user()->Fname . ' ' . auth()->user()->Lname : '' }}" required>
+                                     value="{{ auth()->check() ? auth()->user()->Fname . ' ' . auth()->user()->Lname : '' }}" required readonly>
                                   </div>
     
                                      <input type="hidden" value="{{ auth()->check() ? auth()->user()->id : '' }}" name="user_id">
                                      <input type="hidden" value="{{ $product->id }}" name="product_id">
     
                                  <div class="col-12 p-b-5">
-                                      <label class="stext-102 cl3" for="email">Email *</label>
+                                      <label class="stext-102 cl3" for="email">Email <span style="color:red;">*</span></label>
                                       <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email"
-                                      value="{{ auth()->check() ? auth()->user()->email : '' }}" required>
+                                      value="{{ auth()->check() ? auth()->user()->email : '' }}" required readonly>
                                  </div>
                             </div>
     
@@ -587,7 +611,7 @@
 </section>
 
 
-<!------------------------ Related Products ----------------->
+<!--------------------------------------------------------------------- Related Products -------------------------------------------------------------->
 
 <section class="sec-relate-product bg0 p-t-45 p-b-105">
     <div class="container">

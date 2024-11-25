@@ -41,7 +41,7 @@ class Kernel extends ConsoleKernel
             Log::info('Availability reset for: ' . $day);
         }
 
-    })->everyMinute(); // 5 means Friday, at midnight
+    })->weeklyOn(3, '0:00'); // 3 = Wednesday, at midnight
     }
 
     /**

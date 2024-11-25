@@ -32,15 +32,23 @@ class HomeController extends Controller
         
         $services = Service::all(); 
         $products = Product::all();
+        $latestProduct = Product::latest()->take(12)->get();
         $pets = Pet::all();
         $testimonials = Testimonial::orderBy('created_at', 'desc')->get();
-
-
+        foreach ($products as $product) {
+            // Assuming 'product_feedbacks' is the relationship name for feedbacks on products
+            $product->averageRating = $product->product_feedbacks()->avg('rating') ?? 0;
+        }
+        foreach ($latestProduct as $product) {
+            // Assuming 'product_feedbacks' is the relationship name for feedbacks on products
+            $product->averageRating = $product->product_feedbacks()->avg('rating') ?? 0;
+        }
         return view('landing_page' , [
             'services'=> $services ,
             'products'=> $products , 
             'pets'=> $pets,
-            'testimonials'=> $testimonials
+            'testimonials'=> $testimonials,
+            'latestProduct' => $latestProduct
         ]);
     }
 

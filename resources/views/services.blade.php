@@ -16,10 +16,10 @@
     <div class="container">
         <div class="row">
             @foreach($services as $service)
-            <div class="col-md-8 col-lg-9 p-b-80">
+            <div class="col-md-8 col-lg-12 p-b-100">
                 <div class="p-r-45 p-r-0-lg">
                     <!-- item blog -->
-                    <div class="p-b-63">
+                    <div class="p-b-23">
                         <a href="{{ route('service_details', $service->id) }}" class="hov-img0 how-pos5-parent" >
 
                            <div class="row">
@@ -37,13 +37,13 @@
 
                         <div class="p-t-32">
                             <h4 class="p-b-15">
-                                <a href="{{ route('service_details', $service->id) }}" class="ltext-108 cl2 hov-cl1 trans-04">
+                                <a href="{{ route('service_details', $service->id) }} #book" class="ltext-108 cl2 hov-cl1 trans-04">
                                     {{$service->name}}
                                 </a>
                             </h4>
 
                             <p class="stext-117 cl6">
-                              {{ $service->small_description }}                            
+                              {{ $service->description }}                            
                             </p>
 
                             <div class="flex-w flex-sb-m p-t-18">
@@ -65,18 +65,14 @@
                                     </span>
                                 </span>
 
-                                <a href="{{ route('service_details', $service->id) }}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-                                    Continue Reading
-
-                                    <i class="fa fa-long-arrow-right m-l-9"></i>
-                                </a>
+                              
                             </div>
 
                             
                         </div>
                         
                     </div>
-                    <a href="{{ route('service_details', $service->id) }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1  trans-04"
+                    <a href="{{ route('service_details', $service->id) }} #book" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1  trans-04"
                     style="width:30px;">
                     Book Appointment
                      </a>

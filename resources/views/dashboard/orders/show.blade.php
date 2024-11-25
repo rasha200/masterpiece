@@ -9,25 +9,25 @@
 @endif
     <div class="card-body" style="border: 1px solid #e7dee9;">
        
-        <p><strong>User Name:</strong>{{ optional($appointment->user)->Fname ?? 'Deleted User' }} {{ optional($appointment->user)->Lname ?? '' }}</p>
-        <p><strong>User Email:</strong> {{ optional($appointment->user)->email ?? '' }} </p>
-        <p><strong>User Mobile:</strong> {{ $appointment->mobile }} </p>
-        <p><strong>Note:</strong> {{ $appointment->note }} </p>
-        <p><strong>Service Name:</strong>  {{ optional($appointment->service)->name ?? 'Deleted pet' }}  </p>
-        <p><strong>Appointment date:</strong>{{ $appointment->day }}</p>
-        <p><strong>Start time:</strong>{{ \Carbon\Carbon::parse($appointment->start_time)->format('h:i A') }} </p>
-        <p><strong>End time:</strong>{{ \Carbon\Carbon::parse($appointment->end_time)->format('h:i A') }} </p>
-        <p><strong>Pet number:</strong> {{ $appointment->pet_number }} </p>
-        <p><strong>Appointment Duration:</strong> {{ $formattedDuration }} </p>
+        <p><strong>User Name:</strong>{{ optional($toAdoupt->user)->Fname ?? 'Deleted User' }} {{ optional($toAdoupt->user)->Lname ?? '' }}</p>
+        <p><strong>User Email:</strong> {{ optional($toAdoupt->user)->email ?? '' }} </p>
+        <p><strong>Pet Name:</strong>  {{ optional($toAdoupt->pet)->name ?? 'Deleted pet' }}  </p>
+        <p><strong>Reason For Adoption:</strong>{{ $toAdoupt->reason_for_adoption }} </p>
+        <p><strong>Current Pets:</strong> {{ $toAdoupt->current_pets }} </p>
+        <p><strong>Availability:</strong> {{ $toAdoupt->availability }} </p>
+        <p><strong>Pet Experience:</strong> {{ $toAdoupt->pet_experience }} </p>
+        <p><strong>Contact Info:</strong> {{ $toAdoupt->contact_info }} </p>
+        <p><strong>Address:</strong> {{ $toAdoupt->address }} </p>
 
-        <form id="statusForm" action="{{ route('appointments.update', $appointment->id) }}" method="POST">
+       
+        <form id="statusForm" action="{{ route('toAdoupts.update', $toAdoupt->id) }}" method="POST">
             @csrf
             @method('PUT')
-           
+            @if(Auth::user()->role == 'manager' || Auth::user()->role == 'store_manager' )
             <button type="button" class="btn btn-outline-info btn-fw" onclick="confirmUpdate(event, 'Accept')">Accept</button>
             <button type="button" class="btn btn-outline-danger" onclick="confirmUpdate(event, 'Reject')">Reject</button>
-           
-            <a href="{{ route('appointments.index') }}" class="btn btn-outline-secondary">Back to list</a>
+            @endif 
+            <a href="{{ route('toAdoupts.index') }}" class="btn btn-outline-secondary">Back to list</a>
 
         </form>
         
@@ -36,7 +36,7 @@
 
 <div id="confirmationModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center;">
     <div style="background: #fff; padding: 20px; border-radius: 5px; text-align: center;">
-        <h5>Are you sure you want to update this appointment status?</h5>
+        <h5>Are you sure you want to update the adoption status?</h5>
         <button id="confirmButton" class="btn btn-outline-info btn-fw">Confirm</button>
         <button id="cancelButton" class="btn btn-outline-secondary">Cancel</button>
     </div>

@@ -66,7 +66,7 @@
                          
                           <td> 
 
-                            @if( $ToAdoupt->status == 'Pending') 
+                            @if($ToAdoupt->status == 'Accept' || $ToAdoupt->status == 'Reject' || $ToAdoupt->status == 'Pending') 
                           <a href="{{ route('toAdoupts.show', $ToAdoupt->id) }}"  title="View">
                           <button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
                             <i class="mdi mdi mdi-eye text-success"></i>

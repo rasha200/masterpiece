@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('reminder_time')->nullable();
             $table->integer('pet_number')->default(1);
             $table->string('mobile');
-            $table->string('note');
+            $table->string('note')->nullable();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

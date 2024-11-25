@@ -18,15 +18,18 @@
 {{--Services section end--}}
 
 
+
+
+{{--Pets section start--}}
+@include("include/landing_page/pets")
+{{--Pets section end--}}
+
 {{--Products section start--}}
 @include("include/landing_page/products")
 {{--Products section end--}}
 
 
 
-{{--Pets section start--}}
-@include("include/landing_page/pets")
-{{--Pets section end--}}
 
 
 

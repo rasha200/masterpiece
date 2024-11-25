@@ -23,22 +23,15 @@
 <section class="bg0 p-t-52 p-b-20">
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-lg-9 p-b-80">
+            <div class="col-md-8 col-lg-12 p-b-80">
                 <div class="p-r-45 p-r-0-lg">
                     <!--  -->
-                    <div class="row">
-                        @foreach ($serviceImages->slice(0, 3) as $serviceImage)
-                            <div class="col-md-4 mb-3"> 
-                                <img src="{{ asset($serviceImage->image) }}" class="img-fluid rounded" alt="Service Image"
-                                     style="height: 200px; object-fit: cover; width: 100%;">
-                            </div>
-                       
                    
-                       
-                        @endforeach
-                    </div>
 
                     <div class="p-t-32">
+                        <h4 class="ltext-109 cl2 p-b-28">
+                            {{ $service->name }}
+                        </h4>
                         <span class="flex-w flex-m stext-111 cl2 p-b-19">
                             <span>
                                 <span class="cl4">By</span> Service Team
@@ -62,11 +55,9 @@
                             </span>
                         </span>
 
-                        <h4 class="ltext-109 cl2 p-b-28">
-                            {{ $service->name }}
-                        </h4>
+                       
 
-                        <p class="stext-117 cl6 p-b-26">
+                        <p class="stext-117 cl6 p-b-26" id="book">
                             {{ $service->description }}                       
                          </p>
 
@@ -74,8 +65,8 @@
 
                        
                     </div>
-
-                    <h4 class="ltext-109 cl2 p-t-28 p-b-28">
+ 
+                    <h4 class="ltext-109 cl2 p-t-28 " id="available">
                         Book appointment
                     </h4>
 
@@ -92,7 +83,7 @@
                                     class="stext-111 cl2 size-116 p-lr-15 border rounded shadow-sm" 
                                     value="{{ request('date', now()->format('Y-m-d')) }}" 
                                     min="{{ now()->startOfDay()->format('Y-m-d') }}" 
-                                    max="{{ now()->endOfWeek(Carbon\Carbon::THURSDAY)->format('Y-m-d') }}"
+                                    max="{{ now()->endOfWeek(Carbon\Carbon::WEDNESDAY)->format('Y-m-d') }}"
                                     onchange="this.form.submit()"> <!-- Auto-submit form on date change -->
                             </div>
                         </form>
@@ -183,9 +174,21 @@
                         <!-- Booking Form -->
                         <form method="POST" action="{{ route('appointments.store') }}" id="booking-form">
                             @csrf
-                            <div class="bor8 m-b-20 p-tb-15 p-lr-20 bg-light shadow-sm">
-                                <input type="number" name="pet_number" placeholder="Pet Number *" class="stext-111 cl2 size-116 p-lr-15 border rounded shadow-sm" required>
+                            <div class="bor8 m-b-10 p-tb-15 p-lr-20 bg-light shadow-sm">
+                                <label for="appointment-date" class="stext-111 cl2 m-b-10 d-block font-weight-bold">Pet Number <span style="color:red;">*</span></label>
+                                <input type="number" name="pet_number" placeholder="Pet Number" class="stext-111 cl2 size-116 p-lr-15 border rounded shadow-sm" required>
                             </div>
+
+                            <div class="bor8 m-b-10 p-tb-15 p-lr-20 bg-light shadow-sm">
+                                <label for="appointment-date" class="stext-111 cl2 m-b-10 d-block font-weight-bold">Mobile number <span style="color:red;">*</span></label>
+                                <input type="text" name="mobile" placeholder="Mobile number" class="stext-111 cl2 size-116 p-lr-15 border rounded shadow-sm" required>
+                            </div>
+
+                            <div class="bor8 m-b-10 p-tb-15 p-lr-20 bg-light shadow-sm">
+                                <label for="appointment-date" class="stext-111 cl2 m-b-10 d-block font-weight-bold">Your note</label>
+                                <input type="text" name="note" placeholder="Your note" class="stext-111 cl2 size-116 p-lr-15 border rounded shadow-sm">
+                            </div>
+
                             <input type="hidden" value="{{ auth()->check() ? auth()->user()->id : '' }}" name="user_id">
                             <input type="hidden" value="{{ $service->id }}" name="service_id">
                             <input type="hidden" name="status" value="Pending">
@@ -197,11 +200,22 @@
                         </form>
                     </div>
                      
-                    
+                </div>
                     
                     
                     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                     <script>
+
+                        document.addEventListener('DOMContentLoaded', function () {
+                          // Scroll to the 'book' section if slots are available
+                        if (document.querySelector('.slot-button')) {
+                        const bookSection = document.getElementById('available');
+                        if (bookSection) {
+                         bookSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                       }
+                     });
+
                        $(document).ready(function () {
                         // Handle slot selection
                         $('.slot-button').click(function () {
@@ -269,18 +283,20 @@
                         </div>
 
                         <div class="size-207">
+                            <div class="flex-w flex-sb-m p-b-17">
+                                <span class="mtext-107 cl2 p-r-20">
+                                {{$servicefeedback->feedback}}
+                            </span>
                            
                                 <span class="fs-18 cl11">
                                     @for ($i = 1; $i <= 5; $i++)
                                         <i class="zmdi {{ $i <= $servicefeedback->rating ? 'zmdi-star' : 'zmdi-star-outline' }}"></i>
                                     @endfor
                                 </span>
+                            </div>
                                 <br>
 
-                                <p class="mtext-107 cl2 p-r-20">
-                                   
-                                    {{$servicefeedback->feedback}}
-                                </p>
+                               
                                 
 
                                 <p class="stext-102 cl6">
@@ -311,7 +327,7 @@
                                        
                                        <div class="flex-w flex-m p-t-50 p-b-23">
                                            <span class="stext-102 cl3 m-r-16">
-                                               Your Rating *
+                                               Your Rating <span style="color:red;">*</span>
                                            </span>
                    
                                            <span class="wrap-rating fs-18 cl11 pointer">
@@ -449,7 +465,7 @@
 
 
 
-             <!-------------------- Add review -------------->
+<!--------------------------------------------- Add review --------------------------------------------------------------->
             <div class="tab-pane fade" id="add_review" role="tabpanel">
                 <div class="row">
                     <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
@@ -462,7 +478,7 @@
                                 </h5>
 
                                 <p class="stext-102 cl6">
-                                   Required fields are marked *
+                                   Required fields are marked <span style="color:red;">*</span>
                                 </p>
 
                                 <div class="flex-w flex-m p-t-30 p-b-23">
@@ -499,23 +515,23 @@
 
                         <div class="row p-b-25">
                               <div class="col-12 p-b-5">
-                                 <label class="stext-102 cl3" for="review">Your Review *</label>
+                                 <label class="stext-102 cl3" for="review">Your Review <span style="color:red;">*</span></label>
                                  <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="feedback" name="feedback" required>{{ old('feedback') }}</textarea>
                               </div>
 
                               <div class="col-12 p-b-5">
-                                 <label class="stext-102 cl3" for="name">Name *</label>
+                                 <label class="stext-102 cl3" for="name">Name <span style="color:red;">*</span></label>
                                  <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name"
-                                 value="{{ auth()->check() ? auth()->user()->Fname . ' ' . auth()->user()->Lname : '' }}" required>
+                                 value="{{ auth()->check() ? auth()->user()->Fname . ' ' . auth()->user()->Lname : '' }}" required readonly>
                               </div>
 
                                  <input type="hidden" value="{{ auth()->check() ? auth()->user()->id : '' }}" name="user_id">
                                  <input type="hidden" value="{{ $service->id }}" name="service_id">
 
                              <div class="col-12 p-b-5">
-                                  <label class="stext-102 cl3" for="email">Email *</label>
+                                  <label class="stext-102 cl3" for="email">Email <span style="color:red;">*</span></label>
                                   <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email"
-                                  value="{{ auth()->check() ? auth()->user()->email : '' }}" required>
+                                  value="{{ auth()->check() ? auth()->user()->email : '' }}" required readonly>
                              </div>
                         </div>
 
@@ -531,7 +547,6 @@
     </div>
 </div>
 
- <!--==========================================  (ٌReview)  =====================================================-->
 
 
                     

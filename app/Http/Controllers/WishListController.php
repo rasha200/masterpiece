@@ -30,6 +30,14 @@ class WishListController extends Controller
 
      public function store(Request $request)
      {
+
+        if (!auth()->check()) {
+            // Store a session variable to remember that the user came from the service feedback form
+            session(['from_wishlist' => true, 'product_id' => $request->input('product_id')]);
+        
+            // Redirect back with the error message and input data
+            return redirect()->back()->with('error', 'Please log in to add to the wishlist.')->withInput();
+        }
         
 
     $user = auth()->user();

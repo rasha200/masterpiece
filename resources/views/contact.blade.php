@@ -128,7 +128,7 @@
                     <div class="flex-w flex-m p-t-50 p-b-23">
                        
                         <span class="stext-102 cl3 m-r-16">
-                            Your Rating *
+                            Your Rating <span style="color:red;">*</span>
                         </span>
                         
                         
@@ -149,14 +149,14 @@
                     
                     <div class="bor8 m-b-20 how-pos4-parent">
                         <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="name" placeholder="Your Name" 
-                        value="{{ auth()->check() ? auth()->user()->Fname . ' ' . auth()->user()->Lname : '' }}" required>
+                        value="{{ auth()->check() ? auth()->user()->Fname . ' ' . auth()->user()->Lname : '' }}" required readonly>
                     </div>
             
                     <input type="hidden" value="{{ auth()->check() ? auth()->user()->id : '' }}" name="user_id">
             
                     <div class="bor8 m-b-20 how-pos4-parent">
                         <input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Your Email Address" 
-                        value="{{ auth()->check() ? auth()->user()->email : '' }}" required>
+                        value="{{ auth()->check() ? auth()->user()->email : '' }}" required readonly>
                         <img class="how-pos4 pointer-none" src="images/icons/icon-email.png" alt="ICON">
                     </div>
             

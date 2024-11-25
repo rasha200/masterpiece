@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('pet_experience');
             $table->string('contact_info');
             $table->string('address');
+            $table->string('reason_of_reject')->nullable();
 
             $table->unsignedBigInteger('pet_id');
             $table->foreign('pet_id')->references('id')->on('pets');

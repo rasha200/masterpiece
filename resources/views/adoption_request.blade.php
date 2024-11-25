@@ -62,7 +62,7 @@
 @endif
 
 <!-- Adoption Form -->
-<div class="container mt-5" style="max-width: 800px; padding: 40px; border-radius: 15px; background-size: cover; background-position: center; background-image: url('{{ $pet->pet_images->isNotEmpty() ? asset($pet->pet_images[0]->image) : asset('resgister/images/rigester.jpg') }}');">
+<div class="container " style="max-width: 800px; padding: 40px; border-radius: 15px; background-size: cover; background-position: center; background-image: url('{{ $pet->pet_images->isNotEmpty() ? asset($pet->pet_images[0]->image) : asset('resgister/images/rigester.jpg') }}');">
 
     <!-- Form Heading -->
     <div class="text-center mb-5" style="background: rgba(255, 255, 255, 0.8); padding: 15px; border-radius: 10px;">
@@ -76,36 +76,87 @@
         <input type="hidden" name="status" value="Pending">
 
         <!-- Input Fields with Semi-Transparent Background for Each Input -->
+    
+        
+        <label for="reason_for_adoption" class="form-label">Reason for Adoption <span style="color:red;">*</span></label>
         <div class="bor8 m-b-20 how-pos4-parent">
             <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="reason_for_adoption" placeholder="Reason for Adoption" value="{{ old('reason_for_adoption') }}" required style="background: rgba(255, 255, 255, 0.7);">
         </div>
 
+        <label for="reason_for_adoption" class="form-label">Current Pets <span style="color:red;">*</span></label>
         <div class="bor8 m-b-20 how-pos4-parent">
             <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="current_pets" placeholder="Current Pets" value="{{ old('current_pets') }}" required style="background: rgba(255, 255, 255, 0.7);">
         </div>
 
+        <label for="reason_for_adoption" class="form-label">Availability <span style="color:red;">*</span></label>
         <div class="bor8 m-b-20 how-pos4-parent">
             <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="availability" placeholder="Availability" value="{{ old('availability') }}" required style="background: rgba(255, 255, 255, 0.7);">
         </div>
 
+        <label for="reason_for_adoption" class="form-label">Pet Experience <span style="color:red;">*</span></label>
         <div class="bor8 m-b-20 how-pos4-parent">
             <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="pet_experience" placeholder="Pet Experience" value="{{ old('pet_experience') }}" required style="background: rgba(255, 255, 255, 0.7);">
         </div>
 
+        <label for="reason_for_adoption" class="form-label">Contact Info <span style="color:red;">*</span></label>
         <div class="bor8 m-b-20 how-pos4-parent">
             <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="contact_info" placeholder="Contact Info" value="{{ old('contact_info') }}" required style="background: rgba(255, 255, 255, 0.7);">
         </div>
 
+        <label for="reason_for_adoption" class="form-label">Address <span style="color:red;">*</span></label>
         <div class="bor8 m-b-20 how-pos4-parent">
             <input class="stext-111 cl2 plh3 size-116 p-l-28 p-r-30" type="text" name="address" placeholder="Address" value="{{ old('address') }}" required style="background: rgba(255, 255, 255, 0.7);">
         </div>
 
+    
         <!-- Submit Button -->
         <button type="button" class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer mt-3" data-toggle="modal" data-target="#confirmationModal">
             Submit
         </button>
     </form>
 </div>
+
+        <!-- input divs style -->
+        <style>
+            /* Semi-transparent background for the container */
+            .input-container {
+                background: rgba(0, 0, 0, 0.1); /* Slightly transparent background */
+                padding: 15px;
+                border-radius: 8px; /* Optional: for rounded corners */
+                margin-bottom: 20px;
+                position: relative;
+            }
+        
+            /* Style for the label */
+            .input-container .form-label {
+                display: block;
+                margin-bottom: 5px;
+                color: #333;
+                font-size: 14px;
+                font-weight: 500;
+            }
+        
+            /* More semi-transparent background for the input */
+            .input-container .input-field {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc; /* Optional: border style */
+                border-radius: 5px; /* Optional: match container */
+                background: rgba(255, 255, 255, 0.7); /* More transparent */
+                font-size: 14px;
+                color: #333;
+                box-sizing: border-box; /* Ensures padding doesn't overflow the div */
+            }
+        
+            /* Add focus effect for the input */
+            .input-container .input-field:focus {
+                outline: none;
+                border-color: #007bff; /* Optional: focus border color */
+                background: rgba(255, 255, 255, 0.9); /* Slightly less transparent on focus */
+            }
+        </style>
+
+
 
 <!-- Modal for Confirmation -->
 <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">

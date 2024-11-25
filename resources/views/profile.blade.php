@@ -153,7 +153,7 @@
 
                                     @if($adoptRequest->status == "Reject")
                                    
-                                    <p><strong>{{ auth()->user()->Fname }} {{ auth()->user()->Lname }}</strong> Thank you for your interest in adopting {{ $adoptRequest->pet->name }}. Unfortunately, your adoption request has been rejected. We appreciate your time and understanding. Please feel free to check for other pets available for adoption.</p>
+                                    <p><strong>{{ auth()->user()->Fname }} {{ auth()->user()->Lname }}</strong> Thank you for your interest in adopting {{ $adoptRequest->pet->name }}. Unfortunately, your adoption request has been rejected because : {{ $adoptRequest->reason_of_reject }}</p>
                               
                                 @endif
 
@@ -304,7 +304,7 @@
                                 @else
                                     {{-- Show cancel button logic based on time difference if appointment is not ended --}}
                                     @if($timeDifference >= 240) {{-- 240 minutes = 4 hours --}}
-        <button class="btn btn-danger custom-btn" data-toggle="modal" data-target="#cancelModalAppointment{{ $UserAppointment->id }}" style="margin-top:18px; background-color: #A71619; padding:0px !important; width:120px !important; height : 40px !important; border-radius: 20px !important;">Cancel Adoption</button>
+        <button class="btn btn-danger custom-btn" data-toggle="modal" data-target="#cancelModalAppointment{{ $UserAppointment->id }}" style="margin-top:18px; background-color: #A71619; padding:0px !important; width:120px !important; height : 40px !important; border-radius: 20px !important;">Cancel</button>
     @else
         <button class="btn btn-secondary custom-btn" disabled style="margin-top:18px; padding:0px !important; width:120px !important; height : 40px !important; border-radius: 20px !important;">Cancel (Not Allowed)</button>
     @endif

@@ -42,6 +42,7 @@ class ToAdouptController extends Controller
             'pet_experience' => 'required|string',
             'contact_info' => 'required|string',
             'address' => 'required|string',
+            'reason_of_reject' => 'nullable|string',
         ]);
 
         if (!auth()->check()) {
@@ -91,13 +92,15 @@ class ToAdouptController extends Controller
     {
         $validation = $request->validate([
             'status' => 'required|in:Accept,Reject',
+            'reason_of_reject' => 'nullable|string',
         ]);
 
         $toAdoupt->update([
             'status' => $request->input('status'),
+            'reason_of_reject' => $request->input('reason_of_reject'),
         ]);
 
-        return redirect()->back()->with('success', 'Adoption request updated successfully');
+        return redirect()->route('toAdoupts.index')->with('success', 'Adoption request updated successfully');
     }
 
 

@@ -62,7 +62,7 @@
     <!-- End Topbar -->
 
 
-       	<div class="wrap-menu-desktop">
+       	<div class="wrap-menu-desktop" style="background-color:#fff;">
 				<nav class="limiter-menu-desktop container">
                 
                 <!-- Logo desktop -->		
@@ -73,28 +73,28 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li >
+                        <li class="{{ request()->routeIs('home') ? 'active-menu' : '' }}">
                             <a href="{{ route('home') }}">Home</a>
                         </li>
 
-                        <li>
+                        <li class="{{ request()->routeIs('about_us') ? 'active-menu' : '' }}">
                             <a href="{{ route('about_us') }}">About</a>
                         </li>
 
-                        <li >
+                        <li class="{{ request()->routeIs('services') ? 'active-menu' : '' }}">
                             <a href="{{ route('services') }}">Services</a>
                         </li>
 
 
-                        <li>
+                        <li class="{{ request()->routeIs('store') ? 'active-menu' : '' }}">
                             <a href="{{ route('store') }}">Store</a>
                         </li>
 
-                        <li>
+                        <li class="{{ request()->routeIs('pet_adoption') ? 'active-menu' : '' }}">
                             <a href="{{ route('pet_adoption') }}">Pet Adoption</a>
                         </li>
 
-                        <li>
+                        <li class="{{ request()->routeIs('contact') ? 'active-menu' : '' }}">
                             <a href="{{ route('contact') }}">Contact</a>
                         </li>
                     </ul>
@@ -103,9 +103,14 @@
                 <!-- Icon header -->
                 <div class="wrap-icon-header flex-w flex-r-m">
                     
-                        
+                    @php
+                    $cartItems = json_decode(Cookie::get('cart', json_encode([])), true);
+                    $cartCount = array_reduce($cartItems, function ($carry, $item) {
+                        return $carry + $item['quantity'];
+                    }, 0);
+                @endphp
                    
-                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="">
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-lr-11 icon-header-noti js-show-cart" data-notify="{{ $cartCount }}">
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
                         @if (Auth::check())

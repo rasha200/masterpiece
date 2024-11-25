@@ -24,6 +24,11 @@
             @csrf
             @method('PUT')
             @if(Auth::user()->role == 'manager' || Auth::user()->role == 'store_manager' )
+             <div class="form-group">
+                <label for="exampleInputName1">Reason of reject</label>
+                <input type="text" class="form-control" id="reason_of_reject" placeholder="Reason of reject" name="reason_of_reject" value="{{ old('reason_of_reject') }}">
+              </div>
+
             <button type="button" class="btn btn-outline-info btn-fw" onclick="confirmUpdate(event, 'Accept')">Accept</button>
             <button type="button" class="btn btn-outline-danger" onclick="confirmUpdate(event, 'Reject')">Reject</button>
             @endif 

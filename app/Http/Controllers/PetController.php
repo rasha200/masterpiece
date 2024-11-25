@@ -21,7 +21,7 @@ class PetController extends Controller
 
     public function index_user_side()
     {
-        $pets = Pet::with('pet_images')->paginate(6);
+        $pets = Pet::with('pet_images')->paginate(12);
 
         return view('pet_adoption' , ['pets'=> $pets]);
     }

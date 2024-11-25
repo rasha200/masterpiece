@@ -162,7 +162,13 @@ input:invalid + #rating-warning {
 
 
 
-
+.color-circle {
+  width: 20px;  /* Size of the circle */
+  height: 20px;  /* Size of the circle */
+  border-radius: 50%;  /* Makes the div round */
+  display: inline-block;
+  margin-right: 5px;  /* Space between the color circle and the text */
+}
 
 
 
@@ -2200,7 +2206,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .block2-pic:hover .block2-btn {
   bottom: 20px;
-  
+
 }
 
 /*---------------------------------------------*/
@@ -2794,8 +2800,8 @@ input.num-product::-webkit-inner-spin-button {
 .bg3 {background-color: #14535F;}
 .bg5 {background-color: rgba(0,0,0,0.5);}
 .bg6 {background-color: #f2f2f2;}
-.bg7 {background-color: #333;}
-.bg8 {background-color: #f3f3f3;}
+.bg7 {background-color: #14535F;}
+.bg8 {background-color: #14535F; color:#fff;}
 .bg9 {background-color: rgba(255,255,255,0.9);}
 
 /*---------------------------------------------*/
@@ -3221,8 +3227,8 @@ input.num-product::-webkit-inner-spin-button {
 
 /*---------------------------------------------*/
 .hov-btn1:hover {
-  border-color: #222;
-  background-color: #222;
+  border-color:#14535F;
+  background-color: #14535F;
   color: #fff;
 }
 

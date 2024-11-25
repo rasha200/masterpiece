@@ -18,7 +18,7 @@
     
 
 <!-- Shoping Cart -->
-<form class="bg0 p-t-75 p-b-85">
+<div class="bg0 p-t-75 p-b-85">
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -28,50 +28,110 @@
                         @if (isset($cartDetails) && is_array($cartDetails) && count($cartDetails) > 0)
                         <table class="table-shopping-cart">
                             <tr class="table_head">
-                                <th class="column-1">Product</th>
-                                <th class="column-2"></th>
+                               
+                                <th class="column-1"></th>
+                                <th class="column-2">Product</th>
                                 <th class="column-3">Price</th>
                                 <th class="column-4">Quantity</th>
                                 <th class="column-5">Total</th>
+                                <th class="column-6"></th>
                             </tr>
                           @foreach ($cartDetails as $item)
                             <tr class="table_row">
                                 <td class="column-1">
-                                    <div class="how-itemcart1">
-                                        <img src="images/item-cart-04.jpg" alt="IMG">
-                                    </div>
+                                    <form action="{{ route('cart.delete',$item['id']) }}" method="POST">
+                                        @csrf
+                                 
+                                        <button type="submit" >
+                                           <img src="{{ $item['image'] }}" alt="IMG" style="width:80px;">
+                                        </button>
+                                  
+                                </form>
+
+                                
                                 </td>
                                 <td class="column-2"> 
                                     {{ $item['name'] }}
+                                
                                     <br> 
                                      @if (isset($item['variation']))
-                                      {{ $item['variation'] }}
+                                     {!! $item['variation'] !!}
                                     @else
-                                      N/A
+                                      
                                     @endif
                                 </td>
                                 <td class="column-3">${{ number_format($item['price'], 2) }}</td>
                                 <td class="column-4">
-                                    <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-minus"></i>
-                                        </div>
+                                   
+                                        
 
-                                        <input 
-                                        class="mtext-104 cl3 txt-center num-product" 
-                                        type="number" 
-                                        name="num-product1" 
-                                        value="{{ $item['quantity'] }}"
-                                        min="1"
-                                    >
-                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-plus"></i>
-                                        </div>
-                                    </div>
+                                        <form action="{{ route('cart.update', $item['id']) }}" method="POST" >
+                                            @csrf
+                                            <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                               
+                                             
+                                                <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" onclick="updateQuantity({{ $item['id'] }}, -1)">
+                                                    <i class="fs-16 zmdi zmdi-minus"></i>
+                                                </div>
+                                                <input
+                                             class="mtext-104 cl3 txt-center num-product"
+                                                type="number"
+                                                name="quantity"
+                                                data-product-id="{{ $item['id'] }}"
+                                                value="{{ $item['quantity'] }}"
+                                                min="1"
+                                                required
+                                            >
+
+                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"  onclick="updateQuantity({{ $item['id'] }}, 1)">
+                                                <i class="fs-16 zmdi zmdi-plus"></i>
+                                            </div>
+                                                
+                                            </div>
+                                        </form>
+                                       
+
+
+                                        
+                                      
+                                        
+                                     
+                                  
                                 </td>
                                 <td class="column-5">${{ number_format($item['total'], 2) }}</td>
+
+
+                               
+
+                           
+                             
+                             
                             </tr>
                             @endforeach
+
+                            
+                            <script>
+                                function updateQuantity(id, change) {
+                                    // Select the input element using data-product-id
+                                    const quantityInput = document.querySelector(`input[name="quantity"][data-product-id="${id}"]`);
+                    
+                                    if (quantityInput) {
+                                        // Adjust the quantity based on the change value
+                                        let newQuantity = parseInt(quantityInput.value) + change;
+                    
+                                        // Ensure quantity remains at least 1
+                                        if (newQuantity < 1) {
+                                            newQuantity = 1;
+                                        }
+                    
+                                        // Update the input value
+                                        quantityInput.value = newQuantity;
+                    
+                                        // Automatically submit the form to apply the update to the cart
+                                        quantityInput.closest('form').submit();
+                                    }
+                                }
+                            </script>
 
                           
                         </table>
@@ -90,9 +150,16 @@
                             </div>
                         </div>
 
-                        <div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
-                            Update Cart
-                        </div>
+                        <form action="{{ route('cart.clear') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="route-box__link">
+                                <div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+                                    Delete Cart
+                                </div>
+                            </button>
+                        </form>
+
+                       
                     </div>
                 </div>
             </div>
@@ -110,9 +177,16 @@
                             </span>
                         </div>
 
+                        @php
+                        $total = collect($cartDetails)->sum(function($item) {
+                            return $item['price'] * $item['quantity'];
+                        });
+                        
+                    @endphp
+
                         <div class="size-209">
                             <span class="mtext-110 cl2">
-                                $79.65
+                                ${{ number_format($total, 2) }}
                             </span>
                         </div>
                     </div>
@@ -170,7 +244,7 @@
 
                         <div class="size-209 p-t-1">
                             <span class="mtext-110 cl2">
-                                $79.65
+                                ${{ number_format($total, 2) }}
                             </span>
                         </div>
                     </div>
@@ -182,7 +256,6 @@
             </div>
         </div>
     </div>
-</form>
-    
+</div>
 
 @endsection

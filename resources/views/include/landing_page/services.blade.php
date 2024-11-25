@@ -21,7 +21,7 @@
                             <span>No image available</span>
             @endif
                         </a>
-                        <a href="{{ route('service_details', $service->id) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 " >
+                        <a href="{{ route('service_details', $service->id) }} #book" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 " >
                             Book Appointment
                         </a>
                     </div>
@@ -30,7 +30,7 @@
                         
 
                         <h4 class="p-b-15">
-                            <a href="{{ route('service_details', $service->id) }}" class="ltext-108 cl2 hov-cl1 trans-04">
+                            <a href="{{ route('service_details', $service->id) }}#book" class="ltext-108 cl2 hov-cl1 trans-04">
                                 {{$service->name}}
                             </a>
                         </h4>
@@ -43,7 +43,7 @@
                     </div>
                     <br>
 
-                    <a href="{{ route('service_details', $service->id) }}" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
+                    <a href="{{ route('service_details', $service->id) }} #book" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
                         Continue Reading
 
                         <i class="fa fa-long-arrow-right m-l-9"></i>

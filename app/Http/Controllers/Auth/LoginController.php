@@ -62,6 +62,18 @@ class LoginController extends Controller
             return route('product_details', ['id' => $productId]);
         }
 
+        if (session()->has('from_wishlist')) {
+            // Get the product ID from the session
+            $productId = session('product_id');
+    
+            // Remove the session variable after use
+            session()->forget('from_wishlist');
+            session()->forget('product_id'); // Remove product ID after use
+    
+            // Redirect to the product_details page with the product ID
+            return route('product_details', ['id' => $productId]);
+        }
+
         if (session()->has('from_adoption')) {
             // Get the pet ID from the session
             $pet_id = session('pet_id');
@@ -86,6 +98,7 @@ class LoginController extends Controller
             return route('service_details', ['id' => $serviceId]);
         }
 
+        
 
     
     if (Auth::user()->role == 'receptionist' || Auth::user()->role == 'veterinarian' || Auth::user()->role == 'manager') {

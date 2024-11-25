@@ -22,6 +22,8 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ChartController;
+
 
 
 
@@ -42,6 +44,8 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 
+
+
 // <!--==========================================  (HOME)  ========================================================================================================================-->
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [HomeController::class, 'index']);
@@ -55,6 +59,12 @@ Route::get('/dashboard', function () {
     return view('layouts.dashboard_master');
 })->name('dashboard')->middleware(['auth' , 'role']);
 
+
+
+
+// <!--==========================================  (Chart)  ============================================================================================================================-->
+
+Route::get('/chart', [ChartController::class, 'chart'])->name('chart')->middleware(['auth' , 'role']);
 
 
 // <!--==========================================  (Search)  ========================================================================================================================-->
@@ -107,6 +117,16 @@ Route::middleware(['auth', 'role','store'])->group(function () {
 Route::get('/productVariations/{product_id}/{productVariation}', [ProductVariationController::class, 'show'])->name('productVariations.show'); 
 
 
+
+
+// <!--==========================================  (orders)  ==================================================================================================================-->
+Route::middleware(['auth', 'role'])->group(function () {
+    Route::get('/orderProducts', [OrderProductController::class, 'index'])->name('orderProducts.index'); // List all orderProducts (dashboard)
+    Route::get('/orderProducts/{orderProduct}', [OrderProductController::class, 'show'])->name('orderProducts.show'); // Show
+});
+// Public routes
+Route::get('/orderProducts/create/{pet_id}', [OrderProductController::class, 'create'])->name('orderProducts.create'); // Create form (user side)
+Route::post('/orderProducts', [OrderProductController::class, 'store'])->name('orderProducts.store'); // Create
 
 
 
@@ -269,10 +289,7 @@ Route::get('/about_us', function () {
 
 
 
-// <!--==========================================  (Cart)  =============================================================================================================================-->
-Route::get('/cart', function () {
-    return view('cart');
-})->name("cart");
+
 
 
 

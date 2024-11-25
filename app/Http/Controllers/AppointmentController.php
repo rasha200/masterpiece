@@ -80,6 +80,8 @@ public function store(Request $request)
     $request->validate([
         'appointment_datetime' => 'required|date_format:Y-m-d h:i A',
         'pet_number' => 'required|integer|min:1',
+        'mobile' => 'required|numeric',
+        'note' => 'nullable|string',
         'service_id' => 'required|exists:services,id',
     ]);
 
@@ -118,18 +120,20 @@ public function store(Request $request)
         return redirect()->back()->with('error', 'The selected slot is not available. Please choose another slot.');
     }
 
-    // Create the appointment
+
     $appointment = Appointment::create([
         'day' => $startTime->format('l') . ' ' . $startTime->format('Y-m-d'), 
         'start_time' => $startTime->format('H:i'),
         'end_time' => $endTime->format('H:i'),
-        'status' => 'Pending', // Default status
+        'status' => 'Pending', 
         'pet_number' => $request->input('pet_number'),
-        'user_id' => auth()->id(), // Authenticated user ID
+        'mobile' => $request->input('mobile'),
+        'note' => $request->input('note'),
+        'user_id' => auth()->id(), 
         'service_id' => $request->input('service_id'),
     ]);
 
-    // Mark overlapping slots as unavailable
+    
     AvailabilityTime::where('service_id', $request->input('service_id'))
         ->where('is_available', 'true')
         ->where(function ($query) use ($startTime, $endTime) {
