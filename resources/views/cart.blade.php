@@ -42,7 +42,7 @@
                                     <form action="{{ route('cart.delete',$item['id']) }}" method="POST">
                                         @csrf
                                  
-                                        <button type="submit" >
+                                        <button type="submit" class="header-cart-item-img">
                                            <img src="{{ $item['image'] }}" alt="IMG" style="width:80px;">
                                         </button>
                                   
@@ -51,9 +51,12 @@
                                 
                                 </td>
                                 <td class="column-2"> 
-                                    {{ $item['name'] }}
+                                    <a href="{{ route('product_details', $item['id']) }}" class="header-cart-item-name hov-cl1 trans-04">
+                                        {{ $item['name'] }}
+                                    </a>
+                                    
                                 
-                                    <br> 
+                                   
                                      @if (isset($item['variation']))
                                      {!! $item['variation'] !!}
                                     @else

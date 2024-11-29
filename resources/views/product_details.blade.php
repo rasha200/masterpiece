@@ -132,53 +132,6 @@
             @endforeach
         </div>
 
-    <style>
-        .variation-group {
-            margin-bottom: 15px;
-        }
-        
-        .variation-title {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 8px;
-        }
-        
-        .variation-options {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        
-        .attribute-option {
-            padding: 8px 16px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin: 5px;
-            cursor: pointer;
-            transition: border-color 0.3s, background-color 0.3s;
-        }
-        
-        .color-option {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            padding: 0;
-            margin-right: 10px;
-        }
-        
-        .attribute-option:hover,
-        .color-option:hover {
-            border-color: #ffa500;
-        }
-        
-        .attribute-option.active,
-        .color-option.active {
-            border-color: #ffa500;
-            background-color: #ffe4b5;
-        }
-        </style>
-
-        
-                    
                     <!--  -->
                     <div class="p-t-33">
 
@@ -276,6 +229,51 @@
                             </div>
                         </div>	
                     </div>
+
+                    <style>
+                        .variation-group {
+                            margin-bottom: 15px;
+                        }
+                        
+                        .variation-title {
+                            font-weight: bold;
+                            display: block;
+                            margin-bottom: 8px;
+                        }
+                        
+                        .variation-options {
+                            display: flex;
+                            flex-wrap: wrap;
+                        }
+                        
+                        .attribute-option {
+                            padding: 8px 16px;
+                            border: 1px solid #ddd;
+                            border-radius: 5px;
+                            margin: 5px;
+                            cursor: pointer;
+                            transition: border-color 0.3s, background-color 0.3s;
+                        }
+                        
+                        .color-option {
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 50%;
+                            padding: 0;
+                            margin-right: 10px;
+                        }
+                        
+                        .attribute-option:hover,
+                        .color-option:hover {
+                            border-color: #ffa500;
+                        }
+                        
+                        .attribute-option.active,
+                        .color-option.active {
+                            border-color: #ffa500;
+                            background-color: #ffe4b5;
+                        }
+                        </style>
 
                     <!--------------------------------- wishlist ------------------------------------>
 

@@ -4,7 +4,7 @@
 
 <!-- page title -->
 <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/hero-16.webp');">
-    <h2 class="ltext-105 cl0 txt-center" style="color:#333;;">
+    <h2 class="ltext-105 cl0 txt-center" style="color:#14535F;">
         Everything Your Pet Deserves
     </h2>
 </section>	
@@ -13,8 +13,145 @@
 <!-- Categories -->
 <section class="bg0 p-t-23 p-b-130" >
     <div class="container">
-        <div class="flex-w flex-sb-m p-b-52">
-            <div class="flex-w flex-l-m filter-tope-group m-tb-10" style="margin-left: 230px;">
+        <div class="row" >
+            <div class="col-md-4 col-lg-3 p-b-80" >
+                <div class="side-menu">
+                    <div class="bor17 of-hidden pos-relative">
+                        <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+        
+                        <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
+                            <i class="zmdi zmdi-search"></i>
+                        </button>
+                    </div>
+        
+                    <div class="p-t-55">
+                        <h4 class="mtext-112 cl2 p-b-33">
+                            Sort by
+                        </h4>
+        
+                        <ul>
+                            <li class="bor18">
+                                <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                    Default
+                                </a>
+                            </li>
+        
+                            <li class="bor18">
+                                <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                    Popularity
+                                </a>
+                            </li>
+        
+                            <li class="bor18">
+                                <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                    Average rating
+                                </a>
+                            </li>
+        
+                            <li class="bor18">
+                                <a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+                                    Newness
+                                </a>
+                            </li>
+        
+                           
+                        </ul>
+                    </div>
+        
+                   
+        
+                    <div class="p-t-55">
+                        <h4 class="mtext-112 cl2 p-b-20">
+                           Price
+                        </h4>
+        
+                        <ul>
+                            <li class="p-b-7">
+                                <a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+                                    <span>
+                                        $0.00 - $5.00
+                                    </span>
+        
+                                    <span>
+                                        (9)
+                                    </span>
+                                </a>
+                            </li>
+        
+                            <li class="p-b-7">
+                                <a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+                                    <span>
+                                        $5.00 - $10.00
+                                    </span>
+        
+                                    <span>
+                                        (39)
+                                    </span>
+                                </a>
+                            </li>
+        
+                            <li class="p-b-7">
+                                <a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+                                    <span>
+                                        $10.00 - $15.00
+                                    </span>
+        
+                                    <span>
+                                        (29)
+                                    </span>
+                                </a>
+                            </li>
+        
+                            <li class="p-b-7">
+                                <a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+                                    <span>
+                                        $15.00 - $20.00
+                                    </span>
+        
+                                    <span>
+                                        (35)
+                                    </span>
+                                </a>
+                            </li>
+        
+                            <li class="p-b-7">
+                                <a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+                                    <span>
+                                        $20.00+
+                                    </span>
+        
+                                    <span>
+                                        (22)
+                                    </span>
+                                </a>
+                            </li>
+        
+                        </ul>
+                    </div>
+        
+                    <div class="p-t-50">
+                        <h4 class="mtext-112 cl2 p-b-27">
+                           Age group
+                        </h4>
+        
+                        <div class="flex-w m-r--5">
+                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                                Kitten
+                            </a>
+        
+                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+                              Adult
+                            </a>
+        
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-md-8 col-lg-9" style="padding-left:60px;">
+        <div class="flex-w flex-sb-m p-b-52" >
+            <div class="flex-w flex-l-m filter-tope-group m-tb-10" >
                 <!-- Button for All Products -->
                 <a href="{{ route('store') }}" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 {{ request()->has('category_id') ? '' : 'how-active1' }}">
                     All Products
@@ -39,209 +176,12 @@
        
             </div>
             
-            <!-- Search product -->
-            <div class="dis-none panel-search w-full p-t-10 p-b-15">
-                <div class="bor8 dis-flex p-l-15">
-                    <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-                        <i class="zmdi zmdi-search"></i>
-                    </button>
+         
 
-                    <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
-                </div>	
-            </div>
-
-            <!-- Filter -->
-            <div class="dis-none panel-filter w-full p-t-10">
-                <div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-                    <div class="filter-col1 p-r-15 p-b-27">
-                        <div class="mtext-102 cl2 p-b-15">
-                            Sort By
-                        </div>
-
-                        <ul>
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Default
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Popularity
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Average rating
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                    Newness
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Price: Low to High
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Price: High to Low
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="filter-col2 p-r-15 p-b-27">
-                        <div class="mtext-102 cl2 p-b-15">
-                            Price
-                        </div>
-
-                        <ul>
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                    All
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    $0.00 - $50.00
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    $50.00 - $100.00
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    $100.00 - $150.00
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    $150.00 - $200.00
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    $200.00+
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="filter-col3 p-r-15 p-b-27">
-                        <div class="mtext-102 cl2 p-b-15">
-                            Color
-                        </div>
-
-                        <ul>
-                            <li class="p-b-6">
-                                <span class="fs-15 lh-12 m-r-6" style="color: #222;">
-                                    <i class="zmdi zmdi-circle"></i>
-                                </span>
-
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Black
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
-                                    <i class="zmdi zmdi-circle"></i>
-                                </span>
-
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-                                    Blue
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
-                                    <i class="zmdi zmdi-circle"></i>
-                                </span>
-
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Grey
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
-                                    <i class="zmdi zmdi-circle"></i>
-                                </span>
-
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Green
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
-                                    <i class="zmdi zmdi-circle"></i>
-                                </span>
-
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Red
-                                </a>
-                            </li>
-
-                            <li class="p-b-6">
-                                <span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
-                                    <i class="zmdi zmdi-circle-o"></i>
-                                </span>
-
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    White
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="filter-col4 p-b-27">
-                        <div class="mtext-102 cl2 p-b-15">
-                            Tags
-                        </div>
-
-                        <div class="flex-w p-t-4 m-r--5">
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                Fashion
-                            </a>
-
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                Lifestyle
-                            </a>
-
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                Denim
-                            </a>
-
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                Streetstyle
-                            </a>
-
-                            <a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-                                Crafts
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
 <!---------------------------- Product ----------------------------------------------------->
-        <div class="row isotope-grid" style="margin-left: 130px;">
+        <div class="row isotope-grid" style="padding: 0px !important;">
             
             @if($products->isEmpty())
             <div class="col-12 text-center">
@@ -260,7 +200,7 @@
                                             @endif
                         
                         <a href="{{ route('product_details', $product->id) }}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 " >
-                            Quick View
+                           View
                         </a>
                     </div>
 
@@ -289,7 +229,10 @@
             @endforeach
             @endif
         </div>
+    </div>
 
+    
+</div>
     <!-- Custom Pagination -->
 <div class="flex-c-m flex-w w-full p-t-38">
     {{-- Loop through the pages --}}
@@ -305,6 +248,7 @@
         @endif
     @endforeach
 </div>
+
     </div>
 </section>
 

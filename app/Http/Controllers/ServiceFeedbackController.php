@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ServiceFeedback;
 use App\Models\Service;
+use App\Models\Appointment;
+
 
 use Illuminate\Http\Request;
 
@@ -44,6 +46,20 @@ class ServiceFeedbackController extends Controller
     public function store(Request $request)
     {
        
+        $userId = auth()->id();
+        $serviceId = $request->service_id;
+    
+        // Check if the user has a completed or accepted appointment for the service
+        $appointmentExists = Appointment::where('user_id', $userId)
+                                         ->where('service_id', $serviceId)
+                                         ->whereIn('status', ['Accept']) // Adjust status conditions
+                                         ->exists();
+    
+        if (!$appointmentExists) {
+            return redirect()->back()->with('not_allow', 'You can only add a review for services you have booked and completed');
+        }
+        
+
         $validation = $request->validate([
             'rating' => 'required|integer|min:1|max:5',
             'feedback' => 'required|string',

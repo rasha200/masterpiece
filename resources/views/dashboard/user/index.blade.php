@@ -14,16 +14,33 @@
     </div>
     
     @if(session('delete'))
-    <div class="alert alert-success" style="background-color: #FFFFFF; color: #DC3545; border: 1px solid #DC3545; font-weight: bold; margin-left: 36px; ">
+    <div class="alert alert-success" style="background-color: #FFFFFF; color: #DC3545; border: 1px solid #DC3545; font-weight: bold; margin-left: 36px; margin-bottom: 0px;">
         {{ session('delete') }}
     </div>
 @endif
 
     @if(session('success'))
-    <div class="alert alert-success" style="background-color: #d4edda; color: #155724; font-weight: bold; margin-left: 36px; ">
+    <div class="alert alert-success" style="background-color: #d4edda; color: #155724; font-weight: bold; margin-left: 36px; margin-bottom: 0px;">
         {{ session('success') }}
     </div>
 @endif
+
+<style>
+  /* Animation to fade out */
+  @keyframes fadeOut {
+      0% {
+          opacity: 1;
+      }
+      100% {
+          opacity: 0;
+      }
+  }
+
+  /* Apply fade-out animation to messages */
+  .alert {
+      animation: fadeOut 3s ease-out forwards;
+  }
+</style>
 
 <div class=" grid-margin stretch-card">
                 <div class="card">

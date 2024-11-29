@@ -16,6 +16,22 @@
                     </ul>
                 </div>
                     @endif
+                    <style>
+                      /* Animation to fade out */
+                      @keyframes fadeOut {
+                          0% {
+                              opacity: 1;
+                          }
+                          100% {
+                              opacity: 0;
+                          }
+                      }
+                    
+                      /* Apply fade-out animation to messages */
+                      .alert {
+                          animation: fadeOut 3s ease-out forwards;
+                      }
+                    </style>
                    
                     <form class="forms-sample" action="{{ route('users.store')}}" method="POST">
                         @csrf

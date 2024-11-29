@@ -63,7 +63,7 @@ class CartController extends Controller
             }
         }
 
-      
+    //   dd($cartDetails);
 
        
         return view('cart', compact('cartDetails'));
@@ -107,6 +107,7 @@ class CartController extends Controller
     public function store(Request $request)
     {
 
+        // dd($request);
         
         // Fetch the product from the database with its variations
         $product = Product::with('product_variation')->findOrFail($request->product_id);

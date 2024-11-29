@@ -156,6 +156,23 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   background-color: #FFF;
 }
 
+
+  /* Animation to fade out */
+  @keyframes fadeOut {
+      0% {
+          opacity: 1;
+      }
+      100% {
+          opacity: 0;
+      }
+  }
+
+  /* Apply fade-out animation to messages */
+  .alert {
+      animation: fadeOut 3s ease-out forwards;
+  }
+
+
 input:invalid + #rating-warning {
   display: inline; /* Show warning if input is invalid */
 }
@@ -1169,9 +1186,7 @@ input:invalid + #rating-warning {
 }
 
 /*---------------------------------------------*/
-.header-cart-item-txt {
-  width: calc(100% - 80px);
-}
+
 
 .header-cart-item-name {
   display: block;

@@ -283,7 +283,7 @@
                         </div>
 
                         <div class="size-207">
-                            <div class="flex-w flex-sb-m p-b-17">
+                            <div class="flex-w flex-sb-m">
                                 <span class="mtext-107 cl2 p-r-20">
                                 {{$servicefeedback->feedback}}
                             </span>
@@ -461,6 +461,33 @@
                         </div>
                     </div>
                 </div>
+
+                @elseif (Session::get('not_allow'))
+                <div class="swal-overlay swal-overlay--show-modal" tabindex="-1">
+                   <div class="swal-modal">
+                       <div class="swal-icon swal-icon--error">
+                           <div class="swal-icon--error__x-mark">
+                               <span class="swal-icon--error__line swal-icon--error__line--left"></span>
+                               <span class="swal-icon--error__line swal-icon--error__line--right"></span>
+                           </div>
+                       </div>
+                       
+               
+                       <div class="swal-title" style="">{{ Session::get('not_allow') }}</div>
+               
+                       <div class="swal-footer">
+                           <div class="swal-button-container">
+                               <a href="{{ route('service_details', ['id' => $service->id]) }}" class="swal-button swal-button--confirm">OK</a>
+                               <div class="swal-button__loader">
+                                   <div></div>
+                                   <div></div>
+                                   <div></div>
+                                   <div></div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
             @endif   
 
 

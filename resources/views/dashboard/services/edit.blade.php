@@ -22,6 +22,23 @@
             </div>
             @endif
 
+            <style>
+                /* Animation to fade out */
+                @keyframes fadeOut {
+                    0% {
+                        opacity: 1;
+                    }
+                    100% {
+                        opacity: 0;
+                    }
+                }
+              
+                /* Apply fade-out animation to messages */
+                .alert {
+                    animation: fadeOut 3s ease-out forwards;
+                }
+              </style>
+
             <div class="form-group">
                 <label>Current Images</label><br>
                 <div class="row">

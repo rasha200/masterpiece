@@ -298,25 +298,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script><a hre
 </script>
 
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-       
 <!--===============================================================================================-->
 	<script src="{{asset('vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
 	<script>

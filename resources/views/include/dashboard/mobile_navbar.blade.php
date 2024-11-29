@@ -1,20 +1,15 @@
 <!-- Navbar -->
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-left navbar-brand-wrapper d-flex align-items-center">
-        <a class="navbar-brand brand-logo" href="">
+        <div class="navbar-brand brand-logo" href="">
             <img src="{{asset('masterlogo2.png')}}" alt="logo" style="width: 90px; height:27px"/>
-        </a>
+        </div>
         <a class="navbar-brand brand-logo-mini" href="index.html">
         <i class="mdi mdi-paw"></i> 
 </a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-stretch">
-        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-            <span class="mdi mdi-menu"></span>
-        </button>
-        <div class="search-field d-none d-md-block">
-            
-        </div>
+      
         <ul class="navbar-nav navbar-nav-right">
             
                     

@@ -29,12 +29,23 @@
                         $subtotal += $price * $item['quantity'];
                     @endphp
 
-                    <li class="header-cart-item flex-w flex-t m-b-12">
-                        <div class="header-cart-item-img">
-                            <img src="{{ $imageUrl }}" alt="Product Image">
-                        </div>
+                    <li class="header-cart-item flex-w flex-t m-b-12"  style="display: flex;">
+                       
+
+                            <form action="{{ route('cart.delete',$product->id) }}" method="POST">
+                                @csrf
+                         
+                                <button type="submit" class="header-cart-item-img">
+                                   <img src="{{ $imageUrl }}" alt="IMG" style="height: 75px; width:75px;">
+                                </button>
+                          
+                        </form>
+
+
+                        
+                      
                         <div class="header-cart-item-txt p-t-8">
-                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                            <a href="{{ route('product_details', $product->id) }}" class="header-cart-item-name m-b-8 hov-cl1 trans-04">
                                 {{ $product->name }}
                             </a>
 
@@ -55,6 +66,8 @@
                                     @if ($variation->disinfected)
                                         <span></span>
                                     @endif
+
+                                    
                                 </div>
                             @endif
 
@@ -62,6 +75,59 @@
                                 {{ $item['quantity'] }} x ${{ number_format($price, 2) }}
                             </span>
                         </div>
+
+                        <div class="header-cart-item-txt p-t-8" style="height: 60px; width:60px; margin-top:35px; margin-left:35px;">
+                            <form action="{{ route('cart.update',  $product->id) }}" method="POST" style="height: 60px; width:60px;">
+                                @csrf
+                                <div class="wrap-num-product flex-w m-r-20 m-tb-10" style="height: 20px; width:62px;">
+                                   
+                                 
+                                    <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" onclick="updateQuantity({{  $product->id }}, -1)" style="height: 20px; width:20px;">
+                                        <i class="fs-16 zmdi zmdi-minus"></i>
+                                    </div>
+                                    <input
+                                 class="mtext-104 cl3 txt-center num-product"
+                                    type="number"
+                                    name="quantity"
+                                    data-product-id="{{  $product->id }}"
+                                    value="{{ $item['quantity'] }}"
+                                    min="1"
+                                    style="height: 20px; width:20px;"
+                                    required
+                                >
+
+                                <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"  onclick="updateQuantity({{  $product->id }}, 1)" style="height: 20px; width:20px;">
+                                    <i class="fs-16 zmdi zmdi-plus"></i>
+                                </div>
+                                    
+                                </div>
+                            </form>
+
+                            <script>
+                                function updateQuantity(id, change) {
+                                    // Select the input element using data-product-id
+                                    const quantityInput = document.querySelector(`input[name="quantity"][data-product-id="${id}"]`);
+                    
+                                    if (quantityInput) {
+                                        // Adjust the quantity based on the change value
+                                        let newQuantity = parseInt(quantityInput.value) + change;
+                    
+                                        // Ensure quantity remains at least 1
+                                        if (newQuantity < 1) {
+                                            newQuantity = 1;
+                                        }
+                    
+                                        // Update the input value
+                                        quantityInput.value = newQuantity;
+                    
+                                        // Automatically submit the form to apply the update to the cart
+                                        quantityInput.closest('form').submit();
+                                    }
+                                }
+                            </script>
+
+                        </div>
+
                     </li>
                 @endforeach
             </ul>

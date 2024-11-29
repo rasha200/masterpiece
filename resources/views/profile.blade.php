@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/hero-16.webp');">
-    <h2 class="ltext-105 cl0 txt-center">
+    <h2 class="ltext-105 cl0 txt-center" style="color:#14535F;">
         Profile
     </h2>
 </section>    
@@ -146,7 +146,7 @@
                                         {{ $adoptRequest->status == 'Reject' ? 'badge-danger' : '' }}
                                         {{ $adoptRequest->status == 'Pending' ? 'badge-warning' : '' }}
                                         {{ $adoptRequest->status == 'Accept' ? 'badge-success' : '' }}">
-                                        {{ ucfirst($adoptRequest->status) }}
+                                        {{ $adoptRequest->status == 'Reject' ? 'Unapproved' : ucfirst($adoptRequest->status) }}
                                     </span>
                                     </p>
                                     @endif
@@ -252,7 +252,8 @@
                                         {{ $UserAppointment->status == 'Reject' ? 'badge-danger' : '' }}
                                         {{ $UserAppointment->status == 'Pending' ? 'badge-warning' : '' }}
                                         {{ $UserAppointment->status == 'Accept' ? 'badge-success' : '' }}">
-                                        {{ ucfirst($UserAppointment->status) }}
+                                        {{ $UserAppointment->status == 'Reject' ? 'Unavailable' : ucfirst($UserAppointment->status) }}
+                                      
                                     </span>
                                     </p>
                                     @endif
